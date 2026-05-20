@@ -1,13 +1,214 @@
-<ion-header [translucent]="true">
+<!-- 
+  explore.page.html
+  Página principal da app Eat&Go — Explorar Restaurantes.
+  Requisito 11: Estruturar/Disponibilizar conteúdos através dos Ionic Components
+  Requisito 6: Utilizar ícones da framework (Ionicons)
+-->
+
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>explore</ion-title>
+
+    <!-- Logo Eat&Go -->
+    <ion-buttons slot="start">
+      <div class="logo-wrapper">
+        <div class="logo-icon">
+          <ion-icon name="restaurant"></ion-icon>
+        </div>
+        <span class="logo-text">Eat&amp;Go</span>
+      </div>
+    </ion-buttons>
+
+    <!-- Barra de pesquisa central -->
+    <div class="search-wrapper">
+      <ion-searchbar
+        [(ngModel)]="searchQuery"
+        (ionInput)="onSearch($event)"
+        placeholder="Pesquisar por restaurantes, pratos..."
+        [debounce]="300"
+        class="custom-searchbar">
+      </ion-searchbar>
+    </div>
+
+    <!-- Botões direita: Login e Menu -->
+    <ion-buttons slot="end">
+      <!-- Mostra Login se não estiver autenticado -->
+      <ion-button class="login-btn" routerLink="/login" *ngIf="!isLoggedIn">
+        Login
+      </ion-button>
+      <!-- Mostra ícone de utilizador se autenticado -->
+      <ion-button *ngIf="isLoggedIn" (click)="logout()">
+        <ion-icon name="person-circle-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <!-- Menu hamburger -->
+      <ion-button (click)="toggleMenu()">
+        <ion-icon name="menu-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">explore</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<!-- Menu lateral (hamburger) -->
+<!-- Requisito 6: ícones da framework -->
+<div class="menu-overlay" *ngIf="menuAberto" (click)="toggleMenu()"></div>
+<div class="menu-lateral" [class.aberto]="menuAberto">
+  <div class="menu-header">
+    <ion-button class="login-btn-menu" routerLink="/login" *ngIf="!isLoggedIn" (click)="toggleMenu()">
+      Login
+    </ion-button>
+    <ion-button fill="clear" (click)="toggleMenu()">
+      <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+  </div>
+  <div class="menu-items">
+    <!-- Minhas Avaliações -->
+    <div class="menu-item" (click)="toggleMenu()">
+      <ion-icon name="star-outline"></ion-icon>
+      <span>Minhas Avaliações</span>
+    </div>
+    <!-- Adicionar Restaurante -->
+    <div class="menu-item destaque" routerLink="/adicionar-restaurante" (click)="toggleMenu()">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <span>Adicionar Restaurante</span>
+    </div>
+    <!-- Explorar Mapa -->
+    <div class="menu-item" (click)="toggleMenu()">
+      <ion-icon name="search-outline"></ion-icon>
+      <span>Explorar Mapa</span>
+    </div>
+  </div>
+</div>
+
+<ion-content>
+
+  <!-- Card principal com a lista de restaurantes -->
+  <div class="main-card">
+
+    <!-- Cabeçalho da secção -->
+    <div class="section-header">
+      <h1 class="section-title">Explorar Restaurantes</h1>
+      <p class="results-count">{{ filteredRestaurants.length }} resultados localizados</p>
+    </div>
+
+    <!-- Linha de filtros e ordenação -->
+    <div class="filter-sort-row">
+      <!-- Botão filtrar -->
+      <ion-button fill="outline" class="filter-btn" (click)="openFilters()">
+        <ion-icon name="options-outline" slot="start"></ion-icon>
+        Filtrar por:
+      </ion-button>
+      <!-- Botão ordenar por distância -->
+      <ion-button
+        fill="outline"
+        class="sort-btn"
+        (click)="sortByDistance()"
+        [class.ativo]="sortedByDistance">
+        <ion-icon name="swap-vertical-outline" slot="start"></ion-icon>
+        Mais perto de mim
+      </ion-button>
+    </div>
+
+    <!-- Chips dos filtros ativos -->
+    <div class="filter-chips" *ngIf="activeFilters.length > 0">
+      <ion-chip
+        *ngFor="let filtro of activeFilters"
+        (click)="removeFilter(filtro)"
+        color="warning">
+        <ion-label>{{ filtro }}</ion-label>
+        <ion-icon name="close-circle"></ion-icon>
+      </ion-chip>
+    </div>
+
+    <!-- Lista de restaurantes -->
+    <!-- Requisito 10: dados vêm do ficheiro JSON via service -->
+    <div class="restaurant-list">
+      <div
+        *ngFor="let restaurante of filteredRestaurants; trackBy: trackById"
+        class="restaurant-card"
+        (click)="goToRestaurant(restaurante.id)">
+
+        <!-- Imagem + badge de avaliação -->
+        <div class="restaurant-image-wrapper">
+          <img
+            [src]="restaurante.imagem"
+            [alt]="restaurante.nome"
+            class="restaurant-image"
+            onerror="this.src='assets/images/placeholder.jpg'"
+          />
+          <div class="rating-badge">
+            <ion-icon name="star" class="star-icon"></ion-icon>
+            <span>{{ restaurante.avaliacao }}</span>
+          </div>
+        </div>
+
+        <!-- Informações do restaurante -->
+        <div class="restaurant-info">
+
+          <!-- Nome + nível de preço -->
+          <div class="restaurant-top-row">
+            <h2 class="restaurant-name">{{ restaurante.nome }}</h2>
+            <span class="price-badge">{{ restaurante.nivelPreco }}</span>
+          </div>
+
+          <!-- Badge de categoria -->
+          <ion-badge color="warning" class="category-badge">
+            {{ restaurante.categoria }}
+          </ion-badge>
+
+          <!-- Descrição -->
+          <p class="restaurant-description">{{ restaurante.descricao }}</p>
+
+          <!-- Localização e distância -->
+          <div class="restaurant-meta">
+            <ion-icon name="location-outline"></ion-icon>
+            <span>{{ restaurante.localizacao }}</span>
+            <span class="separator">•</span>
+            <span class="distance-text">A {{ restaurante.distancia }} km</span>
+          </div>
+
+          <!-- Rodapé do card: avaliações + ações -->
+          <div class="card-bottom-row">
+            <span class="reviews-count">
+              <strong>{{ restaurante.totalAvaliacoes }}</strong> avaliações
+            </span>
+            <div class="card-actions">
+              <!-- Abrir no mapa -->
+              <ion-button fill="clear" class="action-btn" (click)="openMap(restaurante, $event)">
+                <ion-icon name="map-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <!-- Partilhar -->
+              <ion-button fill="clear" class="action-btn" (click)="shareRestaurant(restaurante, $event)">
+                <ion-icon name="share-social-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <!-- Avaliar — navega para a página de avaliação -->
+              <ion-button class="avaliar-btn" (click)="goToAvaliar(restaurante.id, $event)">
+                <ion-icon name="create-outline" slot="start"></ion-icon>
+                Avaliar
+              </ion-button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão ver mais resultados -->
+    <div class="load-more-wrapper" *ngIf="hasMoreResults">
+      <ion-button expand="block" fill="outline" class="load-more-btn" (click)="loadMore()">
+        Ver mais resultados
+      </ion-button>
+    </div>
+
+    <!-- Secção do mapa da zona -->
+    <div class="map-section">
+      <h2 class="map-title">Mapa da zona</h2>
+      <p class="map-subtitle">Explore e clique nos pins para selecionar os restaurantes.</p>
+      <div class="map-placeholder" (click)="openFullMap()">
+        <ion-icon name="map-outline" class="map-icon"></ion-icon>
+        <span>Ver mapa completo</span>
+      </div>
+    </div>
+
+  </div>
+
 </ion-content>

@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "nome": "Smash Burger Co.",
+    "categoria": "Fast Food",
+    "descricao": "Os melhores hambúrgueres smash da cidade, com carne 100% bovina e ingredientes frescos.",
+    "localizacao": "Cais do Sodré, Lisboa",
+    "distancia": 0.8,
+    "nivelPreco": "$",
+    "avaliacao": 4.5,
+    "totalAvaliacoes": 312,
+    "imagem": "assets/images/smash-burger.jpg",
+    "coordenadas": { "lat": 38.7072, "lng": -9.1445 }
+  },
+  {
+    "id": 2,
+    "nome": "Lumière Bistro",
+    "categoria": "Gourmet",
+    "descricao": "Cozinha portuguesa contemporânea servida num ambiente elegante e intimista.",
+    "localizacao": "Baixa, Lisboa",
+    "distancia": 1.2,
+    "nivelPreco": "$$$",
+    "avaliacao": 4.8,
+    "totalAvaliacoes": 124,
+    "imagem": "assets/images/lumiere-bistro.jpg",
+    "coordenadas": { "lat": 38.7139, "lng": -9.1394 }
+  },
+  {
+    "id": 3,
+    "nome": "Yami Sushi",
+    "categoria": "Outros",
+    "descricao": "Sushi de fusão num ambiente vibrante com vista para o rio.",
+    "localizacao": "Parque das Nações, Lisboa",
+    "distancia": 5.4,
+    "nivelPreco": "$$$",
+    "avaliacao": 4.6,
+    "totalAvaliacoes": 420,
+    "imagem": "assets/images/yami-sushi.jpg",
+    "coordenadas": { "lat": 38.7631, "lng": -9.0963 }
+  },
+  {
+    "id": 4,
+    "nome": "Tasco do Zé",
+    "categoria": "Tradicional",
+    "descricao": "Petiscos e pratos típicos portugueses num ambiente descontraído e familiar.",
+    "localizacao": "Alfama, Lisboa",
+    "distancia": 2.1,
+    "nivelPreco": "$",
+    "avaliacao": 4.3,
+    "totalAvaliacoes": 87,
+    "imagem": "assets/images/tasco.jpg",
+    "coordenadas": { "lat": 38.7116, "lng": -9.1320 }
+  },
+  {
+    "id": 5,
+    "nome": "Green Bowl",
+    "categoria": "Vegetariano",
+    "descricao": "Bowls saudáveis, saladas frescas e opções veganas para uma alimentação equilibrada.",
+    "localizacao": "Príncipe Real, Lisboa",
+    "distancia": 1.7,
+    "nivelPreco": "$$",
+    "avaliacao": 4.4,
+    "totalAvaliacoes": 198,
+    "imagem": "assets/images/green-bowl.jpg",
+    "coordenadas": { "lat": 38.7159, "lng": -9.1480 }
+  },
+  {
+    "id": 6,
+    "nome": "Pizzeria Bella Napoli",
+    "categoria": "Italiana",
+    "descricao": "Pizzas artesanais cozidas em forno a lenha, com massa madre e ingredientes importados de Itália.",
+    "localizacao": "Campo de Ourique, Lisboa",
+    "distancia": 3.0,
+    "nivelPreco": "$$",
+    "avaliacao": 4.7,
+    "totalAvaliacoes": 256,
+    "imagem": "assets/images/bella-napoli.jpg",
+    "coordenadas": { "lat": 38.7182, "lng": -9.1572 }
+  }
+]
