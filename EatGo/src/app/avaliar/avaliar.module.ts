@@ -13,8 +13,9 @@ import { AvaliarPage } from './avaliar.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AvaliarPageRoutingModule
+    AvaliarPageRoutingModule,
+    AvaliarPage
   ],
-  declarations: [AvaliarPage]
+
 })
 export class AvaliarPageModule {}
