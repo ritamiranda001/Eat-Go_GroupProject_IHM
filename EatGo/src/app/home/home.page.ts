@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 export interface Restaurante {
   id: number;
@@ -18,6 +20,7 @@ export interface Restaurante {
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
+  standalone: false,
 })
 export class HomePage implements OnInit {
 
