@@ -1,0 +1,109 @@
+<ion-header class="home-header" [translucent]="false">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <div class="brand-icon">
+        <ion-icon name="restaurant"></ion-icon>
+      </div>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" class="header-btn">
+        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" class="header-btn">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false" class="home-content">
+
+  <!-- Título -->
+  <div class="page-header">
+    <h1 class="page-title">Explorar Restaurantes</h1>
+    <p class="page-subtitle">{{ resultados.length }} resultados localizados</p>
+  </div>
+
+  <!-- Barra de filtros -->
+  <div class="filter-bar">
+    <ion-button fill="outline" class="filter-btn" (click)="abrirFiltros()">
+      <ion-icon slot="start" name="options-outline"></ion-icon>
+      Filtrar por:
+    </ion-button>
+    <ion-button fill="outline" class="filter-btn" (click)="abrirOrdenacao()">
+      <ion-icon slot="start" name="swap-vertical-outline"></ion-icon>
+      Ordenar
+    </ion-button>
+  </div>
+
+  <!-- Lista de restaurantes -->
+  <div class="restaurantes-lista">
+    <div
+      class="restaurante-card"
+      *ngFor="let restaurante of resultados"
+      (click)="verDetalhe(restaurante)"
+    >
+      <!-- Imagem + badge rating -->
+      <div class="card-imagem-wrapper">
+        <img
+          class="card-imagem"
+          [src]="restaurante.imagem"
+          [alt]="restaurante.nome"
+        />
+        <div class="rating-badge">
+          <ion-icon name="star"></ion-icon>
+          <span>{{ restaurante.rating }}</span>
+        </div>
+      </div>
+
+      <!-- Conteúdo do card -->
+      <div class="card-body">
+        <div class="card-nome-preco">
+          <h2 class="card-nome">{{ restaurante.nome }}</h2>
+          <span class="preco-badge">{{ restaurante.preco }}</span>
+        </div>
+
+        <p class="card-categoria">{{ restaurante.categoria }}</p>
+        <p class="card-descricao">{{ restaurante.descricao }}</p>
+
+        <div class="card-localizacao">
+          <ion-icon name="location-outline"></ion-icon>
+          <span>{{ restaurante.morada }}</span>
+          <span class="separador">•</span>
+          <span>A {{ restaurante.distancia }} km</span>
+        </div>
+
+        <div class="card-acoes">
+          <span class="avaliacoes-count">{{ restaurante.avaliacoes }} avaliações</span>
+          <div class="acoes-icons">
+            <ion-button fill="clear" class="icon-action" (click)="verMapa($event, restaurante)">
+              <ion-icon slot="icon-only" name="map-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" class="icon-action" (click)="partilhar($event, restaurante)">
+              <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
+            </ion-button>
+            <ion-button class="avaliar-btn" (click)="avaliar($event, restaurante)">
+              <ion-icon slot="start" name="create-outline"></ion-icon>
+              Avaliar
+            </ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ver mais resultados -->
+  <div class="ver-mais-wrapper">
+    <ion-button fill="outline" class="ver-mais-btn" expand="block" (click)="verMaisResultados()">
+      Ver mais resultados
+    </ion-button>
+  </div>
+
+  <!-- Secção Mapa da zona -->
+  <div class="mapa-secao">
+    <h2 class="mapa-titulo">Mapa da zona</h2>
+    <p class="mapa-descricao">Explore e clique nos pins para selecionar os restaurantes.</p>
+    <div class="mapa-placeholder"></div>
+  </div>
+
+</ion-content>
