@@ -13,8 +13,9 @@ import { RestauranteDetalhePage } from './restaurante-detalhe.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RestauranteDetalhePageRoutingModule
+    RestauranteDetalhePageRoutingModule,
+    RestauranteDetalhePage
   ],
-  declarations: [RestauranteDetalhePage]
+  
 })
 export class RestauranteDetalhePageModule {}

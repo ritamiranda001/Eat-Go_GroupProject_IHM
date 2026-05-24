@@ -13,8 +13,9 @@ import { ExplorePage } from './explore.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ExplorePageRoutingModule
+    ExplorePageRoutingModule,
+    ExplorePage
   ],
-  declarations: [ExplorePage]
+  
 })
 export class ExplorePageModule {}

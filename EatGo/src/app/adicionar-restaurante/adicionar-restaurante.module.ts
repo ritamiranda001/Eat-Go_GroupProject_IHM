@@ -13,8 +13,9 @@ import { AdicionarRestaurantePage } from './adicionar-restaurante.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AdicionarRestaurantePageRoutingModule
+    AdicionarRestaurantePageRoutingModule,
+    AdicionarRestaurantePage
   ],
-  declarations: [AdicionarRestaurantePage]
+ 
 })
 export class AdicionarRestaurantePageModule {}
