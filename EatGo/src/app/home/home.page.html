@@ -24,7 +24,7 @@
 
   <!-- Barra de filtros -->
   <div class="filter-bar">
-    <ion-button fill="outline" class="filter-btn" (click)="abrirFiltros()">
+    <ion-button fill="outline" class="filter-btn" (click)="toggleFiltros()">
       <ion-icon slot="start" name="options-outline"></ion-icon>
       Filtrar por:
     </ion-button>
@@ -34,43 +34,87 @@
     </ion-button>
   </div>
 
+  <!-- Dropdown Filtros -->
+  <div class="filtros-dropdown" *ngIf="mostrarFiltros">
+
+    <!-- Filtrar por Avaliação -->
+    <div class="filtro-secao">
+      <p class="filtro-titulo">Filtrar por Avaliação (Estrelas)</p>
+      <div class="filtro-opcoes">
+        <ion-button
+          [fill]="filtroAvaliacao === 'todos' ? 'solid' : 'outline'"
+          class="filtro-chip"
+          (click)="selecionarAvaliacao('todos')"
+        >Avaliação</ion-button>
+        <ion-button
+          [fill]="filtroAvaliacao === '5' ? 'solid' : 'outline'"
+          class="filtro-chip estrelas"
+          (click)="selecionarAvaliacao('5')"
+        >
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </ion-button>
+        <ion-button
+          [fill]="filtroAvaliacao === '4' ? 'solid' : 'outline'"
+          class="filtro-chip estrelas"
+          (click)="selecionarAvaliacao('4')"
+        >
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Filtrar por Ementa -->
+    <div class="filtro-secao">
+      <p class="filtro-titulo">Filtrar por Ementa</p>
+      <div class="filtro-opcoes">
+        <ion-button
+          *ngFor="let cat of categorias"
+          [fill]="filtroCategoria === cat.valor ? 'solid' : 'outline'"
+          class="filtro-chip"
+          (click)="selecionarCategoria(cat.valor)"
+        >
+          <ion-icon [name]="cat.icone"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+  </div>
+
   <!-- Lista de restaurantes -->
   <div class="restaurantes-lista">
     <div
       class="restaurante-card"
-      *ngFor="let restaurante of resultados"
+      *ngFor="let restaurante of resultadosFiltrados"
       (click)="verDetalhe(restaurante)"
     >
-      <!-- Imagem + badge rating -->
       <div class="card-imagem-wrapper">
-        <img
-          class="card-imagem"
-          [src]="restaurante.imagem"
-          [alt]="restaurante.nome"
-        />
+        <img class="card-imagem" [src]="restaurante.imagem" [alt]="restaurante.nome"/>
         <div class="rating-badge">
           <ion-icon name="star"></ion-icon>
           <span>{{ restaurante.rating }}</span>
         </div>
       </div>
 
-      <!-- Conteúdo do card -->
       <div class="card-body">
         <div class="card-nome-preco">
           <h2 class="card-nome">{{ restaurante.nome }}</h2>
           <span class="preco-badge">{{ restaurante.preco }}</span>
         </div>
-
         <p class="card-categoria">{{ restaurante.categoria }}</p>
         <p class="card-descricao">{{ restaurante.descricao }}</p>
-
         <div class="card-localizacao">
           <ion-icon name="location-outline"></ion-icon>
           <span>{{ restaurante.morada }}</span>
           <span class="separador">•</span>
           <span>A {{ restaurante.distancia }} km</span>
         </div>
-
         <div class="card-acoes">
           <span class="avaliacoes-count">{{ restaurante.avaliacoes }} avaliações</span>
           <div class="acoes-icons">
