@@ -27,6 +27,7 @@ export class HomePage implements OnInit {
   mostrarFiltros = false;
   filtroAvaliacao = 'todos';
   filtroCategoria = 'todos';
+  ordenacaoAtual: 'alfabetica' | 'distancia' = 'distancia';
 
   categorias = [
     { valor: 'todos',      icone: 'restaurant-outline' },
@@ -46,11 +47,19 @@ export class HomePage implements OnInit {
   ];
 
   get resultadosFiltrados(): Restaurante[] {
-    return this.resultados.filter(r => {
+    let lista = this.resultados.filter(r => {
       const porAvaliacao = this.filtroAvaliacao === 'todos' || Math.floor(r.rating) >= parseInt(this.filtroAvaliacao);
       const porCategoria = this.filtroCategoria === 'todos' || r.categoria === this.filtroCategoria;
       return porAvaliacao && porCategoria;
     });
+
+    if (this.ordenacaoAtual === 'alfabetica') {
+      lista = [...lista].sort((a, b) => a.nome.localeCompare(b.nome));
+    } else {
+      lista = [...lista].sort((a, b) => a.distancia - b.distancia);
+    }
+
+    return lista;
   }
 
   constructor(private router: Router) {}
@@ -59,11 +68,11 @@ export class HomePage implements OnInit {
   toggleFiltros() { this.mostrarFiltros = !this.mostrarFiltros; }
   selecionarAvaliacao(v: string) { this.filtroAvaliacao = v; }
   selecionarCategoria(v: string) { this.filtroCategoria = v; }
+  toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'distancia' ? 'alfabetica' : 'distancia'; }
 
   verDetalhe(restaurante: Restaurante) { this.router.navigate(['/restaurante-detalhe', restaurante.id]); }
   avaliar(event: Event, restaurante: Restaurante) { event.stopPropagation(); this.router.navigate(['/avaliar', restaurante.id]); }
   verMapa(event: Event, restaurante: Restaurante) { event.stopPropagation(); console.log('Ver mapa:', restaurante.nome); }
   partilhar(event: Event, restaurante: Restaurante) { event.stopPropagation(); console.log('Partilhar:', restaurante.nome); }
-  abrirOrdenacao() { console.log('Abrir ordenação'); }
   verMaisResultados() { console.log('Ver mais resultados'); }
 }
