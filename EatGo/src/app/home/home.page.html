@@ -6,11 +6,21 @@
       </div>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button fill="clear" class="header-btn">
-        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      <ion-button fill="clear" class="header-btn" (click)="togglePesquisa()">
+        <ion-icon slot="icon-only" [name]="mostrarPesquisa ? 'close-outline' : 'search-outline'"></ion-icon>
       </ion-button>
       <ion-menu-button class="header-btn" autoHide="false"></ion-menu-button>
     </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Barra de pesquisa -->
+  <ion-toolbar *ngIf="mostrarPesquisa" class="search-toolbar">
+    <ion-searchbar
+      [(ngModel)]="termoPesquisa"
+      placeholder="Pesquisar restaurante, categoria..."
+      animated="true"
+      [debounce]="300"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 

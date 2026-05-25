@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 export interface Restaurante {
   id: number;
@@ -25,6 +26,8 @@ export interface Restaurante {
 export class HomePage implements OnInit {
 
   mostrarFiltros = false;
+  mostrarPesquisa = false;
+  termoPesquisa = '';
   filtroAvaliacao = 'todos';
   filtroCategoria = 'todos';
   ordenacaoAtual: 'alfabetica' | 'distancia' = 'distancia';
@@ -50,7 +53,11 @@ export class HomePage implements OnInit {
     let lista = this.resultados.filter(r => {
       const porAvaliacao = this.filtroAvaliacao === 'todos' || Math.floor(r.rating) >= parseInt(this.filtroAvaliacao);
       const porCategoria = this.filtroCategoria === 'todos' || r.categoria === this.filtroCategoria;
-      return porAvaliacao && porCategoria;
+      const porPesquisa = this.termoPesquisa === '' ||
+        r.nome.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
+        r.categoria.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
+        r.morada.toLowerCase().includes(this.termoPesquisa.toLowerCase());
+      return porAvaliacao && porCategoria && porPesquisa;
     });
 
     if (this.ordenacaoAtual === 'alfabetica') {
@@ -66,6 +73,7 @@ export class HomePage implements OnInit {
   ngOnInit() {}
 
   toggleFiltros() { this.mostrarFiltros = !this.mostrarFiltros; }
+  togglePesquisa() { this.mostrarPesquisa = !this.mostrarPesquisa; if (!this.mostrarPesquisa) this.termoPesquisa = ''; }
   selecionarAvaliacao(v: string) { this.filtroAvaliacao = v; }
   selecionarCategoria(v: string) { this.filtroCategoria = v; }
   toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'distancia' ? 'alfabetica' : 'distancia'; }
