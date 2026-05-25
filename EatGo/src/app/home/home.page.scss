@@ -369,3 +369,17 @@ $bg:            #F7F7F7;
     }
   }
 }
+// ── Search Toolbar ───────────────────────────────────────────
+
+.search-toolbar {
+  --background: #f0f0f0;
+
+  ion-searchbar {
+    --background: #e8e8e8;
+    --color: #{$text-dark};
+    --placeholder-color: #{$text-light};
+    --icon-color: #{$text-light};
+    --border-radius: 10px;
+    --box-shadow: none;
+  }
+}
