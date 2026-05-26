@@ -1,13 +1,61 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>restaurante-detalhe</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ restaurante?.nome }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">restaurante-detalhe</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content *ngIf="restaurante">
+
+  <!-- Imagem -->
+  <div class="imagem-wrapper">
+    <img [src]="restaurante.imagem" [alt]="restaurante.nome" class="restaurante-imagem"/>
+    <div class="rating-overlay">
+      <ion-icon name="star"></ion-icon>
+      <span>{{ restaurante.avaliacao }}</span>
+    </div>
+  </div>
+
+  <!-- Info principal -->
+  <div class="info-section">
+    <div class="nome-preco">
+      <h1 class="nome">{{ restaurante.nome }}</h1>
+      <span class="preco">{{ restaurante.nivelPreco }}</span>
+    </div>
+    <p class="categoria">{{ restaurante.categoria }}</p>
+    <p class="descricao">{{ restaurante.descricao }}</p>
+
+    <!-- Localização -->
+    <div class="detalhe-row">
+      <ion-icon name="location-outline"></ion-icon>
+      <span>{{ restaurante.localizacao }} • A {{ restaurante.distancia }} km</span>
+    </div>
+
+    <!-- Avaliações -->
+    <div class="detalhe-row">
+      <ion-icon name="star-outline"></ion-icon>
+      <span>{{ restaurante.avaliacao }} estrelas · {{ restaurante.totalAvaliacoes }} avaliações</span>
+    </div>
+  </div>
+
+  <!-- Botão Avaliar -->
+  <div class="avaliar-wrapper">
+    <ion-button expand="block" color="primary" (click)="avaliar()">
+      <ion-icon slot="start" name="create-outline"></ion-icon>
+      Avaliar este restaurante
+    </ion-button>
+  </div>
+
+</ion-content>
+
+<!-- Loading se restaurante não carregou -->
+<ion-content *ngIf="!restaurante">
+  <div class="loading-wrapper">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>A carregar...</p>
+  </div>
 </ion-content>

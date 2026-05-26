@@ -9,7 +9,7 @@
     "nivelPreco": "$$",
     "avaliacao": 4.5,
     "totalAvaliacoes": 287,
-    "imagem": "assets/images/o-pescador.jpg",
+    "imagem": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600",
     "coordenadas": { "lat": 41.69164, "lng": -8.83405 }
   },
   {
@@ -22,7 +22,7 @@
     "nivelPreco": "$",
     "avaliacao": 4.6,
     "totalAvaliacoes": 193,
-    "imagem": "assets/images/o-tabernao.jpg",
+    "imagem": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600",
     "coordenadas": { "lat": 41.6918, "lng": -8.8330 }
   },
   {
@@ -35,7 +35,7 @@
     "nivelPreco": "$$$",
     "avaliacao": 4.8,
     "totalAvaliacoes": 142,
-    "imagem": "assets/images/porta-93.jpg",
+    "imagem": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600",
     "coordenadas": { "lat": 41.6935, "lng": -8.8358 }
   },
   {
@@ -48,7 +48,7 @@
     "nivelPreco": "$",
     "avaliacao": 4.3,
     "totalAvaliacoes": 98,
-    "imagem": "assets/images/adega-padrinho.jpg",
+    "imagem": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600",
     "coordenadas": { "lat": 41.6922, "lng": -8.8342 }
   },
   {
@@ -61,7 +61,7 @@
     "nivelPreco": "$",
     "avaliacao": 4.4,
     "totalAvaliacoes": 215,
-    "imagem": "assets/images/damore-cafe.jpg",
+    "imagem": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600",
     "coordenadas": { "lat": 41.6912, "lng": -8.8325 }
   },
   {
@@ -74,7 +74,7 @@
     "nivelPreco": "$$",
     "avaliacao": 4.5,
     "totalAvaliacoes": 176,
-    "imagem": "assets/images/a-petisqueira.jpg",
+    "imagem": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=600",
     "coordenadas": { "lat": 41.6928, "lng": -8.8315 }
   }
 ]
