@@ -20,13 +20,8 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () =>
       import('./home/home.module').then(m => m.HomePageModule)
-  },
-  {
-    // Página principal Keila: Explorar Restaurantes
-    path: 'explorar',
-    loadChildren: () =>
-      import('./explore/explore.module').then(m => m.ExplorePageModule)
-  },
+  }
+  ,
   {
     // Detalhe de um restaurante — parâmetro :id na rota
     // Requisito 5: passar parâmetros entre páginas
