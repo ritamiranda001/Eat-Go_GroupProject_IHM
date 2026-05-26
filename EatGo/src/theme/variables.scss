@@ -1,2 +1,84 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Eat&Go – Cores e variáveis globais da aplicação
+// Requisito 16: Criar cores disponíveis globalmente na app
+// Requisito 13: Manipular as CSS Custom Properties dos components
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Cor principal da app: laranja Eat&Go
+:root {
+  // Cor primária (laranja)
+  --ion-color-primary: #f97316;
+  --ion-color-primary-rgb: 249, 115, 22;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #db6513;
+  --ion-color-primary-tint: #fa8130;
+
+  // Cor warning (mesmo laranja — usado nos badges e botões)
+  --ion-color-warning: #f97316;
+  --ion-color-warning-rgb: 249, 115, 22;
+  --ion-color-warning-contrast: #ffffff;
+  --ion-color-warning-contrast-rgb: 255, 255, 255;
+  --ion-color-warning-shade: #db6513;
+  --ion-color-warning-tint: #fa8130;
+
+  // ── Tokens personalizados Eat&Go ──────────────────────────────────────────
+
+  /** Cor principal laranja */
+  --eat-go-laranja: #f97316;
+
+  /** Cor de fundo da app */
+  --eat-go-fundo: #f0f0f0;
+
+  /** Cor de fundo dos cards */
+  --eat-go-card: #ffffff;
+
+  /** Cor das bordas */
+  --eat-go-borda: #efefef;
+
+  /** Texto secundário (cinzento médio) */
+  --eat-go-texto-secundario: #888888;
+
+  /** Texto muito suave */
+  --eat-go-texto-suave: #aaaaaa;
+
+  /** Cor escura principal */
+  --eat-go-escuro: #1a1a1a;
+
+  // ── Tipografia ────────────────────────────────────────────────────────────
+
+  /** Fonte principal da app */
+  --ion-font-family: 'Inter', -apple-system, BlinkMacSystemFont,
+    'Helvetica Neue', sans-serif;
+
+  // ── Border Radius ─────────────────────────────────────────────────────────
+
+  --eat-go-radius-sm: 8px;
+  --eat-go-radius-md: 14px;
+  --eat-go-radius-lg: 20px;
+  --eat-go-radius-full: 50px;
+}
+
+// ── Estilos globais base ───────────────────────────────────────────────────
+
+// Fundo padrão do conteúdo
+ion-content {
+  --background: var(--eat-go-fundo);
+}
+
+// Remove borda padrão do header
+ion-header ion-toolbar {
+  --background: #ffffff;
+  --border-width: 0;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+// Badge de categoria com cor laranja suave
+ion-badge[color="warning"] {
+  --background: rgba(249, 115, 22, 0.12);
+  --color: #f97316;
+}

@@ -1,0 +1,208 @@
+// login.page.scss
+// Estilos da página de Login/Registo da app Eat&Go
+// Requisito 13: Manipular as CSS Custom Properties dos components
+// Requisito 16: Utilizar cores disponíveis globalmente
+
+// ── Conteúdo ──────────────────────────────────────────────────────────────────
+
+.login-content {
+  --background: #f0f0f0;
+}
+
+// Centraliza o card na página
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 20px 16px;
+}
+
+// ── Card principal ────────────────────────────────────────────────────────────
+
+.login-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+// ── Topo: voltar + fechar ─────────────────────────────────────────────────────
+
+.login-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .voltar-btn {
+    --color: var(--eat-go-escuro);
+    --padding-start: 0;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .fechar-btn {
+    --color: var(--eat-go-escuro);
+    font-size: 22px;
+  }
+}
+
+// ── Cabeçalho ─────────────────────────────────────────────────────────────────
+
+.login-header {
+  text-align: center;
+  margin-bottom: 28px;
+
+  .login-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--eat-go-escuro);
+    margin: 0 0 6px;
+    letter-spacing: -0.4px;
+  }
+
+  .login-subtitle {
+    font-size: 13px;
+    color: var(--eat-go-texto-secundario);
+    margin: 0;
+  }
+}
+
+// ── Formulário ────────────────────────────────────────────────────────────────
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+// Grupo de campo: label + input
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  .form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--eat-go-escuro);
+  }
+}
+
+// Wrapper do input com ícones
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #f4f4f4;
+  border-radius: 12px;
+  padding: 0 14px;
+  border: 1.5px solid transparent;
+  transition: border-color 0.2s;
+
+  // Borda laranja quando em foco
+  &:focus-within {
+    border-color: var(--eat-go-laranja);
+    background: #fff;
+  }
+
+  .input-icon {
+    font-size: 18px;
+    color: var(--eat-go-texto-secundario);
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+
+  .input-icon-right {
+    font-size: 18px;
+    color: var(--eat-go-texto-secundario);
+    flex-shrink: 0;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  // Input de texto
+  .form-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: var(--eat-go-escuro);
+    padding: 14px 0;
+    font-family: var(--ion-font-family);
+
+    &::placeholder {
+      color: #bbb;
+    }
+  }
+}
+
+// ── Opções: lembrar-me + esqueceu ────────────────────────────────────────────
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -4px;
+
+  .lembrar-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--eat-go-escuro);
+
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--eat-go-laranja);
+      cursor: pointer;
+    }
+  }
+
+  .esqueceu-link {
+    font-size: 13px;
+    color: var(--eat-go-laranja);
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ── Botão Entrar/Criar Conta ──────────────────────────────────────────────────
+
+.entrar-btn {
+  --background: var(--eat-go-laranja);
+  --color: #ffffff;
+  --border-radius: 50px;
+  --box-shadow: 0 4px 16px rgba(249, 115, 22, 0.4);
+  font-weight: 700;
+  font-size: 15px;
+  height: 52px;
+  margin-top: 8px;
+}
+
+// ── Link criar conta ──────────────────────────────────────────────────────────
+
+.criar-conta-texto {
+  text-align: center;
+  font-size: 13px;
+  color: var(--eat-go-texto-secundario);
+  margin: 8px 0 0;
+
+  .criar-conta-link {
+    color: var(--eat-go-laranja);
+    font-weight: 700;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
