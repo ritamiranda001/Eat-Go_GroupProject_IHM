@@ -1,0 +1,132 @@
+.sucesso-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  ion-icon { font-size: 1.4rem; }
+}
+
+.restaurante-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+
+  .restaurante-thumb {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .restaurante-nome {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+  }
+
+  .restaurante-categoria {
+    color: var(--ion-color-primary);
+    font-weight: 600;
+    margin: 0 0 4px;
+    font-size: 0.9rem;
+  }
+
+  .restaurante-morada {
+    color: var(--ion-color-medium);
+    font-size: 0.85rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.secao {
+  padding: 16px 0;
+
+  .secao-titulo {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ion-color-dark);
+    margin-bottom: 10px;
+  }
+}
+
+.estrelas-wrapper {
+  display: flex;
+  gap: 8px;
+
+  .estrela {
+    font-size: 2.2rem;
+    color: var(--ion-color-medium);
+    cursor: pointer;
+    transition: transform 0.1s;
+
+    &.ativa {
+      color: var(--ion-color-primary);
+    }
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.estrelas-label {
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
+
+.erro-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffebee;
+  color: #c62828;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.btn-submeter {
+  margin-top: 8px;
+}
+.secao-titulo {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333333 !important;
+  margin-bottom: 10px;
+}
+
+.estrela {
+  font-size: 2.2rem;
+  color: #cccccc;
+  cursor: pointer;
+  transition: transform 0.1s;
+
+  &.ativa {
+    color: var(--ion-color-primary);
+  }
+}
+
+.restaurante-nome {
+  color: #333333 !important;
+}
+
+.restaurante-morada {
+  color: #666666 !important;
+}
+.comentario-input {
+  --color: #333333;
+  --placeholder-color: #999999;
+  --background: #ffffff;
+}

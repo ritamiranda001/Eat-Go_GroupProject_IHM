@@ -1,13 +1,115 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>adicionar-restaurante</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Adicionar Restaurante</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">adicionar-restaurante</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <!-- Mensagem de sucesso -->
+  <div class="sucesso-banner" *ngIf="sucesso">
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+    <span>Restaurante adicionado com sucesso! A redirecionar...</span>
+  </div>
+
+  <!-- Erros de validação -->
+  <div class="erros-banner" *ngIf="erros.length > 0">
+    <p *ngFor="let erro of erros">• {{ erro }}</p>
+  </div>
+
+  <!-- Formulário -->
+  <div class="form-wrapper" *ngIf="!sucesso">
+
+    <!-- Nome -->
+    <div class="campo">
+      <ion-label class="campo-label">Nome do restaurante *</ion-label>
+      <ion-input
+        [(ngModel)]="novoRestaurante.nome"
+        placeholder="Ex: O Pescador"
+        class="campo-input"
+        fill="outline"
+      ></ion-input>
+    </div>
+
+    <!-- Categoria -->
+    <div class="campo">
+      <ion-label class="campo-label">Categoria *</ion-label>
+      <ion-select
+        [(ngModel)]="novoRestaurante.categoria"
+        placeholder="Seleciona uma categoria"
+        class="campo-input"
+        fill="outline"
+      >
+        <ion-select-option *ngFor="let cat of categorias" [value]="cat">
+          {{ cat }}
+        </ion-select-option>
+      </ion-select>
+    </div>
+
+    <!-- Descrição -->
+    <div class="campo">
+      <ion-label class="campo-label">Descrição *</ion-label>
+      <ion-textarea
+        [(ngModel)]="novoRestaurante.descricao"
+        placeholder="Descreve o restaurante..."
+        [rows]="3"
+        class="campo-input"
+        fill="outline"
+      ></ion-textarea>
+    </div>
+
+    <!-- Localização -->
+    <div class="campo">
+      <ion-label class="campo-label">Localização *</ion-label>
+      <ion-input
+        [(ngModel)]="novoRestaurante.localizacao"
+        placeholder="Ex: Largo São Domingos, Viana do Castelo"
+        class="campo-input"
+        fill="outline"
+      ></ion-input>
+    </div>
+
+    <!-- Nível de Preço -->
+    <div class="campo">
+      <ion-label class="campo-label">Nível de preço</ion-label>
+      <div class="preco-opcoes">
+        <ion-button
+          *ngFor="let p of ['$', '$$', '$$$']"
+          [fill]="novoRestaurante.nivelPreco === p ? 'solid' : 'outline'"
+          color="primary"
+          (click)="selecionarPreco(p)"
+        >{{ p }}</ion-button>
+      </div>
+    </div>
+
+    <!-- Imagem URL -->
+    <div class="campo">
+      <ion-label class="campo-label">URL da imagem</ion-label>
+      <ion-input
+        [(ngModel)]="novoRestaurante.imagem"
+        placeholder="https://..."
+        class="campo-input"
+        fill="outline"
+        (ionChange)="atualizarPreview()"
+      ></ion-input>
+    </div>
+
+    <!-- Preview da imagem -->
+    <div class="imagem-preview" *ngIf="imagemPreview">
+      <img [src]="imagemPreview" alt="Preview" />
+    </div>
+
+    <!-- Botão submeter -->
+    <ion-button expand="block" color="primary" class="btn-submeter" (click)="submeter()">
+      <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+      Adicionar Restaurante
+    </ion-button>
+
+  </div>
+
 </ion-content>

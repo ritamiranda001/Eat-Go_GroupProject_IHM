@@ -1,13 +1,80 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>avaliar</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Avaliar Restaurante</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">avaliar</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <!-- Sucesso -->
+  <div class="sucesso-banner" *ngIf="sucesso">
+    <ion-icon name="checkmark-circle-outline"></ion-icon>
+    <span>Avaliação guardada com sucesso! A redirecionar...</span>
+  </div>
+
+  <div *ngIf="!sucesso">
+
+    <!-- Info do restaurante -->
+    <div class="restaurante-info" *ngIf="restaurante">
+      <img [src]="restaurante.imagem" [alt]="restaurante.nome" class="restaurante-thumb"/>
+      <div>
+        <h2 class="restaurante-nome">{{ restaurante.nome }}</h2>
+        <p class="restaurante-categoria">{{ restaurante.categoria }}</p>
+        <p class="restaurante-morada">
+          <ion-icon name="location-outline"></ion-icon>
+          {{ restaurante.localizacao }}
+        </p>
+      </div>
+    </div>
+
+   <div style="height: 1px; background: #eeeeee; margin: 8px 0;"></div>
+
+    <!-- Estrelas -->
+    <div class="secao">
+      <p class="secao-titulo">A tua classificação *</p>
+      <div class="estrelas-wrapper">
+        <ion-icon
+          *ngFor="let e of estrelas"
+          [name]="e <= estrelasAtivas ? 'star' : 'star-outline'"
+          class="estrela"
+          [class.ativa]="e <= estrelasAtivas"
+          (click)="selecionarEstrelas(e)"
+        ></ion-icon>
+      </div>
+      <p class="estrelas-label" *ngIf="estrelasAtivas > 0">
+        {{ estrelasAtivas }} {{ estrelasAtivas === 1 ? 'estrela' : 'estrelas' }}
+      </p>
+    </div>
+
+    <!-- Comentário -->
+    <div class="secao">
+      <p class="secao-titulo">Comentário *</p>
+      <ion-textarea
+        [(ngModel)]="comentario"
+        placeholder="Partilha a tua experiência..."
+        [rows]="4"
+        fill="outline"
+        class="comentario-input"
+      ></ion-textarea>
+    </div>
+
+    <!-- Erro -->
+    <div class="erro-banner" *ngIf="erro">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <span>{{ erro }}</span>
+    </div>
+
+    <!-- Botão submeter -->
+    <ion-button expand="block" color="primary" class="btn-submeter" (click)="submeter()">
+      <ion-icon slot="start" name="star-outline"></ion-icon>
+      Guardar Avaliação
+    </ion-button>
+
+  </div>
+
 </ion-content>
