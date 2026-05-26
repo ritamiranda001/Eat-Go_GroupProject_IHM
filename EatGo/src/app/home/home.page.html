@@ -6,11 +6,21 @@
       </div>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button fill="clear" class="header-btn">
-        <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+      <ion-button fill="clear" class="header-btn" (click)="togglePesquisa()">
+        <ion-icon slot="icon-only" [name]="mostrarPesquisa ? 'close-outline' : 'search-outline'"></ion-icon>
       </ion-button>
       <ion-menu-button class="header-btn" autoHide="false"></ion-menu-button>
     </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Barra de pesquisa -->
+  <ion-toolbar *ngIf="mostrarPesquisa" class="search-toolbar">
+    <ion-searchbar
+      [(ngModel)]="termoPesquisa"
+      placeholder="Pesquisar restaurante, categoria..."
+      animated="true"
+      [debounce]="300"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -19,7 +29,7 @@
   <!-- Título -->
   <div class="page-header">
     <h1 class="page-title">Explorar Restaurantes</h1>
-    <p class="page-subtitle">{{ resultados.length }} resultados localizados</p>
+    <p class="page-subtitle">{{ resultadosFiltrados.length }} resultados localizados</p>
   </div>
 
   <!-- Barra de filtros -->
@@ -28,9 +38,9 @@
       <ion-icon slot="start" name="options-outline"></ion-icon>
       Filtrar por:
     </ion-button>
-    <ion-button fill="outline" class="filter-btn" (click)="abrirOrdenacao()">
+    <ion-button fill="outline" class="filter-btn" (click)="toggleOrdenacao()">
       <ion-icon slot="start" name="swap-vertical-outline"></ion-icon>
-      Ordenar
+      {{ ordenacaoAtual === 'distancia' ? 'Ordenar: Distância' : 'Ordenar: A-Z' }}
     </ion-button>
   </div>
 
