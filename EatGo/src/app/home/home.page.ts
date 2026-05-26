@@ -33,21 +33,21 @@ export class HomePage implements OnInit {
   ordenacaoAtual: 'alfabetica' | 'distancia' = 'distancia';
 
   categorias = [
-    { valor: 'todos',      icone: 'restaurant-outline' },
-    { valor: 'Italiano',   icone: 'pizza-outline' },
-    { valor: 'Fast Food',  icone: 'fast-food-outline' },
-    { valor: 'Café',       icone: 'cafe-outline' },
-    { valor: 'Pastelaria', icone: 'ice-cream-outline' },
-  ];
+  { valor: 'todos',       icone: 'restaurant-outline' },
+  { valor: 'Tradicional', icone: 'fish-outline' },
+  { valor: 'Gourmet',     icone: 'wine-outline' },
+  { valor: 'Café',        icone: 'cafe-outline' },
+  { valor: 'Petiscos',    icone: 'beer-outline' },
+];
 
   resultados: Restaurante[] = [
-    { id: 1, nome: 'Smash Burger Co.', categoria: 'Fast Food', descricao: 'Os melhores hambúrgueres smash da cidade, feitos na hora com ingredientes frescos.', morada: 'Cais do Sodré, Lisboa', distancia: 0.8, rating: 4.5, preco: '$', avaliacoes: 312, imagem: 'assets/images/smash-burger.jpg' },
-    { id: 2, nome: 'Yami Sushi', categoria: 'Outros', descricao: 'Sushi de fusão num ambiente vibrante com ingredientes de alta qualidade.', morada: 'Parque das Nações, Lisboa', distancia: 5.4, rating: 4.6, preco: '$$$', avaliacoes: 420, imagem: 'assets/images/yami-sushi.jpg' },
-    { id: 3, nome: 'Café da Esquina', categoria: 'Café', descricao: 'Brunch incrível e os melhores pastéis de nata da zona.', morada: 'Príncipe Real, Lisboa', distancia: 1.2, rating: 4.3, preco: '$', avaliacoes: 189, imagem: 'assets/images/cafe-esquina.jpg' },
-    { id: 4, nome: 'Sweet Tooth', categoria: 'Pastelaria', descricao: 'Bolos artesanais, tartes de fruta e cheesecakes que vão fazer-te sorrir.', morada: 'Chiado, Lisboa', distancia: 2.1, rating: 4.7, preco: '$$', avaliacoes: 256, imagem: 'assets/images/sweet-tooth.jpg' },
-    { id: 5, nome: 'Nonna Trattoria', categoria: 'Italiano', descricao: 'Autêntica cozinha italiana da avó: massas frescas, risotto e muito amor.', morada: 'Intendente, Lisboa', distancia: 3.0, rating: 4.4, preco: '$$', avaliacoes: 98, imagem: 'assets/images/nonna-trattoria.jpg' },
-    { id: 6, nome: 'Bistro Central', categoria: 'Bistro', descricao: 'Pratos mediterrânicos frescos num espaço acolhedor e com música ao vivo.', morada: 'Avenida da Liberdade, Lisboa', distancia: 1.7, rating: 4.2, preco: '$$', avaliacoes: 143, imagem: 'assets/images/bistro-central.jpg' },
-  ];
+  { id: 1, nome: 'O Pescador', categoria: 'Tradicional', descricao: 'Especializado em arroz de tamboril, feijoada de marisco e peixe grelhado fresquíssimo no centro histórico.', morada: 'Largo São Domingos, Viana do Castelo', distancia: 0.3, rating: 4.5, preco: '$$', avaliacoes: 287, imagem: 'assets/images/o-pescador.jpg' },
+  { id: 2, nome: 'O Tabernão', categoria: 'Petiscos', descricao: 'Tasca aconchegante com petiscos tradicionais como polvo à galega e mexilhão frio com salsa.', morada: 'Centro Histórico, Viana do Castelo', distancia: 0.5, rating: 4.6, preco: '$', avaliacoes: 193, imagem: 'assets/images/o-tabernao.jpg' },
+  { id: 3, nome: 'Porta 93', categoria: 'Gourmet', descricao: 'Restaurante de autor da Chef Mariana, com pratos criativos feitos com ingredientes locais.', morada: 'Av. Conde Carreira 28, Viana do Castelo', distancia: 0.8, rating: 4.8, preco: '$$$', avaliacoes: 142, imagem: 'assets/images/porta-93.jpg' },
+  { id: 4, nome: 'Adega do Padrinho', categoria: 'Tradicional', descricao: 'Numa rua típica do centro histórico, cozinha minhota autêntica com bacalhau e pratos regionais.', morada: 'Centro Histórico, Viana do Castelo', distancia: 0.4, rating: 4.3, preco: '$', avaliacoes: 98, imagem: 'assets/images/adega-padrinho.jpg' },
+  { id: 5, nome: "D'Amore Café", categoria: 'Café', descricao: 'Café charmoso com esplanada encantadora, perfeito para pequenos-almoços e brunchs.', morada: 'R. Mateus Barbosa 23, Viana do Castelo', distancia: 0.6, rating: 4.4, preco: '$', avaliacoes: 215, imagem: 'assets/images/damore-cafe.jpg' },
+  { id: 6, nome: 'A Petisqueira', categoria: 'Petiscos', descricao: 'Espaço descontraído especializado em petiscos portugueses para partilhar, com serviço caloroso.', morada: 'Centro, Viana do Castelo', distancia: 1.0, rating: 4.5, preco: '$$', avaliacoes: 176, imagem: 'assets/images/a-petisqueira.jpg' },
+];
 
   get resultadosFiltrados(): Restaurante[] {
     let lista = this.resultados.filter(r => {
