@@ -8,33 +8,16 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Storage } from '@ionic/storage-angular';
 import { RestauranteService } from '../services/restaurante.service';
 import { Restaurante } from '../models/restaurante.model';
-
-/** Interface que representa uma avaliação feita pelo utilizador */
-export interface Avaliacao {
-  /** ID do restaurante avaliado */
-  restauranteId: number;
-  /** Nome do restaurante avaliado */
-  restauranteNome: string;
-  /** Classificação de 1 a 5 estrelas */
-  estrelas: number;
-  /** Comentário do utilizador */
-  comentario: string;
-  /** Data da avaliação */
-  data: string;
-}
+import { Avaliacao } from '../models/avaliacao.model';
 
 @Component({
   selector: 'app-avaliar',
   templateUrl: './avaliar.page.html',
   styleUrls: ['./avaliar.page.scss'],
-  standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  standalone: false
 })
 export class AvaliarPage implements OnInit {
 
@@ -64,10 +47,7 @@ export class AvaliarPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    // Inicializa o Storage
     await this.storage.create();
-
-    // Obtém o ID do restaurante a partir dos parâmetros da rota
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.restauranteService.getById(id).subscribe({
       next: (r) => this.restaurante = r,
@@ -75,20 +55,12 @@ export class AvaliarPage implements OnInit {
     });
   }
 
-  /**
-   * Define o número de estrelas selecionadas pelo utilizador.
-   * @param n - Número de estrelas (1 a 5)
-   */
   selecionarEstrelas(n: number) {
     this.estrelasAtivas = n;
   }
 
-  /**
-   * Valida e submete a avaliação, guardando-a no Ionic Storage.
-   */
   async submeter() {
     this.erro = '';
-
     if (this.estrelasAtivas === 0) {
       this.erro = 'Por favor seleciona uma classificação.';
       return;
@@ -98,7 +70,6 @@ export class AvaliarPage implements OnInit {
       return;
     }
 
-    // Cria o objeto de avaliação
     const avaliacao: Avaliacao = {
       restauranteId: this.restaurante!.id,
       restauranteNome: this.restaurante!.nome,
@@ -107,15 +78,12 @@ export class AvaliarPage implements OnInit {
       data: new Date().toLocaleDateString('pt-PT')
     };
 
-    // Guarda no Storage — chave única por restaurante + timestamp
     const chave = `avaliacao_${this.restaurante!.id}_${Date.now()}`;
     await this.storage.set(chave, avaliacao);
-
     this.sucesso = true;
     setTimeout(() => this.router.navigate(['/home']), 2000);
   }
 
-  /** Navega de volta para a página anterior */
   voltar() {
     this.router.navigate(['/home']);
   }
