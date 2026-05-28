@@ -1,0 +1,87 @@
+ion-toolbar {
+  --background: #FF6B2B;
+  --color: #ffffff;
+}
+
+.vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+
+  .vazio-icon {
+    font-size: 64px;
+    color: #FF6B2B;
+    margin-bottom: 16px;
+  }
+
+  .vazio-texto {
+    font-size: 15px;
+    color: #888888;
+    margin-bottom: 24px;
+  }
+}
+
+.avaliacoes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.avaliacao-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+
+    .restaurante-nome {
+      font-size: 16px;
+      font-weight: 800;
+      color: #1A1A1A;
+      margin: 0 0 4px 0;
+    }
+
+    .avaliacao-data {
+      font-size: 12px;
+      color: #888888;
+      margin: 0;
+    }
+  }
+
+  .estrelas-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 10px;
+
+    .estrela {
+      font-size: 20px;
+      color: #E0E0E0;
+
+      &.ativa {
+        color: #FF6B2B;
+      }
+    }
+
+    .estrelas-count {
+      font-size: 13px;
+      color: #888888;
+      margin-left: 6px;
+    }
+  }
+
+  .comentario {
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.5;
+    margin: 0;
+  }
+}

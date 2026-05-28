@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Minhas Avaliações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Sem avaliações -->
+  <div class="vazio" *ngIf="avaliacoes.length === 0">
+    <ion-icon name="star-outline" class="vazio-icon"></ion-icon>
+    <p class="vazio-texto">Ainda não fizeste nenhuma avaliação.</p>
+    <ion-button fill="outline" color="primary" routerLink="/home">
+      Explorar Restaurantes
+    </ion-button>
+  </div>
+
+  <!-- Lista de avaliações -->
+  <div class="avaliacoes-lista" *ngIf="avaliacoes.length > 0">
+    <div class="avaliacao-card" *ngFor="let av of avaliacoes">
+
+      <div class="card-header">
+        <div>
+          <h2 class="restaurante-nome">{{ av.restauranteNome }}</h2>
+          <p class="avaliacao-data">{{ av.data }}</p>
+        </div>
+        <ion-button fill="clear" color="danger" (click)="apagar(av)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="estrelas-wrapper">
+        <ion-icon
+          *ngFor="let e of [1,2,3,4,5]"
+          [name]="e <= av.estrelas ? 'star' : 'star-outline'"
+          class="estrela"
+          [class.ativa]="e <= av.estrelas"
+        ></ion-icon>
+        <span class="estrelas-count">{{ av.estrelas }}/5</span>
+      </div>
+
+      <p class="comentario">{{ av.comentario }}</p>
+
+    </div>
+  </div>
+
+</ion-content>

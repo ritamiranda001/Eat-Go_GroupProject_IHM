@@ -9,7 +9,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class AppComponent {
   public menuPages = [
-    { title: 'Minhas Avaliações', url: '/avaliar', icon: 'star-outline' },
+    { title: 'Minhas Avaliações', url: '/minhas-avaliacoes', icon: 'star-outline' },
     { title: 'Adicionar Restaurante', url: '/adicionar-restaurante', icon: 'add-circle-outline' },
     { title: 'Explorar Mapa', url: '/home', icon: 'search-outline' },
   ];

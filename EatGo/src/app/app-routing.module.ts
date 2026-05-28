@@ -10,48 +10,45 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    // Redireciona a raiz para a página home das colegas
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
   {
-    // Página home (Rita)
     path: 'home',
     loadChildren: () =>
       import('./home/home.module').then(m => m.HomePageModule)
-  }
-  ,
+  },
   {
-    // Detalhe de um restaurante — parâmetro :id na rota
-    // Requisito 5: passar parâmetros entre páginas
     path: 'restaurante-detalhe/:id',
     loadChildren: () =>
       import('./restaurante-detalhe/restaurante-detalhe.module')
         .then(m => m.RestauranteDetalhePageModule)
   },
   {
-    // Tarefa: Avaliar restaurante — recebe :id do restaurante
-    // Requisito 5: passar parâmetros entre páginas
     path: 'avaliar/:id',
     loadChildren: () =>
       import('./avaliar/avaliar.module').then(m => m.AvaliarPageModule)
   },
   {
-    // Tarefa: Adicionar novo restaurante
     path: 'adicionar-restaurante',
     loadChildren: () =>
       import('./adicionar-restaurante/adicionar-restaurante.module')
         .then(m => m.AdicionarRestaurantePageModule)
   },
   {
-    // Login e Registo
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
-    // Redireciona rotas desconhecidas para home
+    path: 'minhas-avaliacoes',
+    loadChildren: () =>
+      import('./minhas-avaliacoes/minhas-avaliacoes.module')
+        .then(m => m.MinhasAvaliacoesPageModule)
+  },
+  {
+    // Deve ser sempre o último!
     path: '**',
     redirectTo: 'home'
   }

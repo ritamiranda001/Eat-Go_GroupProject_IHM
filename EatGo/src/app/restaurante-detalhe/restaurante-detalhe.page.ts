@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
 import { RestauranteService } from '../services/restaurante.service';
 import { Restaurante } from '../models/restaurante.model';
 
@@ -9,8 +7,7 @@ import { Restaurante } from '../models/restaurante.model';
   selector: 'app-restaurante-detalhe',
   templateUrl: './restaurante-detalhe.page.html',
   styleUrls: ['./restaurante-detalhe.page.scss'],
-  standalone: true,
-  imports: [IonicModule, CommonModule]
+  standalone: false
 })
 export class RestauranteDetalhePage implements OnInit {
 

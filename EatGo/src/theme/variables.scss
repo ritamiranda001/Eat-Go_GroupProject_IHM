@@ -82,3 +82,24 @@ ion-badge[color="warning"] {
   --background: rgba(249, 115, 22, 0.12);
   --color: #f97316;
 }
+
+// ── Formulários ───────────────────────────────────────────────────────────
+
+ion-input, ion-select, ion-textarea {
+  --color: #1a1a1a;
+  --placeholder-color: #888888;
+  --background: #ffffff;
+}
+
+ion-label {
+  color: #1a1a1a !important;
+}
+
+ion-content {
+  --background: #ffffff;
+}
+ion-input, ion-select, ion-textarea {
+  --color: #1a1a1a;
+  --placeholder-color: #888888 !important;
+  --background: #ffffff;
+}
