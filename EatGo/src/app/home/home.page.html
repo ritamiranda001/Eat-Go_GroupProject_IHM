@@ -40,7 +40,7 @@
     </ion-button>
     <ion-button fill="outline" class="filter-btn" (click)="toggleOrdenacao()">
       <ion-icon slot="start" name="swap-vertical-outline"></ion-icon>
-      {{ ordenacaoAtual === 'distancia' ? 'Ordenar: Distância' : 'Ordenar: A-Z' }}
+      {{ ordenacaoAtual === 'avaliacao' ? 'Ordenar: Avaliação' : 'Ordenar: A-Z' }}
     </ion-button>
   </div>
 
@@ -108,7 +108,7 @@
         <img class="card-imagem" [src]="restaurante.imagem" [alt]="restaurante.nome"/>
         <div class="rating-badge">
           <ion-icon name="star"></ion-icon>
-          <span>{{ restaurante.avaliacao }}</span>
+          <span>{{ getAvaliacao(restaurante) }}</span>
         </div>
       </div>
 
@@ -126,7 +126,7 @@
           <span>A {{ restaurante.distancia }} km</span>
         </div>
         <div class="card-acoes">
-          <span class="avaliacoes-count">{{ restaurante.totalAvaliacoes > 0 ? restaurante.totalAvaliacoes + ' avaliações' : 'Sem avaliações' }}</span>
+          <span class="avaliacoes-count">{{ getTotalAvaliacoes(restaurante) > 0 ? getTotalAvaliacoes(restaurante) + ' avaliações' : 'Sem avaliações' }}</span>
           <div class="acoes-icons">
             <ion-button fill="clear" class="icon-action" (click)="verMapa($event, restaurante)">
               <ion-icon slot="icon-only" name="map-outline"></ion-icon>

@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   public menuPages = [
-    { title: 'Minhas Avaliações', url: '/minhas-avaliacoes', icon: 'star-outline' },
-    { title: 'Adicionar Restaurante', url: '/adicionar-restaurante', icon: 'add-circle-outline' },
-    { title: 'Explorar Mapa', url: '/home', icon: 'search-outline' },
+    { title: 'Minhas Avaliações', url: '/minhas-avaliacoes', icon: 'star-outline', requerLogin: true },
+    { title: 'Adicionar Restaurante', url: '/adicionar-restaurante', icon: 'add-circle-outline', requerLogin: true },
+    { title: 'Explorar Mapa', url: '/home', icon: 'search-outline', requerLogin: false },
   ];
 
   constructor(
