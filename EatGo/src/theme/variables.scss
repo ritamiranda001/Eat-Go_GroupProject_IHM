@@ -101,3 +101,11 @@ input, textarea {
 ion-select::part(text) {
   color: var(--eat-go-escuro) !important;
 }
+
+ion-checkbox + ion-label {
+  color: #1a1a1a !important;
+}
+
+ion-item {
+  --color: #1a1a1a;
+}

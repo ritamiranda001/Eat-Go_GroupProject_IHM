@@ -32,7 +32,7 @@
       </div>
     </div>
 
-   <div style="height: 1px; background: #eeeeee; margin: 8px 0;"></div>
+    <div style="height: 1px; background: #eeeeee; margin: 8px 0;"></div>
 
     <!-- Estrelas -->
     <div class="secao">
@@ -61,6 +61,21 @@
         fill="outline"
         class="comentario-input"
       ></ion-textarea>
+    </div>
+
+    <!-- Avaliação Anónima -->
+    <div class="secao anonimo-wrapper">
+      <ion-item lines="none" class="anonimo-item">
+        <ion-checkbox
+          [(ngModel)]="anonimo"
+          slot="start"
+          color="primary"
+        ></ion-checkbox>
+        <ion-label>Publicar como anónimo</ion-label>
+      </ion-item>
+      <p class="anonimo-descricao" *ngIf="anonimo">
+        A tua avaliação será publicada como "Utilizador Anónimo".
+      </p>
     </div>
 
     <!-- Erro -->
