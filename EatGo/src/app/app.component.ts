@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +16,19 @@ export class AppComponent {
     { title: 'Explorar Mapa', url: '/home', icon: 'search-outline' },
   ];
 
-  constructor(private menuCtrl: MenuController) {}
+  constructor(
+    private menuCtrl: MenuController,
+    public authService: AuthService,
+    private router: Router
+  ) {}
 
   fecharMenu() {
     this.menuCtrl.close();
+  }
+
+  async logout() {
+    await this.authService.logout();
+    this.menuCtrl.close();
+    this.router.navigate(['/home']);
   }
 }

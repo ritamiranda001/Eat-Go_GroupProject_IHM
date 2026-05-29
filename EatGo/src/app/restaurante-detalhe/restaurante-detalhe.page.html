@@ -29,13 +29,11 @@
     <p class="categoria">{{ restaurante.categoria }}</p>
     <p class="descricao">{{ restaurante.descricao }}</p>
 
-    <!-- Localização -->
     <div class="detalhe-row">
       <ion-icon name="location-outline"></ion-icon>
       <span>{{ restaurante.localizacao }} • A {{ restaurante.distancia }} km</span>
     </div>
 
-    <!-- Avaliações -->
     <div class="detalhe-row">
       <ion-icon name="star-outline"></ion-icon>
       <span>{{ restaurante.avaliacao }} estrelas · {{ restaurante.totalAvaliacoes }} avaliações</span>
@@ -50,9 +48,42 @@
     </ion-button>
   </div>
 
+  <!-- Secção de Avaliações -->
+  <div class="avaliacoes-section">
+    <h2 class="avaliacoes-titulo">Avaliações</h2>
+
+    <!-- Sem avaliações -->
+    <div class="sem-avaliacoes" *ngIf="avaliacoes.length === 0">
+      <ion-icon name="chatbubble-outline"></ion-icon>
+      <p>Ainda não há avaliações. Sê o primeiro!</p>
+    </div>
+
+    <!-- Lista de avaliações -->
+    <div class="avaliacao-card" *ngFor="let av of avaliacoes">
+      <div class="avaliacao-header">
+        <div class="avaliacao-autor">
+          <ion-icon name="person-circle-outline" class="autor-icon"></ion-icon>
+          <span class="autor-nome">{{ av.utilizador || 'Utilizador Anónimo' }}</span>
+        </div>
+        <span class="avaliacao-data">{{ av.data }}</span>
+      </div>
+
+      <div class="estrelas-wrapper">
+        <ion-icon
+          *ngFor="let e of [1,2,3,4,5]"
+          [name]="e <= av.estrelas ? 'star' : 'star-outline'"
+          class="estrela"
+          [class.ativa]="e <= av.estrelas"
+        ></ion-icon>
+        <span class="estrelas-count">{{ av.estrelas }}/5</span>
+      </div>
+
+      <p class="avaliacao-comentario">{{ av.comentario }}</p>
+    </div>
+  </div>
+
 </ion-content>
 
-<!-- Loading se restaurante não carregou -->
 <ion-content *ngIf="!restaurante">
   <div class="loading-wrapper">
     <ion-spinner name="crescent"></ion-spinner>

@@ -24,9 +24,27 @@
         </ion-list>
 
         <div class="menu-footer">
-          <ion-button expand="block" routerLink="/login" class="login-btn">
+          <!-- Se não está autenticado mostra Login -->
+          <ion-button
+            *ngIf="!authService.isLoggedIn()"
+            expand="block"
+            routerLink="/login"
+            class="login-btn"
+            (click)="fecharMenu()"
+          >
             <ion-icon slot="start" name="log-in-outline"></ion-icon>
             Login
+          </ion-button>
+
+          <!-- Se está autenticado mostra Logout -->
+          <ion-button
+            *ngIf="authService.isLoggedIn()"
+            expand="block"
+            class="login-btn logout-btn"
+            (click)="logout()"
+          >
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            Logout
           </ion-button>
         </div>
 

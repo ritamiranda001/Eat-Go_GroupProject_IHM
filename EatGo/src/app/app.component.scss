@@ -59,3 +59,10 @@ ion-menu {
     }
   }
 }
+.logout-btn {
+  --background: #ffffff;
+  --color: #FF6B2B;
+  --border-color: #FF6B2B;
+  border: 1px solid #FF6B2B;
+  border-radius: 12px;
+}

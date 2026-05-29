@@ -10,4 +10,6 @@ export interface Avaliacao {
   comentario: string;
   /** Data da avaliação */
   data: string;
+  /** Nome do utilizador que fez a avaliação */
+  utilizador?: string;
 }

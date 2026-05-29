@@ -1,15 +1,8 @@
-/**
- * avaliar.page.ts
- * Página para avaliar um restaurante.
- * Requisito 4: Utilizar o Angular Router: Router e ActivatedRoute
- * Requisito 5: Navegar e passar informação (parâmetros) entre páginas
- * Requisito 9: Guardar informação com recurso ao Ionic Storage
- * Requisito 15: Otimizar código com recurso a Services
- */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { RestauranteService } from '../services/restaurante.service';
+import { AuthService } from '../services/auth.service';
 import { Restaurante } from '../models/restaurante.model';
 import { Avaliacao } from '../models/avaliacao.model';
 
@@ -21,29 +14,19 @@ import { Avaliacao } from '../models/avaliacao.model';
 })
 export class AvaliarPage implements OnInit {
 
-  /** Restaurante a ser avaliado */
   restaurante: Restaurante | undefined;
-
-  /** Número de estrelas selecionadas (1-5) */
   estrelasAtivas = 0;
-
-  /** Comentário escrito pelo utilizador */
   comentario = '';
-
-  /** Indica se a avaliação foi submetida com sucesso */
   sucesso = false;
-
-  /** Mensagem de erro caso a validação falhe */
   erro = '';
-
-  /** Array de 5 posições para renderizar as estrelas */
   readonly estrelas = [1, 2, 3, 4, 5];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private restauranteService: RestauranteService,
-    private storage: Storage
+    private storage: Storage,
+    private authService: AuthService
   ) {}
 
   async ngOnInit() {
@@ -55,27 +38,24 @@ export class AvaliarPage implements OnInit {
     });
   }
 
-  selecionarEstrelas(n: number) {
-    this.estrelasAtivas = n;
-  }
+  selecionarEstrelas(n: number) { this.estrelasAtivas = n; }
 
   async submeter() {
     this.erro = '';
-    if (this.estrelasAtivas === 0) {
-      this.erro = 'Por favor seleciona uma classificação.';
-      return;
-    }
-    if (this.comentario.trim().length < 5) {
-      this.erro = 'O comentário deve ter pelo menos 5 caracteres.';
-      return;
-    }
+    if (this.estrelasAtivas === 0) { this.erro = 'Por favor seleciona uma classificação.'; return; }
+    if (this.comentario.trim().length < 5) { this.erro = 'O comentário deve ter pelo menos 5 caracteres.'; return; }
+
+    // Obtém o nome do utilizador autenticado
+    const utilizadorAtual = this.authService.getUtilizador();
+    const nomeUtilizador = utilizadorAtual?.nome || 'Utilizador Anónimo';
 
     const avaliacao: Avaliacao = {
       restauranteId: this.restaurante!.id,
       restauranteNome: this.restaurante!.nome,
       estrelas: this.estrelasAtivas,
       comentario: this.comentario.trim(),
-      data: new Date().toLocaleDateString('pt-PT')
+      data: new Date().toLocaleDateString('pt-PT'),
+      utilizador: nomeUtilizador
     };
 
     const chave = `avaliacao_${this.restaurante!.id}_${Date.now()}`;
@@ -84,7 +64,5 @@ export class AvaliarPage implements OnInit {
     setTimeout(() => this.router.navigate(['/home']), 2000);
   }
 
-  voltar() {
-    this.router.navigate(['/home']);
-  }
+  voltar() { this.router.navigate(['/home']); }
 }
