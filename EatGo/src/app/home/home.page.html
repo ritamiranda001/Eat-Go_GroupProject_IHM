@@ -29,7 +29,7 @@
   <!-- Título -->
   <div class="page-header">
     <h1 class="page-title">Explorar Restaurantes</h1>
-    <p class="page-subtitle">{{ resultadosFiltrados.length }} resultados localizados</p>
+    <p class="page-subtitle">{{ totalFiltrados }} resultados localizados</p>
   </div>
 
   <!-- Barra de filtros -->
@@ -126,7 +126,7 @@
           <span>A {{ restaurante.distancia }} km</span>
         </div>
         <div class="card-acoes">
-          <span class="avaliacoes-count">{{ restaurante.totalAvaliacoes }} avaliações</span>
+          <span class="avaliacoes-count">{{ restaurante.totalAvaliacoes > 0 ? restaurante.totalAvaliacoes + ' avaliações' : 'Sem avaliações' }}</span>
           <div class="acoes-icons">
             <ion-button fill="clear" class="icon-action" (click)="verMapa($event, restaurante)">
               <ion-icon slot="icon-only" name="map-outline"></ion-icon>
@@ -145,7 +145,7 @@
   </div>
 
   <!-- Ver mais resultados -->
-  <div class="ver-mais-wrapper">
+  <div class="ver-mais-wrapper" *ngIf="limite <= totalFiltrados">
     <ion-button fill="outline" class="ver-mais-btn" expand="block" (click)="verMaisResultados()">
       Ver mais resultados
     </ion-button>

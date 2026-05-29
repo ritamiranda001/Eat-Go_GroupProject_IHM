@@ -19,6 +19,7 @@ export class AvaliarPage implements OnInit {
   comentario = '';
   sucesso = false;
   erro = '';
+  anonimo = false;
   readonly estrelas = [1, 2, 3, 4, 5];
 
   constructor(
@@ -45,9 +46,9 @@ export class AvaliarPage implements OnInit {
     if (this.estrelasAtivas === 0) { this.erro = 'Por favor seleciona uma classificação.'; return; }
     if (this.comentario.trim().length < 5) { this.erro = 'O comentário deve ter pelo menos 5 caracteres.'; return; }
 
-    // Obtém o nome do utilizador autenticado
+    // Se anónimo usa "Utilizador Anónimo", senão usa o nome do utilizador autenticado
     const utilizadorAtual = this.authService.getUtilizador();
-    const nomeUtilizador = utilizadorAtual?.nome || 'Utilizador Anónimo';
+    const nomeUtilizador = this.anonimo ? 'Utilizador Anónimo' : (utilizadorAtual?.nome || 'Utilizador Anónimo');
 
     const avaliacao: Avaliacao = {
       restauranteId: this.restaurante!.id,

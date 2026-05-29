@@ -17,6 +17,7 @@ export class HomePage implements OnInit {
   filtroAvaliacao = 'todos';
   filtroCategoria = 'todos';
   ordenacaoAtual: 'alfabetica' | 'distancia' = 'distancia';
+  limite = 5;
 
   categorias = [
     { valor: 'todos',       icone: 'restaurant-outline' },
@@ -45,7 +46,19 @@ export class HomePage implements OnInit {
       lista = [...lista].sort((a, b) => a.distancia - b.distancia);
     }
 
-    return lista;
+    return lista.slice(0, this.limite);
+  }
+
+  get totalFiltrados(): number {
+    return this.resultados.filter(r => {
+      const porAvaliacao = this.filtroAvaliacao === 'todos' || Math.floor(r.avaliacao) >= parseInt(this.filtroAvaliacao);
+      const porCategoria = this.filtroCategoria === 'todos' || r.categoria === this.filtroCategoria;
+      const porPesquisa = this.termoPesquisa === '' ||
+        r.nome.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
+        r.categoria.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
+        r.localizacao.toLowerCase().includes(this.termoPesquisa.toLowerCase());
+      return porAvaliacao && porCategoria && porPesquisa;
+    }).length;
   }
 
   constructor(private router: Router, private restauranteService: RestauranteService) {}
@@ -62,10 +75,10 @@ export class HomePage implements OnInit {
   selecionarAvaliacao(v: string) { this.filtroAvaliacao = v; }
   selecionarCategoria(v: string) { this.filtroCategoria = v; }
   toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'distancia' ? 'alfabetica' : 'distancia'; }
+  verMaisResultados() { this.limite += 5; }
 
   verDetalhe(restaurante: Restaurante) { this.router.navigate(['/restaurante-detalhe', restaurante.id]); }
   avaliar(event: Event, restaurante: Restaurante) { event.stopPropagation(); this.router.navigate(['/avaliar', restaurante.id]); }
   verMapa(event: Event, restaurante: Restaurante) { event.stopPropagation(); console.log('Ver mapa:', restaurante.nome); }
   partilhar(event: Event, restaurante: Restaurante) { event.stopPropagation(); console.log('Partilhar:', restaurante.nome); }
-  verMaisResultados() { console.log('Ver mais resultados'); }
 }
