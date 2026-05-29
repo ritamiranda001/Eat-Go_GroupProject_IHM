@@ -8,9 +8,16 @@
     "distancia": 0.3,
     "nivelPreco": "$$",
     "avaliacao": 4.5,
-    "totalAvaliacoes": 287,
+    "totalAvaliacoes": 5,
     "imagem": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600",
-    "coordenadas": { "lat": 41.69164, "lng": -8.83405 }
+    "coordenadas": { "lat": 41.69164, "lng": -8.83405 },
+    "avaliacoesList": [
+      { "restauranteId": 1, "restauranteNome": "O Pescador", "utilizador": "maria.silva", "estrelas": 5, "comentario": "Peixe fresquíssimo e arroz de tamboril de comer e chorar por mais!", "data": "12/05/2026" },
+      { "restauranteId": 1, "restauranteNome": "O Pescador", "utilizador": "joao.costa", "estrelas": 4, "comentario": "Ótimo ambiente e serviço simpático. Voltarei com certeza!", "data": "08/05/2026" },
+      { "restauranteId": 1, "restauranteNome": "O Pescador", "utilizador": "ana.ferreira", "estrelas": 5, "comentario": "Melhor restaurante de Viana! A feijoada de marisco é incrível.", "data": "01/05/2026" },
+      { "restauranteId": 1, "restauranteNome": "O Pescador", "utilizador": "pedro.santos", "estrelas": 4, "comentario": "Comida deliciosa mas a espera foi um pouco longa.", "data": "25/04/2026" },
+      { "restauranteId": 1, "restauranteNome": "O Pescador", "utilizador": "sofia.lima", "estrelas": 5, "comentario": "Peixe grelhado perfeito e vista linda para o rio!", "data": "20/04/2026" }
+    ]
   },
   {
     "id": 2,
@@ -21,9 +28,16 @@
     "distancia": 0.5,
     "nivelPreco": "$",
     "avaliacao": 4.6,
-    "totalAvaliacoes": 193,
+    "totalAvaliacoes": 5,
     "imagem": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600",
-    "coordenadas": { "lat": 41.6918, "lng": -8.8330 }
+    "coordenadas": { "lat": 41.6918, "lng": -8.8330 },
+    "avaliacoesList": [
+      { "restauranteId": 2, "restauranteNome": "O Tabernão", "utilizador": "carlos.mendes", "estrelas": 5, "comentario": "Polvo à galega extraordinário! Ambiente muito acolhedor.", "data": "10/05/2026" },
+      { "restauranteId": 2, "restauranteNome": "O Tabernão", "utilizador": "rita.oliveira", "estrelas": 5, "comentario": "Petiscos deliciosos e preço muito justo. Recomendo!", "data": "05/05/2026" },
+      { "restauranteId": 2, "restauranteNome": "O Tabernão", "utilizador": "miguel.sousa", "estrelas": 4, "comentario": "Muito bom! O mexilhão estava fresco e saboroso.", "data": "28/04/2026" },
+      { "restauranteId": 2, "restauranteNome": "O Tabernão", "utilizador": "ines.rodrigues", "estrelas": 5, "comentario": "Tasca típica com muita alma. Voltamos sempre!", "data": "22/04/2026" },
+      { "restauranteId": 2, "restauranteNome": "O Tabernão", "utilizador": "tiago.alves", "estrelas": 4, "comentario": "Boa comida e staff simpático. Fiquei satisfeito.", "data": "15/04/2026" }
+    ]
   },
   {
     "id": 3,
@@ -34,9 +48,16 @@
     "distancia": 0.8,
     "nivelPreco": "$$$",
     "avaliacao": 4.8,
-    "totalAvaliacoes": 142,
+    "totalAvaliacoes": 5,
     "imagem": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600",
-    "coordenadas": { "lat": 41.6935, "lng": -8.8358 }
+    "coordenadas": { "lat": 41.6935, "lng": -8.8358 },
+    "avaliacoesList": [
+      { "restauranteId": 3, "restauranteNome": "Porta 93", "utilizador": "beatriz.nunes", "estrelas": 5, "comentario": "Experiência gastronómica incrível! A Chef Mariana é um talento.", "data": "11/05/2026" },
+      { "restauranteId": 3, "restauranteNome": "Porta 93", "utilizador": "andre.pinto", "estrelas": 5, "comentario": "Pratos criativos e apresentação impecável. Vale cada cêntimo!", "data": "07/05/2026" },
+      { "restauranteId": 3, "restauranteNome": "Porta 93", "utilizador": "patricia.gomes", "estrelas": 5, "comentario": "O melhor restaurante gourmet do norte! Simplesmente fantástico.", "data": "02/05/2026" },
+      { "restauranteId": 3, "restauranteNome": "Porta 93", "utilizador": "rui.martins", "estrelas": 4, "comentario": "Excelente comida mas a reserva é obrigatória com antecedência.", "data": "26/04/2026" },
+      { "restauranteId": 3, "restauranteNome": "Porta 93", "utilizador": "claudia.pereira", "estrelas": 5, "comentario": "Uma viagem de sabores única. Voltarei para o menu de degustação!", "data": "19/04/2026" }
+    ]
   },
   {
     "id": 4,
@@ -47,9 +68,16 @@
     "distancia": 0.4,
     "nivelPreco": "$",
     "avaliacao": 4.3,
-    "totalAvaliacoes": 98,
+    "totalAvaliacoes": 5,
     "imagem": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600",
-    "coordenadas": { "lat": 41.6922, "lng": -8.8342 }
+    "coordenadas": { "lat": 41.6922, "lng": -8.8342 },
+    "avaliacoesList": [
+      { "restauranteId": 4, "restauranteNome": "Adega do Padrinho", "utilizador": "hugo.carvalho", "estrelas": 4, "comentario": "Bacalhau à minhota autêntico como a avó fazia. Muito bom!", "data": "09/05/2026" },
+      { "restauranteId": 4, "restauranteNome": "Adega do Padrinho", "utilizador": "vera.monteiro", "estrelas": 5, "comentario": "Cozinha regional a preços honestos. Adorei a carne à portuguesa!", "data": "04/05/2026" },
+      { "restauranteId": 4, "restauranteNome": "Adega do Padrinho", "utilizador": "nuno.ribeiro", "estrelas": 4, "comentario": "Ambiente rústico e acolhedor. Comida caseira de qualidade.", "data": "27/04/2026" },
+      { "restauranteId": 4, "restauranteNome": "Adega do Padrinho", "utilizador": "paula.azevedo", "estrelas": 4, "comentario": "Bom petisco e vinho da casa muito agradável.", "data": "21/04/2026" },
+      { "restauranteId": 4, "restauranteNome": "Adega do Padrinho", "utilizador": "jorge.freitas", "estrelas": 4, "comentario": "Tradição minhota preservada. Recomendo o caldo verde!", "data": "14/04/2026" }
+    ]
   },
   {
     "id": 5,
@@ -60,9 +88,16 @@
     "distancia": 0.6,
     "nivelPreco": "$",
     "avaliacao": 4.4,
-    "totalAvaliacoes": 215,
+    "totalAvaliacoes": 5,
     "imagem": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600",
-    "coordenadas": { "lat": 41.6912, "lng": -8.8325 }
+    "coordenadas": { "lat": 41.6912, "lng": -8.8325 },
+    "avaliacoesList": [
+      { "restauranteId": 5, "restauranteNome": "D'Amore Café", "utilizador": "filipa.santos", "estrelas": 5, "comentario": "Melhor brunch de Viana! Os ovos benedict são divinos.", "data": "13/05/2026" },
+      { "restauranteId": 5, "restauranteNome": "D'Amore Café", "utilizador": "diogo.lopes", "estrelas": 4, "comentario": "Café com muito charme e esplanada agradável. Voltarei!", "data": "06/05/2026" },
+      { "restauranteId": 5, "restauranteNome": "D'Amore Café", "utilizador": "catarina.silva", "estrelas": 5, "comentario": "Pequeno-almoço incrível e staff muito simpático.", "data": "30/04/2026" },
+      { "restauranteId": 5, "restauranteNome": "D'Amore Café", "utilizador": "marco.ferreira", "estrelas": 4, "comentario": "Boa seleção de bolos e café de qualidade.", "data": "23/04/2026" },
+      { "restauranteId": 5, "restauranteNome": "D'Amore Café", "utilizador": "joana.costa", "estrelas": 4, "comentario": "Espaço acolhedor para trabalhar com bom WiFi e café.", "data": "16/04/2026" }
+    ]
   },
   {
     "id": 6,
@@ -73,8 +108,15 @@
     "distancia": 1.0,
     "nivelPreco": "$$",
     "avaliacao": 4.5,
-    "totalAvaliacoes": 176,
+    "totalAvaliacoes": 5,
     "imagem": "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=600",
-    "coordenadas": { "lat": 41.6928, "lng": -8.8315 }
+    "coordenadas": { "lat": 41.6928, "lng": -8.8315 },
+    "avaliacoesList": [
+      { "restauranteId": 6, "restauranteNome": "A Petisqueira", "utilizador": "antonio.dias", "estrelas": 5, "comentario": "Petiscos para partilhar fantásticos! Ideal para grupos.", "data": "14/05/2026" },
+      { "restauranteId": 6, "restauranteNome": "A Petisqueira", "utilizador": "susana.melo", "estrelas": 4, "comentario": "Ambiente descontraído e comida muito saborosa.", "data": "09/05/2026" },
+      { "restauranteId": 6, "restauranteNome": "A Petisqueira", "utilizador": "bruno.correia", "estrelas": 5, "comentario": "As amêijoas à bulhão pato são simplesmente perfeitas!", "data": "03/05/2026" },
+      { "restauranteId": 6, "restauranteNome": "A Petisqueira", "utilizador": "teresa.campos", "estrelas": 4, "comentario": "Boa variedade de petiscos e staff muito atencioso.", "data": "24/04/2026" },
+      { "restauranteId": 6, "restauranteNome": "A Petisqueira", "utilizador": "luis.barros", "estrelas": 5, "comentario": "Lugar perfeito para conviver! Petiscos deliciosos.", "data": "17/04/2026" }
+    ]
   }
 ]

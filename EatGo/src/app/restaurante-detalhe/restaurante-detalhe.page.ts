@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 import { RestauranteService } from '../services/restaurante.service';
 import { Restaurante } from '../models/restaurante.model';
+import { Avaliacao } from '../models/avaliacao.model';
 
 @Component({
   selector: 'app-restaurante-detalhe',
@@ -12,30 +14,49 @@ import { Restaurante } from '../models/restaurante.model';
 export class RestauranteDetalhePage implements OnInit {
 
   restaurante: Restaurante | undefined;
+  avaliacoes: Avaliacao[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private restauranteService: RestauranteService
+    private restauranteService: RestauranteService,
+    private storage: Storage
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.storage.create();
     const id = Number(this.route.snapshot.paramMap.get('id'));
+
     this.restauranteService.getById(id).subscribe({
-      next: (r) => this.restaurante = r,
+      next: async (r) => {
+        this.restaurante = r;
+        await this.carregarAvaliacoes(id);
+      },
       error: (err) => console.error('Erro ao carregar restaurante:', err)
     });
   }
 
-  voltar() {
-    this.router.navigate(['/home']);
+  async carregarAvaliacoes(restauranteId: number) {
+    this.avaliacoes = [];
+
+    // Avaliações do Storage (feitas pelo utilizador)
+    await this.storage.forEach((valor, chave) => {
+      if (chave.startsWith('avaliacao_') && valor.restauranteId === restauranteId) {
+        this.avaliacoes.push(valor);
+      }
+    });
+
+    // Avaliações do JSON (se existirem)
+    if (this.restaurante && (this.restaurante as any).avaliacoesList) {
+      const avaliacoesJSON = (this.restaurante as any).avaliacoesList as Avaliacao[];
+      this.avaliacoes = [...avaliacoesJSON, ...this.avaliacoes];
+    }
   }
 
-  avaliar() {
-    this.router.navigate(['/avaliar', this.restaurante?.id]);
-  }
+  voltar() { this.router.navigate(['/home']); }
+  avaliar() { this.router.navigate(['/avaliar', this.restaurante?.id]); }
 
-  getEstrelasArray(avaliacao: number): number[] {
-    return Array(Math.round(avaliacao)).fill(0);
+  getEstrelasArray(n: number): number[] {
+    return Array(Math.round(n)).fill(0);
   }
 }
