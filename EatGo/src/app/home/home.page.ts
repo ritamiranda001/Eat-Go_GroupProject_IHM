@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 import { RestauranteService } from '../services/restaurante.service';
 import { Restaurante } from '../models/restaurante.model';
+import { Avaliacao } from '../models/avaliacao.model';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +18,7 @@ export class HomePage implements OnInit {
   termoPesquisa = '';
   filtroAvaliacao = 'todos';
   filtroCategoria = 'todos';
-  ordenacaoAtual: 'alfabetica' | 'distancia' = 'distancia';
+  ordenacaoAtual: 'alfabetica' | 'avaliacao' = 'avaliacao';
   limite = 5;
 
   categorias = [
@@ -28,10 +30,11 @@ export class HomePage implements OnInit {
   ];
 
   resultados: Restaurante[] = [];
+  avaliacoesMap: Map<number, Avaliacao[]> = new Map();
 
   get resultadosFiltrados(): Restaurante[] {
     let lista = this.resultados.filter(r => {
-      const porAvaliacao = this.filtroAvaliacao === 'todos' || Math.floor(r.avaliacao) >= parseInt(this.filtroAvaliacao);
+      const porAvaliacao = this.filtroAvaliacao === 'todos' || Math.floor(this.getAvaliacao(r)) >= parseInt(this.filtroAvaliacao);
       const porCategoria = this.filtroCategoria === 'todos' || r.categoria === this.filtroCategoria;
       const porPesquisa = this.termoPesquisa === '' ||
         r.nome.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
@@ -43,7 +46,7 @@ export class HomePage implements OnInit {
     if (this.ordenacaoAtual === 'alfabetica') {
       lista = [...lista].sort((a, b) => a.nome.localeCompare(b.nome));
     } else {
-      lista = [...lista].sort((a, b) => a.distancia - b.distancia);
+      lista = [...lista].sort((a, b) => this.getAvaliacao(b) - this.getAvaliacao(a));
     }
 
     return lista.slice(0, this.limite);
@@ -51,7 +54,7 @@ export class HomePage implements OnInit {
 
   get totalFiltrados(): number {
     return this.resultados.filter(r => {
-      const porAvaliacao = this.filtroAvaliacao === 'todos' || Math.floor(r.avaliacao) >= parseInt(this.filtroAvaliacao);
+      const porAvaliacao = this.filtroAvaliacao === 'todos' || Math.floor(this.getAvaliacao(r)) >= parseInt(this.filtroAvaliacao);
       const porCategoria = this.filtroCategoria === 'todos' || r.categoria === this.filtroCategoria;
       const porPesquisa = this.termoPesquisa === '' ||
         r.nome.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
@@ -61,20 +64,59 @@ export class HomePage implements OnInit {
     }).length;
   }
 
-  constructor(private router: Router, private restauranteService: RestauranteService) {}
+  constructor(
+    private router: Router,
+    private restauranteService: RestauranteService,
+    private storage: Storage
+  ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  async ionViewWillEnter() {
+    await this.storage.create();
     this.restauranteService.getAll().subscribe({
-      next: (data) => this.resultados = data,
+      next: async (data) => {
+        this.resultados = data;
+        await this.carregarAvaliacoes();
+      },
       error: (err) => console.error('Erro ao carregar restaurantes:', err)
     });
+  }
+
+  async carregarAvaliacoes() {
+    this.avaliacoesMap = new Map();
+    await this.storage.forEach((valor, chave) => {
+      if (chave.startsWith('avaliacao_')) {
+        const av: Avaliacao = valor;
+        const lista = this.avaliacoesMap.get(av.restauranteId) || [];
+        lista.push(av);
+        this.avaliacoesMap.set(av.restauranteId, lista);
+      }
+    });
+  }
+
+  getAvaliacao(restaurante: Restaurante): number {
+    const avaliacoesStorage = this.avaliacoesMap.get(restaurante.id) || [];
+    const avaliacoesJSON = (restaurante as any).avaliacoesList || [];
+    const todas = [...avaliacoesJSON, ...avaliacoesStorage];
+
+    if (todas.length === 0) return restaurante.avaliacao || 0;
+
+    const soma = todas.reduce((acc: number, av: Avaliacao) => acc + av.estrelas, 0);
+    return Math.round((soma / todas.length) * 10) / 10;
+  }
+
+  getTotalAvaliacoes(restaurante: Restaurante): number {
+    const avaliacoesStorage = this.avaliacoesMap.get(restaurante.id) || [];
+    const avaliacoesJSON = (restaurante as any).avaliacoesList || [];
+    return avaliacoesJSON.length + avaliacoesStorage.length;
   }
 
   toggleFiltros() { this.mostrarFiltros = !this.mostrarFiltros; }
   togglePesquisa() { this.mostrarPesquisa = !this.mostrarPesquisa; if (!this.mostrarPesquisa) this.termoPesquisa = ''; }
   selecionarAvaliacao(v: string) { this.filtroAvaliacao = v; }
   selecionarCategoria(v: string) { this.filtroCategoria = v; }
-  toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'distancia' ? 'alfabetica' : 'distancia'; }
+  toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'avaliacao' ? 'alfabetica' : 'avaliacao'; }
   verMaisResultados() { this.limite += 5; }
 
   verDetalhe(restaurante: Restaurante) { this.router.navigate(['/restaurante-detalhe', restaurante.id]); }
