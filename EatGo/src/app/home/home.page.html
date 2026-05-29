@@ -108,25 +108,25 @@
         <img class="card-imagem" [src]="restaurante.imagem" [alt]="restaurante.nome"/>
         <div class="rating-badge">
           <ion-icon name="star"></ion-icon>
-          <span>{{ restaurante.rating }}</span>
+          <span>{{ restaurante.avaliacao }}</span>
         </div>
       </div>
 
       <div class="card-body">
         <div class="card-nome-preco">
           <h2 class="card-nome">{{ restaurante.nome }}</h2>
-          <span class="preco-badge">{{ restaurante.preco }}</span>
+          <span class="preco-badge">{{ restaurante.nivelPreco }}</span>
         </div>
         <p class="card-categoria">{{ restaurante.categoria }}</p>
         <p class="card-descricao">{{ restaurante.descricao }}</p>
         <div class="card-localizacao">
           <ion-icon name="location-outline"></ion-icon>
-          <span>{{ restaurante.morada }}</span>
+          <span>{{ restaurante.localizacao }}</span>
           <span class="separador">•</span>
           <span>A {{ restaurante.distancia }} km</span>
         </div>
         <div class="card-acoes">
-          <span class="avaliacoes-count">{{ restaurante.avaliacoes }} avaliações</span>
+          <span class="avaliacoes-count">{{ restaurante.totalAvaliacoes }} avaliações</span>
           <div class="acoes-icons">
             <ion-button fill="clear" class="icon-action" (click)="verMapa($event, restaurante)">
               <ion-icon slot="icon-only" name="map-outline"></ion-icon>
