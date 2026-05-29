@@ -7,6 +7,7 @@
  */
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { authGuard } from './guards/auth-guard';
 
 const routes: Routes = [
   {
@@ -28,13 +29,15 @@ const routes: Routes = [
   {
     path: 'avaliar/:id',
     loadChildren: () =>
-      import('./avaliar/avaliar.module').then(m => m.AvaliarPageModule)
+      import('./avaliar/avaliar.module').then(m => m.AvaliarPageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'adicionar-restaurante',
     loadChildren: () =>
       import('./adicionar-restaurante/adicionar-restaurante.module')
-        .then(m => m.AdicionarRestaurantePageModule)
+        .then(m => m.AdicionarRestaurantePageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'login',
@@ -45,7 +48,8 @@ const routes: Routes = [
     path: 'minhas-avaliacoes',
     loadChildren: () =>
       import('./minhas-avaliacoes/minhas-avaliacoes.module')
-        .then(m => m.MinhasAvaliacoesPageModule)
+        .then(m => m.MinhasAvaliacoesPageModule),
+    canActivate: [authGuard]
   },
   {
     // Deve ser sempre o último!
