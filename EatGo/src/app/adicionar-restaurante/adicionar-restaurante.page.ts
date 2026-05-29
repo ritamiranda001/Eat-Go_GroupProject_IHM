@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { RestauranteService } from '../services/restaurante.service';
+import { Restaurante } from '../models/restaurante.model';
 
 @Component({
   selector: 'app-adicionar-restaurante',
@@ -18,17 +20,20 @@ export class AdicionarRestaurantePage {
     imagem: ''
   };
 
-  selecionarPreco(p: string) {
-    this.novoRestaurante.nivelPreco = p as '$' | '$$' | '$$$';
-  }
-
   categorias = ['Tradicional', 'Gourmet', 'Petiscos', 'Café', 'Italiano', 'Fast Food'];
 
   imagemPreview: string = '';
   sucesso = false;
   erros: string[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private restauranteService: RestauranteService
+  ) {}
+
+  selecionarPreco(p: string) {
+    this.novoRestaurante.nivelPreco = p as '$' | '$$' | '$$$';
+  }
 
   atualizarPreview() {
     this.imagemPreview = this.novoRestaurante.imagem;
@@ -43,9 +48,23 @@ export class AdicionarRestaurantePage {
     return this.erros.length === 0;
   }
 
-  submeter() {
+  async submeter() {
     if (!this.validar()) return;
-    console.log('Novo restaurante:', this.novoRestaurante);
+
+    const restaurante: Restaurante = {
+      id: 0,
+      nome: this.novoRestaurante.nome,
+      categoria: this.novoRestaurante.categoria,
+      descricao: this.novoRestaurante.descricao,
+      localizacao: this.novoRestaurante.localizacao,
+      nivelPreco: this.novoRestaurante.nivelPreco,
+      imagem: this.novoRestaurante.imagem || 'assets/icon/favicon.png',
+      distancia: 0,
+      avaliacao: 0,
+      totalAvaliacoes: 0
+    };
+
+    await this.restauranteService.adicionar(restaurante);
     this.sucesso = true;
     setTimeout(() => this.router.navigate(['/home']), 2000);
   }

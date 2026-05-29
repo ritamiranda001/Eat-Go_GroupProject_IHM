@@ -1,14 +1,12 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
 
-
 // ─────────────────────────────────────────────────────────────────────────────
 // Eat&Go – Cores e variáveis globais da aplicação
 // Requisito 16: Criar cores disponíveis globalmente na app
 // Requisito 13: Manipular as CSS Custom Properties dos components
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Cor principal da app: laranja Eat&Go
 :root {
   // Cor primária (laranja)
   --ion-color-primary: #f97316;
@@ -18,7 +16,7 @@
   --ion-color-primary-shade: #db6513;
   --ion-color-primary-tint: #fa8130;
 
-  // Cor warning (mesmo laranja — usado nos badges e botões)
+  // Cor warning (mesmo laranja)
   --ion-color-warning: #f97316;
   --ion-color-warning-rgb: 249, 115, 22;
   --ion-color-warning-contrast: #ffffff;
@@ -65,19 +63,16 @@
 
 // ── Estilos globais base ───────────────────────────────────────────────────
 
-// Fundo padrão do conteúdo
 ion-content {
   --background: var(--eat-go-fundo);
 }
 
-// Remove borda padrão do header
 ion-header ion-toolbar {
   --background: #ffffff;
   --border-width: 0;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
 }
 
-// Badge de categoria com cor laranja suave
 ion-badge[color="warning"] {
   --background: rgba(249, 115, 22, 0.12);
   --color: #f97316;
@@ -86,20 +81,23 @@ ion-badge[color="warning"] {
 // ── Formulários ───────────────────────────────────────────────────────────
 
 ion-input, ion-select, ion-textarea {
-  --color: #1a1a1a;
-  --placeholder-color: #888888;
+  --color: var(--eat-go-escuro);
+  --placeholder-color: var(--eat-go-texto-suave);
   --background: #ffffff;
+}
+
+ion-input::part(native), ion-textarea::part(native) {
+  color: var(--eat-go-escuro) !important;
 }
 
 ion-label {
-  color: #1a1a1a !important;
+  color: var(--eat-go-escuro) !important;
 }
 
-ion-content {
-  --background: #ffffff;
+// Inputs HTML nativos (usados no login e adicionar-restaurante)
+input, textarea {
+  color: var(--eat-go-escuro) !important;
 }
-ion-input, ion-select, ion-textarea {
-  --color: #1a1a1a;
-  --placeholder-color: #888888 !important;
-  --background: #ffffff;
+ion-select::part(text) {
+  color: var(--eat-go-escuro) !important;
 }
