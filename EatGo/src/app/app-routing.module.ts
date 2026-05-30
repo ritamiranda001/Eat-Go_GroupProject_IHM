@@ -45,16 +45,20 @@ const routes: Routes = [
         .then(m => m.AdicionarRestaurantePageModule)
   },
   {
-    // Login e Registo
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
-    // Redireciona rotas desconhecidas para home
+    path: 'perfil',
+    loadChildren: () =>
+      import('./perfil/perfil.module').then(m => m.PerfilPageModule)
+  },
+  {
     path: '**',
     redirectTo: 'home'
   }
+
 ];
 
 @NgModule({

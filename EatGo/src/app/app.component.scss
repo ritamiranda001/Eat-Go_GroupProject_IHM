@@ -59,3 +59,46 @@ ion-menu {
     }
   }
 }
+.menu-perfil {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  cursor: pointer;
+  background: var(--ion-color-light);
+  margin: 8px;
+  border-radius: 12px;
+
+  .perfil-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--ion-color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ion-icon {
+      font-size: 1.4rem;
+      color: white;
+    }
+  }
+
+  .perfil-info {
+    flex: 1;
+    .perfil-nome {
+      font-weight: 700;
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--ion-color-dark);
+    }
+    .perfil-email {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--ion-color-medium);
+    }
+  }
+
+  .perfil-arrow {
+    color: var(--ion-color-medium);
+  }
+}

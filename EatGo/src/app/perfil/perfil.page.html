@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>O meu Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Avatar e info -->
+  <div class="perfil-hero">
+    <div class="avatar">
+      <ion-icon name="person-outline"></ion-icon>
+    </div>
+    <h2 class="perfil-nome">{{ utilizador?.nome }}</h2>
+    <p class="perfil-email">{{ utilizador?.email }}</p>
+  </div>
+
+  <!-- Estatísticas -->
+  <div class="stats-row">
+    <div class="stat">
+      <span class="stat-numero">{{ avaliacoes.length }}</span>
+      <span class="stat-label">Avaliações</span>
+    </div>
+  </div>
+
+  <!-- Avaliações feitas -->
+  <div class="secao-titulo">
+    <ion-icon name="star-outline"></ion-icon>
+    <span>As minhas avaliações</span>
+  </div>
+
+  <!-- Lista de avaliações -->
+  <div class="avaliacoes-lista" *ngIf="avaliacoes.length > 0">
+    <div class="avaliacao-card" *ngFor="let av of avaliacoes">
+      <div class="avaliacao-header">
+        <h3 class="avaliacao-nome">{{ av.restauranteNome }}</h3>
+        <span class="avaliacao-data">{{ av.data }}</span>
+      </div>
+      <div class="avaliacao-estrelas">
+        <ion-icon
+          *ngFor="let e of getEstrelas(av.estrelas)"
+          name="star"
+          class="estrela-ativa"
+        ></ion-icon>
+        <ion-icon
+          *ngFor="let e of getEstrelas(5 - av.estrelas)"
+          name="star-outline"
+          class="estrela-vazia"
+        ></ion-icon>
+      </div>
+      <p class="avaliacao-comentario">{{ av.comentario }}</p>
+    </div>
+  </div>
+
+  <!-- Sem avaliações -->
+  <div class="sem-avaliacoes" *ngIf="avaliacoes.length === 0">
+    <ion-icon name="star-outline"></ion-icon>
+    <p>Ainda não fizeste nenhuma avaliação.</p>
+    <ion-button fill="outline" color="primary" routerLink="/home">
+      Explorar restaurantes
+    </ion-button>
+  </div>
+
+  <!-- Botão logout -->
+  <div class="logout-wrapper">
+    <ion-button expand="block" color="medium" (click)="logout()">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      Terminar Sessão
+    </ion-button>
+  </div>
+
+</ion-content>

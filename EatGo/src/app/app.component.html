@@ -3,6 +3,7 @@
     <ion-menu contentId="main-content" type="overlay" [swipeGesture]="false" side="end">
       <ion-content>
 
+        <!-- Header do menu -->
         <div class="menu-header">
           <ion-icon name="restaurant" class="menu-logo"></ion-icon>
           <ion-buttons>
@@ -12,21 +13,49 @@
           </ion-buttons>
         </div>
 
-        <ion-list lines="none">
-          @for (p of menuPages; track p) {
-            <ion-menu-toggle auto-hide="false">
-              <ion-item routerDirection="root" [routerLink]="[p.url]" routerLinkActive="selected" detail="false">
-                <ion-icon slot="start" [name]="p.icon"></ion-icon>
-                <ion-label>{{ p.title }}</ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-          }
+        <!-- Perfil (só quando autenticado) -->
+        <ion-menu-toggle auto-hide="false" *ngIf="authService.isLoggedIn()">
+          <ion-item (click)="irPerfil()" button detail="false" class="menu-perfil">
+            <div slot="start" class="perfil-avatar">
+              <ion-icon name="person-outline"></ion-icon>
+            </div>
+            <ion-label>
+              <p class="perfil-nome">{{ authService.getUtilizador()?.nome }}</p>
+              <p class="perfil-email">{{ authService.getUtilizador()?.email }}</p>
+            </ion-label>
+            <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <!-- Páginas autenticadas -->
+        <ion-list lines="none" *ngIf="authService.isLoggedIn()">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of paginasAutenticadas">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" routerLinkActive="selected" detail="false">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
         </ion-list>
 
+        <!-- Páginas públicas -->
+        <ion-list lines="none">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of paginasPublicas">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" routerLinkActive="selected" detail="false">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+
+        <!-- Footer: Login ou Logout -->
         <div class="menu-footer">
-          <ion-button expand="block" routerLink="/login" class="login-btn">
+          <ion-button *ngIf="!authService.isLoggedIn()" expand="block" routerLink="/login" class="login-btn" (click)="fecharMenu()">
             <ion-icon slot="start" name="log-in-outline"></ion-icon>
             Login
+          </ion-button>
+          <ion-button *ngIf="authService.isLoggedIn()" expand="block" color="medium" class="login-btn" (click)="logout()">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            Terminar Sessão
           </ion-button>
         </div>
 
