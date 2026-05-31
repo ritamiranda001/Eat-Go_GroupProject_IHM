@@ -1,13 +1,79 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>definicoes</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Definições</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">definicoes</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="definicoes-content">
+
+  <!-- Aparência -->
+  <div class="secao">
+    <h2 class="secao-titulo">Aparência</h2>
+
+    <div class="opcao-row">
+      <div class="opcao-info">
+        <ion-icon name="moon-outline"></ion-icon>
+        <div class="opcao-texto">
+          <span class="opcao-label">Modo escuro</span>
+          <span class="opcao-desc">Reduz o brilho e poupa bateria</span>
+        </div>
+      </div>
+      <ion-toggle
+        [checked]="modoEscuro"
+        (ionChange)="toggleModoEscuro()"
+        color="primary">
+      </ion-toggle>
+    </div>
+
+  </div>
+
+  <!-- Sobre a app -->
+  <div class="secao">
+    <h2 class="secao-titulo">Sobre a app</h2>
+
+    <div class="sobre-card">
+
+      <div class="app-identidade">
+        <ion-icon name="restaurant" class="app-icon"></ion-icon>
+        <div>
+          <span class="app-nome">Eat&Go</span>
+          <span class="app-versao">Versão 0.1 — Avaliação Oficial</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="autores">
+        <p class="autores-titulo">
+          <ion-icon name="school-outline"></ion-icon>
+          Alunos do IPVC — ESTG
+        </p>
+        <div class="autor-row">
+          <ion-icon name="person-outline"></ion-icon>
+          <span>Igor Brito</span>
+        </div>
+        <div class="autor-row">
+          <ion-icon name="person-outline"></ion-icon>
+          <span>Keila dos Santos</span>
+        </div>
+        <div class="autor-row">
+          <ion-icon name="person-outline"></ion-icon>
+          <span>Rita Miranda</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <p class="disclaimer">
+        Projeto académico desenvolvido no âmbito da unidade curricular de Interação Humano-Máquina.
+      </p>
+
+    </div>
+  </div>
+
 </ion-content>

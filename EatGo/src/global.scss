@@ -38,3 +38,38 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+//-- modo escuro personalizado
+// ── Modo Escuro Global ────────────────────────────────────────
+
+body.dark-mode {
+  --ion-background-color: #1a1a2e;
+  --ion-background-color-rgb: 26, 26, 46;
+  --ion-text-color: #f0f0f0;
+  --ion-text-color-rgb: 240, 240, 240;
+  --ion-border-color: #333350;
+  --ion-item-background: #252538;
+  --ion-toolbar-background: #1f1f35;
+  --ion-card-background: #252538;
+
+  ion-content {
+    --background: #1a1a2e;
+  }
+
+  ion-toolbar {
+    --background: #1f1f35;
+  }
+
+  ion-item {
+    --background: #252538;
+    --color: #f0f0f0;
+  }
+
+  ion-list {
+    background: #252538;
+  }
+
+  ion-menu {
+    --background: #252538;
+  }
+}
