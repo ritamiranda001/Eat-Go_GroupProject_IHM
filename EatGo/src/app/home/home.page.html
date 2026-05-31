@@ -119,12 +119,7 @@
         </div>
         <p class="card-categoria">{{ restaurante.categoria }}</p>
         <p class="card-descricao">{{ restaurante.descricao }}</p>
-        <div class="card-localizacao">
-          <ion-icon name="location-outline"></ion-icon>
-          <span>{{ restaurante.localizacao }}</span>
-          <span class="separador">•</span>
-          <span>A {{ restaurante.distancia }} km</span>
-        </div>
+        
         <div class="card-acoes">
           <span class="avaliacoes-count">{{ getTotalAvaliacoes(restaurante) > 0 ? getTotalAvaliacoes(restaurante) + ' avaliações' : 'Sem avaliações' }}</span>
           <div class="acoes-icons">

@@ -124,7 +124,6 @@ export class HomePage implements OnInit {
   //- opções de mapa alterados
   verDetalhe(restaurante: Restaurante) { 
   this.router.navigate(['/restaurante-detalhe', restaurante.id]); 
-  this.router.navigate(['/restaurante-detalhe', restaurante.id]);
 }
 
 verMapa(event: Event, restaurante: Restaurante) {
