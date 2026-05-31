@@ -61,7 +61,11 @@ const routes: Routes = [
     // Deve ser sempre o último!
     path: '**',
     redirectTo: 'home'
+  },  {
+    path: 'definicoes',
+    loadChildren: () => import('./definicoes/definicoes.module').then( m => m.DefinicoesPageModule)
   },
+
 /*  {
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
