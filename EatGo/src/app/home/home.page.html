@@ -123,9 +123,6 @@
         <div class="card-acoes">
           <span class="avaliacoes-count">{{ getTotalAvaliacoes(restaurante) > 0 ? getTotalAvaliacoes(restaurante) + ' avaliações' : 'Sem avaliações' }}</span>
           <div class="acoes-icons">
-            <ion-button fill="clear" class="icon-action" (click)="verMapa($event, restaurante)">
-              <ion-icon slot="icon-only" name="map-outline"></ion-icon>
-            </ion-button>
             <ion-button fill="clear" class="icon-action" (click)="partilhar($event, restaurante)">
               <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
             </ion-button>

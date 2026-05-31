@@ -52,10 +52,22 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+  path: 'perfil',
+  loadChildren: () =>
+    import('./perfil/perfil.module').then(m => m.PerfilPageModule),
+  canActivate: [authGuard]
+},
+  {
     // Deve ser sempre o último!
     path: '**',
     redirectTo: 'home'
+  },
+/*  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   }
+    */
+
 ];
 
 @NgModule({
