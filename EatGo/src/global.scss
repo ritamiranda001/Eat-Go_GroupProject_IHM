@@ -37,9 +37,9 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+@import 'leaflet/dist/leaflet.css';
 
-//-- modo escuro personalizado
 // ── Modo Escuro Global ────────────────────────────────────────
 
 body.dark-mode {
@@ -71,5 +71,25 @@ body.dark-mode {
 
   ion-menu {
     --background: #252538;
+
+    ion-item {
+      --background: #252538;
+      --color: #f0f0f0;
+    }
+  }
+
+  .restaurante-card,
+  .avaliacao-card,
+  .info-section,
+  .stats-section,
+  .sobre-card,
+  .opcao-row {
+    background: #252538 !important;
+    color: #f0f0f0 !important;
+  }
+
+  h1, h2, h3, p, span, ion-label {
+    color: #f0f0f0;
   }
 }
+
