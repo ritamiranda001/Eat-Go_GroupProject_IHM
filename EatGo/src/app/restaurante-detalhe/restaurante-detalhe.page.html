@@ -30,13 +30,34 @@
     <p class="descricao">{{ restaurante.descricao }}</p>
 
     <div class="detalhe-row">
-      <ion-icon name="location-outline"></ion-icon>
-      <span>{{ restaurante.localizacao }} • A {{ restaurante.distancia }} km</span>
-    </div>
+  <ion-icon name="location-outline"></ion-icon>
+  <span>{{ restaurante.localizacao }}</span>
+</div>
+  </div>
 
-    <div class="detalhe-row">
-      <ion-icon name="star-outline"></ion-icon>
-      <span>{{ restaurante.avaliacao }} estrelas · {{ restaurante.totalAvaliacoes }} avaliações</span>
+  <!-- Mapa de localização -->
+  <div class="mapa-section" *ngIf="restaurante.coordenadas">
+    <h2 class="section-titulo">
+      <ion-icon name="location-outline"></ion-icon>
+      Localização
+    </h2>
+    <div id="mapa-restaurante" class="mapa-container"></div>
+    <p class="mapa-morada">
+      <ion-icon name="navigate-outline"></ion-icon>
+      {{ restaurante.localizacao }}
+    </p>
+  </div>
+
+  <!-- Sem coordenadas -->
+  <div class="mapa-section" *ngIf="!restaurante.coordenadas">
+    <h2 class="section-titulo">
+      <ion-icon name="location-outline"></ion-icon>
+      Localização
+    </h2>
+    <div class="mapa-indisponivel">
+      <ion-icon name="map-outline"></ion-icon>
+      <p>Mapa não disponível para este restaurante.</p>
+      <span>{{ restaurante.localizacao }}</span>
     </div>
   </div>
 

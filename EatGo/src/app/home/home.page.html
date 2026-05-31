@@ -119,12 +119,7 @@
         </div>
         <p class="card-categoria">{{ restaurante.categoria }}</p>
         <p class="card-descricao">{{ restaurante.descricao }}</p>
-        <div class="card-localizacao">
-          <ion-icon name="location-outline"></ion-icon>
-          <span>{{ restaurante.localizacao }}</span>
-          <span class="separador">•</span>
-          <span>A {{ restaurante.distancia }} km</span>
-        </div>
+        
         <div class="card-acoes">
           <span class="avaliacoes-count">{{ getTotalAvaliacoes(restaurante) > 0 ? getTotalAvaliacoes(restaurante) + ' avaliações' : 'Sem avaliações' }}</span>
           <div class="acoes-icons">
@@ -149,13 +144,6 @@
     <ion-button fill="outline" class="ver-mais-btn" expand="block" (click)="verMaisResultados()">
       Ver mais resultados
     </ion-button>
-  </div>
-
-  <!-- Secção Mapa da zona -->
-  <div class="mapa-secao">
-    <h2 class="mapa-titulo">Mapa da zona</h2>
-    <p class="mapa-descricao">Explore e clique nos pins para selecionar os restaurantes.</p>
-    <div class="mapa-placeholder"></div>
   </div>
 
 </ion-content>

@@ -119,8 +119,52 @@ export class HomePage implements OnInit {
   toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'avaliacao' ? 'alfabetica' : 'avaliacao'; }
   verMaisResultados() { this.limite += 5; }
 
-  verDetalhe(restaurante: Restaurante) { this.router.navigate(['/restaurante-detalhe', restaurante.id]); }
   avaliar(event: Event, restaurante: Restaurante) { event.stopPropagation(); this.router.navigate(['/avaliar', restaurante.id]); }
-  verMapa(event: Event, restaurante: Restaurante) { event.stopPropagation(); console.log('Ver mapa:', restaurante.nome); }
-  partilhar(event: Event, restaurante: Restaurante) { event.stopPropagation(); console.log('Partilhar:', restaurante.nome); }
+  
+  //- opções de mapa alterados
+  verDetalhe(restaurante: Restaurante) { 
+  this.router.navigate(['/restaurante-detalhe', restaurante.id]); 
+}
+
+verMapa(event: Event, restaurante: Restaurante) {
+  event.stopPropagation();
+  this.router.navigate(['/restaurante-detalhe', restaurante.id]);
+}
+
+async partilhar(event: Event, restaurante: Restaurante) {
+  event.stopPropagation();
+
+  const texto = `🍽️ ${restaurante.nome} — ${restaurante.categoria} • ${restaurante.nivelPreco}\n📍 ${restaurante.localizacao}\n⭐ ${this.getAvaliacao(restaurante)} estrelas\n\nDescoberto na app Eat&Go!`;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: restaurante.nome,
+        text: texto
+      });
+    } catch {
+      // Utilizador cancelou
+    }
+    return;
+  }
+
+  if (navigator.clipboard) {
+    try {
+      await navigator.clipboard.writeText(texto);
+      await this.mostrarToast('Informação copiada! Cola onde quiseres partilhar. 📋');
+    } catch {
+      await this.mostrarToast('A partilha não está disponível neste dispositivo.');
+    }
+  }
+}
+
+private async mostrarToast(mensagem: string) {
+  const toast = document.createElement('ion-toast');
+  toast.message = mensagem;
+  toast.duration = 3000;
+  toast.position = 'bottom';
+  toast.color = 'dark';
+  document.body.appendChild(toast);
+  await toast.present();
+}
 }
