@@ -1,26 +1,32 @@
 <ion-header class="home-header" [translucent]="false">
   <ion-toolbar>
+
+    <!-- Logo (sempre visível) -->
     <ion-buttons slot="start">
       <div class="brand-icon">
         <ion-icon name="restaurant"></ion-icon>
       </div>
     </ion-buttons>
+
+    <!-- Searchbar inline (quando pesquisa ativa) -->
+    <ion-searchbar
+      *ngIf="mostrarPesquisa"
+      [(ngModel)]="termoPesquisa"
+      placeholder="Pesquisar..."
+      animated="false"
+      [debounce]="300"
+      showCancelButton="never"
+      class="inline-searchbar"
+    ></ion-searchbar>
+
+    <!-- Botões direita (sempre visíveis) -->
     <ion-buttons slot="end">
       <ion-button fill="clear" class="header-btn" (click)="togglePesquisa()">
         <ion-icon slot="icon-only" [name]="mostrarPesquisa ? 'close-outline' : 'search-outline'"></ion-icon>
       </ion-button>
       <ion-menu-button class="header-btn" autoHide="false"></ion-menu-button>
     </ion-buttons>
-  </ion-toolbar>
 
-  <!-- Barra de pesquisa -->
-  <ion-toolbar *ngIf="mostrarPesquisa" class="search-toolbar">
-    <ion-searchbar
-      [(ngModel)]="termoPesquisa"
-      placeholder="Pesquisar restaurante, categoria..."
-      animated="true"
-      [debounce]="300"
-    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -40,7 +46,7 @@
     </ion-button>
     <ion-button fill="outline" class="filter-btn" (click)="toggleOrdenacao()">
       <ion-icon name="swap-vertical-outline" slot="start"></ion-icon>
-  {{ ordenacaoAtual === 'az' ? 'A-Z' : 'Z-A' }}
+      {{ ordenacaoAtual === 'az' ? 'A-Z' : 'Z-A' }}
     </ion-button>
   </div>
 
@@ -114,7 +120,7 @@
         </div>
         <p class="card-categoria">{{ restaurante.categoria }}</p>
         <p class="card-descricao">{{ restaurante.descricao }}</p>
-        
+
         <div class="card-acoes">
           <span class="avaliacoes-count">{{ getTotalAvaliacoes(restaurante) > 0 ? getTotalAvaliacoes(restaurante) + ' avaliações' : 'Sem avaliações' }}</span>
           <div class="acoes-icons">
