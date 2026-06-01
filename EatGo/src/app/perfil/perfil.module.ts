@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { PerfilPageRoutingModule } from './perfil-routing.module';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,6 +15,11 @@ import { PerfilPage } from './perfil.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    PerfilPageRoutingModule,
+    PerfilPage
+  ]
+})
+export class PerfilPageModule {}
     PerfilPageRoutingModule
   ],
   declarations: [PerfilPage]

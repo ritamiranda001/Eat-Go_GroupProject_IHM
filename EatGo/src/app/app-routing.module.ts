@@ -45,6 +45,11 @@ const routes: Routes = [
       import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
+    path: 'perfil',
+    loadChildren: () =>
+      import('./perfil/perfil.module').then(m => m.PerfilPageModule)
+  },
+  {
     path: 'minhas-avaliacoes',
     loadChildren: () =>
       import('./minhas-avaliacoes/minhas-avaliacoes.module')
