@@ -25,19 +25,19 @@ export class AppComponent {
   ];
 
   constructor(
-    private menuCtrl: MenuController,
-    public authService: AuthService,
-    private router: Router
-  ) {
-<<<<<<< HEAD
-  // modo escuro se estava ativo
+  private menuCtrl: MenuController,
+  public authService: AuthService,
+  private router: Router
+) {
+  // Restaura modo escuro se estava ativo
   const escuro = localStorage.getItem('eat_go_modo_escuro') === 'true';
-document.documentElement.classList.toggle('ion-palette-dark', escuro);
+  document.documentElement.classList.toggle('ion-palette-dark', escuro);
 
-=======
-    this.bloquearOrientacao();
->>>>>>> 9e4a75c0199befd8961843dcce1c4d8ab59ed1a0
-  }
+  // Bloqueia a orientação da app em portrait (vertical)
+  // Requisito 12: Capacitor para controlo do dispositivo
+  this.bloquearOrientacao();
+}
+    
 
   /**
    * Bloqueia a orientação da app em portrait (vertical).

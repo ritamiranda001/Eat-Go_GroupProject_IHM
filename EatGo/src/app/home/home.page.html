@@ -39,8 +39,8 @@
       Filtrar por:
     </ion-button>
     <ion-button fill="outline" class="filter-btn" (click)="toggleOrdenacao()">
-      <ion-icon slot="start" name="swap-vertical-outline"></ion-icon>
-      {{ ordenacaoAtual === 'avaliacao' ? 'Ordenar: Avaliação' : 'Ordenar: A-Z' }}
+      <ion-icon name="swap-vertical-outline" slot="start"></ion-icon>
+  {{ ordenacaoAtual === 'az' ? 'A-Z' : 'Z-A' }}
     </ion-button>
   </div>
 
@@ -49,13 +49,8 @@
 
     <!-- Filtrar por Avaliação -->
     <div class="filtro-secao">
-      <p class="filtro-titulo">Filtrar por Avaliação (Estrelas)</p>
+      <p class="filtro-titulo">Avaliação (Estrelas)</p>
       <div class="filtro-opcoes">
-        <ion-button
-          [fill]="filtroAvaliacao === 'todos' ? 'solid' : 'outline'"
-          class="filtro-chip"
-          (click)="selecionarAvaliacao('todos')"
-        >Avaliação</ion-button>
         <ion-button
           [fill]="filtroAvaliacao === '5' ? 'solid' : 'outline'"
           class="filtro-chip estrelas"
@@ -82,7 +77,7 @@
 
     <!-- Filtrar por Ementa -->
     <div class="filtro-secao">
-      <p class="filtro-titulo">Filtrar por Ementa</p>
+      <p class="filtro-titulo">Categoria</p>
       <div class="filtro-opcoes">
         <ion-button
           *ngFor="let cat of categorias"
