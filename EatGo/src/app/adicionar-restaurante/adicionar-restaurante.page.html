@@ -87,21 +87,22 @@
       </div>
     </div>
 
-    <!-- Imagem URL -->
+    <!-- Imagem da Galeria -->
     <div class="campo">
-      <ion-label class="campo-label">URL da imagem</ion-label>
-      <ion-input
-        [(ngModel)]="novoRestaurante.imagem"
-        placeholder="https://..."
-        class="campo-input"
-        fill="outline"
-        (ionChange)="atualizarPreview()"
-      ></ion-input>
-    </div>
+      <ion-label class="campo-label">Foto do restaurante</ion-label>
 
-    <!-- Preview da imagem -->
-    <div class="imagem-preview" *ngIf="imagemPreview">
-      <img [src]="imagemPreview" alt="Preview" />
+      <div class="imagem-selector" (click)="selecionarImagem()">
+        <div *ngIf="!imagemPreview" class="imagem-placeholder">
+          <ion-icon name="camera-outline"></ion-icon>
+          <span>Toca para escolher uma foto da galeria</span>
+        </div>
+        <img *ngIf="imagemPreview" [src]="imagemPreview" alt="Preview" class="imagem-preview-img"/>
+      </div>
+
+      <ion-button *ngIf="imagemPreview" fill="outline" color="medium" expand="block" (click)="selecionarImagem()">
+        <ion-icon slot="start" name="camera-outline"></ion-icon>
+        Alterar foto
+      </ion-button>
     </div>
 
     <!-- Botão submeter -->
