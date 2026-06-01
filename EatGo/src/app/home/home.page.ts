@@ -18,7 +18,6 @@ export class HomePage implements OnInit {
   termoPesquisa = '';
   filtroAvaliacao = 'todos';
   filtroCategoria = 'todos';
-  //ordenacaoAtual: 'alfabetica' | 'avaliacao' = 'avaliacao';
   ordenacaoAtual: 'az' | 'za' = 'az';
   limite = 5;
 
@@ -33,9 +32,18 @@ export class HomePage implements OnInit {
   resultados: Restaurante[] = [];
   avaliacoesMap: Map<number, Avaliacao[]> = new Map();
 
+  private filtrarPorAvaliacao(r: Restaurante): boolean {
+    if (this.filtroAvaliacao === 'todos') return true;
+    const av = this.getAvaliacao(r);
+    const filtro = parseInt(this.filtroAvaliacao);
+    if (filtro === 5) return av >= 5.0;
+    if (filtro === 1) return av >= 0.0 && av < 2.0;
+    return av >= filtro && av < filtro + 1;
+  }
+
   get resultadosFiltrados(): Restaurante[] {
     let lista = this.resultados.filter(r => {
-      const porAvaliacao = this.filtroAvaliacao === 'todos' || Math.floor(this.getAvaliacao(r)) >= parseInt(this.filtroAvaliacao);
+      const porAvaliacao = this.filtrarPorAvaliacao(r);
       const porCategoria = this.filtroCategoria === 'todos' || r.categoria === this.filtroCategoria;
       const porPesquisa = this.termoPesquisa === '' ||
         r.nome.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
@@ -55,7 +63,7 @@ export class HomePage implements OnInit {
 
   get totalFiltrados(): number {
     return this.resultados.filter(r => {
-      const porAvaliacao = this.filtroAvaliacao === 'todos' || Math.floor(this.getAvaliacao(r)) >= parseInt(this.filtroAvaliacao);
+      const porAvaliacao = this.filtrarPorAvaliacao(r);
       const porCategoria = this.filtroCategoria === 'todos' || r.categoria === this.filtroCategoria;
       const porPesquisa = this.termoPesquisa === '' ||
         r.nome.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
@@ -115,52 +123,48 @@ export class HomePage implements OnInit {
 
   toggleFiltros() { this.mostrarFiltros = !this.mostrarFiltros; }
   togglePesquisa() { this.mostrarPesquisa = !this.mostrarPesquisa; if (!this.mostrarPesquisa) this.termoPesquisa = ''; }
-  selecionarAvaliacao(v: string) { this.filtroAvaliacao = v; }
+  selecionarAvaliacao(v: string) { this.filtroAvaliacao = this.filtroAvaliacao === v ? 'todos' : v; }
   selecionarCategoria(v: string) { this.filtroCategoria = v; }
-  //toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'avaliacao' ? 'alfabetica' : 'avaliacao'; }
-  toggleOrdenacao() { 
-  this.ordenacaoAtual = this.ordenacaoAtual === 'az' ? 'za' : 'az'; 
-  }
+  toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'az' ? 'za' : 'az'; }
   verMaisResultados() { this.limite += 5; }
 
   avaliar(event: Event, restaurante: Restaurante) { event.stopPropagation(); this.router.navigate(['/avaliar', restaurante.id]); }
-  
-  //- opções de mapa alterados
-  verDetalhe(restaurante: Restaurante) { 
-  this.router.navigate(['/restaurante-detalhe', restaurante.id]); 
-}
+
+  verDetalhe(restaurante: Restaurante) {
+    this.router.navigate(['/restaurante-detalhe', restaurante.id]);
+  }
 
   verMapa(event: Event, restaurante: Restaurante) {
     event.stopPropagation();
     this.router.navigate(['/restaurante-detalhe', restaurante.id]);
   }
 
-async partilhar(event: Event, restaurante: Restaurante) {
-  event.stopPropagation();
+  async partilhar(event: Event, restaurante: Restaurante) {
+    event.stopPropagation();
 
-  const texto = `🍽️ ${restaurante.nome} — ${restaurante.categoria} • ${restaurante.nivelPreco}\n📍 ${restaurante.localizacao}\n⭐ ${this.getAvaliacao(restaurante)} estrelas\n\nDescoberto na app Eat&Go!`;
+    const texto = `🍽️ ${restaurante.nome} — ${restaurante.categoria} • ${restaurante.nivelPreco}\n📍 ${restaurante.localizacao}\n⭐ ${this.getAvaliacao(restaurante)} estrelas\n\nDescoberto na app Eat&Go!`;
 
-  if (navigator.share) {
-    try {
-      await navigator.share({
-        title: restaurante.nome,
-        text: texto
-      });
-    } catch {
-      // Utilizador cancelou
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: restaurante.nome,
+          text: texto
+        });
+      } catch {
+        // Utilizador cancelou
+      }
+      return;
     }
-    return;
-  }
 
-  if (navigator.clipboard) {
-    try {
-      await navigator.clipboard.writeText(texto);
-      await this.mostrarToast('Informação copiada! Cola onde quiseres partilhar. 📋');
-    } catch {
-      await this.mostrarToast('A partilha não está disponível neste dispositivo.');
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(texto);
+        await this.mostrarToast('Informação copiada! Cola onde quiseres partilhar. 📋');
+      } catch {
+        await this.mostrarToast('A partilha não está disponível neste dispositivo.');
+      }
     }
   }
-}
 
   private async mostrarToast(mensagem: string) {
     const toast = document.createElement('ion-toast');

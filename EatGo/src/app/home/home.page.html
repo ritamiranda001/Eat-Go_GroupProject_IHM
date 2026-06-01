@@ -40,7 +40,7 @@
     </ion-button>
     <ion-button fill="outline" class="filter-btn" (click)="toggleOrdenacao()">
       <ion-icon name="swap-vertical-outline" slot="start"></ion-icon>
-  {{ ordenacaoAtual === 'az' ? 'A-Z' : 'Z-A' }}
+      {{ ordenacaoAtual === 'az' ? 'A-Z' : 'Z-A' }}
     </ion-button>
   </div>
 
@@ -72,10 +72,34 @@
           <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>
         </ion-button>
+        <ion-button
+          [fill]="filtroAvaliacao === '3' ? 'solid' : 'outline'"
+          class="filtro-chip estrelas"
+          (click)="selecionarAvaliacao('3')"
+        >
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </ion-button>
+        <ion-button
+          [fill]="filtroAvaliacao === '2' ? 'solid' : 'outline'"
+          class="filtro-chip estrelas"
+          (click)="selecionarAvaliacao('2')"
+        >
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </ion-button>
+        <ion-button
+          [fill]="filtroAvaliacao === '1' ? 'solid' : 'outline'"
+          class="filtro-chip estrelas"
+          (click)="selecionarAvaliacao('1')"
+        >
+          <ion-icon name="star"></ion-icon>
+        </ion-button>
       </div>
     </div>
 
-    <!-- Filtrar por Ementa -->
+    <!-- Filtrar por Categoria -->
     <div class="filtro-secao">
       <p class="filtro-titulo">Categoria</p>
       <div class="filtro-opcoes">
@@ -114,7 +138,7 @@
         </div>
         <p class="card-categoria">{{ restaurante.categoria }}</p>
         <p class="card-descricao">{{ restaurante.descricao }}</p>
-        
+
         <div class="card-acoes">
           <span class="avaliacoes-count">{{ getTotalAvaliacoes(restaurante) > 0 ? getTotalAvaliacoes(restaurante) + ' avaliações' : 'Sem avaliações' }}</span>
           <div class="acoes-icons">
