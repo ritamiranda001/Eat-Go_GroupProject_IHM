@@ -1,43 +1,143 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
-
-/* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
-
-//- import obrigatório para mapa leaflet
 @import 'leaflet/dist/leaflet.css';
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
-
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
- @import "@ionic/angular/css/palettes/dark.class.css";
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
 /* @import "@ionic/angular/css/palettes/dark.system.css"; */
 
-// ── Modo Escuro Global ────────────────────────────────────────
+// ── Modo Escuro Manual ─────────────────────────────────────────
 
+html.ion-palette-dark {
+
+  --ion-background-color: #1c1c2e;
+  --ion-text-color: #f0f0f0;
+  --ion-border-color: #333350;
+  --ion-item-background: #252538;
+  --ion-toolbar-background: #1f1f35;
+
+  ion-content { --background: #1c1c2e; }
+
+  ion-toolbar:not([color]) {
+    --background: #1f1f35 !important;
+    --color: #f0f0f0 !important;
+  }
+
+  .header-btn { --color: #f0f0f0 !important; }
+
+  ion-item {
+    --background: #252538 !important;
+    --color: #f0f0f0 !important;
+  }
+  ion-list { background: #1c1c2e !important; }
+  ion-label { color: #f0f0f0 !important; }
+
+  ion-menu ion-content { --background: #1f1f35 !important; }
+  ion-menu ion-item {
+    --background: #1f1f35 !important;
+    --color: #f0f0f0 !important;
+  }
+
+  .home-content { --background: #1c1c2e !important; }
+  .page-header { background: #1f1f35 !important; }
+  .page-title { color: #f0f0f0 !important; }
+  .page-subtitle { color: #aaaaaa !important; }
+
+  .filter-bar {
+    background: #1f1f35 !important;
+    border-color: #333350 !important;
+  }
+  .filter-bar .filter-btn {
+    --border-color: #444466 !important;
+    --color: #f0f0f0 !important;
+  }
+  .filtros-dropdown { background: #252538 !important; }
+  .filtro-titulo { color: #aaa !important; }
+  .filtro-chip {
+    --background: #333350 !important;
+    --color: #f0f0f0 !important;
+    --border-color: #444466 !important;
+  }
+
+  .ver-mais-btn {
+    --border-color: #444466 !important;
+    --color: #f0f0f0 !important;
+  }
+
+  .restaurante-card {
+    background: #2a2a3e !important;
+    .card-nome { color: #f0f0f0 !important; }
+    .card-categoria { color: #f97316 !important; }
+    .card-descricao { color: #cccccc !important; }
+    .card-localizacao { color: #aaaaaa !important; }
+    .avaliacoes-count { color: #aaaaaa !important; }
+    .preco-badge {
+      background: #3a3a52 !important;
+      color: #cccccc !important;
+    }
+    .card-acoes { border-color: #3a3a52 !important; }
+    .icon-action { --color: #aaaaaa !important; }
+  }
+
+  // Detalhe restaurante
+  .info-section { background: #1f1f35 !important; }
+  .nome { color: #f0f0f0 !important; }
+  .preco { color: #cccccc !important; }
+  .categoria { color: #f97316 !important; }
+  .descricao { color: #cccccc !important; }
+  .detalhe-row {
+    color: #aaaaaa !important;
+    ion-icon { color: #f97316 !important; }
+  }
+  .avaliacoes-titulo { color: #f0f0f0 !important; }
+  .avaliacao-card {
+    background: #252538 !important;
+    .autor-nome { color: #f0f0f0 !important; }
+    .avaliacao-data { color: #aaa !important; }
+    .avaliacao-comentario { color: #ccc !important; }
+  }
+
+  // Perfil
+  .perfil-content { --background: #1c1c2e !important; }
+  .stats-section {
+    background: #252538 !important;
+    .stat-valor { color: #f97316 !important; }
+    .stat-label { color: #aaa !important; }
+    .stat-divider { background: #333350 !important; }
+  }
+  .info-section {
+    background: #252538 !important;
+    .info-titulo { color: #888 !important; }
+    .info-label { color: #aaa !important; }
+    .info-valor { color: #f0f0f0 !important; }
+    ion-icon { color: #f97316 !important; }
+  }
+  .info-row { border-color: #333350 !important; }
+
+  // Definições
+  .definicoes-content { --background: #1c1c2e !important; }
+  .secao-titulo { color: #888 !important; }
+  .opcao-row {
+    background: #252538 !important;
+    .opcao-label { color: #f0f0f0 !important; }
+    .opcao-desc { color: #aaa !important; }
+    ion-icon { color: #f97316 !important; }
+  }
+  .sobre-card {
+    background: #252538 !important;
+    .app-nome { color: #f0f0f0 !important; }
+    .app-versao { color: #aaa !important; }
+    .autores-titulo { color: #ccc !important; }
+    .autor-row span { color: #ccc !important; }
+    .divider { background: #333350 !important; }
+    .disclaimer { color: #888 !important; }
+  }
+}
