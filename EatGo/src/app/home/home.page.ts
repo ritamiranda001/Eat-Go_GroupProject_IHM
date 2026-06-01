@@ -18,7 +18,8 @@ export class HomePage implements OnInit {
   termoPesquisa = '';
   filtroAvaliacao = 'todos';
   filtroCategoria = 'todos';
-  ordenacaoAtual: 'alfabetica' | 'avaliacao' = 'avaliacao';
+  //ordenacaoAtual: 'alfabetica' | 'avaliacao' = 'avaliacao';
+  ordenacaoAtual: 'az' | 'za' = 'az';
   limite = 5;
 
   categorias = [
@@ -43,10 +44,10 @@ export class HomePage implements OnInit {
       return porAvaliacao && porCategoria && porPesquisa;
     });
 
-    if (this.ordenacaoAtual === 'alfabetica') {
+    if (this.ordenacaoAtual === 'az') {
       lista = [...lista].sort((a, b) => a.nome.localeCompare(b.nome));
     } else {
-      lista = [...lista].sort((a, b) => this.getAvaliacao(b) - this.getAvaliacao(a));
+      lista = [...lista].sort((a, b) => b.nome.localeCompare(a.nome));
     }
 
     return lista.slice(0, this.limite);
@@ -116,7 +117,10 @@ export class HomePage implements OnInit {
   togglePesquisa() { this.mostrarPesquisa = !this.mostrarPesquisa; if (!this.mostrarPesquisa) this.termoPesquisa = ''; }
   selecionarAvaliacao(v: string) { this.filtroAvaliacao = v; }
   selecionarCategoria(v: string) { this.filtroCategoria = v; }
-  toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'avaliacao' ? 'alfabetica' : 'avaliacao'; }
+  //toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'avaliacao' ? 'alfabetica' : 'avaliacao'; }
+  toggleOrdenacao() { 
+  this.ordenacaoAtual = this.ordenacaoAtual === 'az' ? 'za' : 'az'; 
+  }
   verMaisResultados() { this.limite += 5; }
 
   avaliar(event: Event, restaurante: Restaurante) { event.stopPropagation(); this.router.navigate(['/avaliar', restaurante.id]); }
@@ -126,10 +130,10 @@ export class HomePage implements OnInit {
   this.router.navigate(['/restaurante-detalhe', restaurante.id]); 
 }
 
-verMapa(event: Event, restaurante: Restaurante) {
-  event.stopPropagation();
-  this.router.navigate(['/restaurante-detalhe', restaurante.id]);
-}
+  verMapa(event: Event, restaurante: Restaurante) {
+    event.stopPropagation();
+    this.router.navigate(['/restaurante-detalhe', restaurante.id]);
+  }
 
 async partilhar(event: Event, restaurante: Restaurante) {
   event.stopPropagation();
@@ -158,13 +162,13 @@ async partilhar(event: Event, restaurante: Restaurante) {
   }
 }
 
-private async mostrarToast(mensagem: string) {
-  const toast = document.createElement('ion-toast');
-  toast.message = mensagem;
-  toast.duration = 3000;
-  toast.position = 'bottom';
-  toast.color = 'dark';
-  document.body.appendChild(toast);
-  await toast.present();
-}
+  private async mostrarToast(mensagem: string) {
+    const toast = document.createElement('ion-toast');
+    toast.message = mensagem;
+    toast.duration = 3000;
+    toast.position = 'bottom';
+    toast.color = 'dark';
+    document.body.appendChild(toast);
+    await toast.present();
+  }
 }
