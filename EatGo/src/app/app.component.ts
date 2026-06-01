@@ -21,7 +21,7 @@ export class AppComponent {
   public menuPages = [
     { title: 'Minhas Avaliações', url: '/minhas-avaliacoes', icon: 'star-outline', requerLogin: true },
     { title: 'Adicionar Restaurante', url: '/adicionar-restaurante', icon: 'add-circle-outline', requerLogin: true },
-    { title: 'Explorar Mapa', url: '/home', icon: 'search-outline', requerLogin: false },
+    { title: 'Definições', url: '/definicoes', icon: 'settings-outline', requerLogin: false },
   ];
 
   constructor(
@@ -29,7 +29,14 @@ export class AppComponent {
     public authService: AuthService,
     private router: Router
   ) {
+<<<<<<< HEAD
+  // modo escuro se estava ativo
+  const escuro = localStorage.getItem('eat_go_modo_escuro') === 'true';
+document.documentElement.classList.toggle('ion-palette-dark', escuro);
+
+=======
     this.bloquearOrientacao();
+>>>>>>> 9e4a75c0199befd8961843dcce1c4d8ab59ed1a0
   }
 
   /**
