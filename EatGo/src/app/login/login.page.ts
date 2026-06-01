@@ -62,10 +62,28 @@ export class LoginPage implements OnInit {
     this.mostrarPalavraPasse = !this.mostrarPalavraPasse;
   }
 
+  /**
+   * Valida a palavra-passe:
+   * - Mínimo 8 caracteres
+   * - Pelo menos uma letra maiúscula
+   * @param pp - Palavra-passe a validar
+   * @returns true se válida, false caso contrário
+   */
+  private validarPalavraPasse(pp: string): boolean {
+    if (pp.length < 8) return false;
+    if (!/[A-Z]/.test(pp)) return false;
+    return true;
+  }
+
   /** Executa o login do utilizador. */
   async entrar() {
     if (!this.email || !this.palavraPasse) {
       await this.mostrarToast('Por favor preenche todos os campos.', 'warning');
+      return;
+    }
+
+    if (!this.validarPalavraPasse(this.palavraPasse)) {
+      await this.mostrarToast('A palavra-passe deve ter mínimo 8 caracteres e uma letra maiúscula.', 'danger');
       return;
     }
 
@@ -85,11 +103,25 @@ export class LoginPage implements OnInit {
       await this.mostrarToast('Email ou palavra-passe incorretos.', 'danger');
     }
   }
+  /** Verifica se a palavra-passe tem mínimo 8 caracteres */
+get temOitoCaracteres(): boolean {
+  return this.palavraPasse.length >= 8;
+}
+
+/** Verifica se a palavra-passe tem pelo menos uma letra maiúscula */
+get temMaiuscula(): boolean {
+  return /[A-Z]/.test(this.palavraPasse);
+}
 
   /** Executa o registo de um novo utilizador. */
   async registar() {
     if (!this.nome || !this.email || !this.palavraPasse || !this.confirmarPalavraPasse) {
       await this.mostrarToast('Por favor preenche todos os campos.', 'warning');
+      return;
+    }
+
+    if (!this.validarPalavraPasse(this.palavraPasse)) {
+      await this.mostrarToast('A palavra-passe deve ter mínimo 8 caracteres e uma letra maiúscula.', 'danger');
       return;
     }
 
@@ -120,7 +152,11 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  /** Mostra uma mensagem toast ao utilizador. */
+  /**
+   * Mostra uma mensagem toast ao utilizador.
+   * @param mensagem - Texto a mostrar
+   * @param cor - Cor do toast (success, danger, warning)
+   */
   private async mostrarToast(mensagem: string, cor: string) {
     const toast = await this.toastCtrl.create({
       message: mensagem,

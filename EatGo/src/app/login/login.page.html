@@ -66,6 +66,17 @@
               (click)="togglePalavraPasse()">
             </ion-icon>
           </div>
+          <!-- Requisitos da palavra-passe -->
+          <div class="pp-requisitos" *ngIf="palavraPasse.length > 0">
+            <p [class.valido]="temOitoCaracteres" [class.invalido]="!temOitoCaracteres">
+              <ion-icon [name]="temOitoCaracteres ? 'checkmark-circle-outline' : 'close-circle-outline'"></ion-icon>
+              Mínimo 8 caracteres
+            </p>
+            <p [class.valido]="temMaiuscula" [class.invalido]="!temMaiuscula">
+              <ion-icon [name]="temMaiuscula ? 'checkmark-circle-outline' : 'close-circle-outline'"></ion-icon>
+              Pelo menos uma letra maiúscula
+            </p>
+          </div>
         </div>
 
         <!-- Lembrar-me + Esqueceu a palavra-passe -->
@@ -78,10 +89,7 @@
         </div>
 
         <!-- Botão Entrar -->
-        <ion-button
-          expand="block"
-          class="entrar-btn"
-          (click)="entrar()">
+        <ion-button expand="block" class="entrar-btn" (click)="entrar()">
           <ion-icon name="log-in-outline" slot="start"></ion-icon>
           Entrar
         </ion-button>
@@ -142,6 +150,17 @@
               (click)="togglePalavraPasse()">
             </ion-icon>
           </div>
+          <!-- Requisitos da palavra-passe -->
+          <div class="pp-requisitos" *ngIf="palavraPasse.length > 0">
+            <p [class.valido]="temOitoCaracteres" [class.invalido]="!temOitoCaracteres">
+              <ion-icon [name]="temOitoCaracteres ? 'checkmark-circle-outline' : 'close-circle-outline'"></ion-icon>
+              Mínimo 8 caracteres
+            </p>
+            <p [class.valido]="temMaiuscula" [class.invalido]="!temMaiuscula">
+              <ion-icon [name]="temMaiuscula ? 'checkmark-circle-outline' : 'close-circle-outline'"></ion-icon>
+              Pelo menos uma letra maiúscula
+            </p>
+          </div>
         </div>
 
         <!-- Campo Confirmar Palavra-passe -->
@@ -159,10 +178,7 @@
         </div>
 
         <!-- Botão Criar Conta -->
-        <ion-button
-          expand="block"
-          class="entrar-btn"
-          (click)="registar()">
+        <ion-button expand="block" class="entrar-btn" (click)="registar()">
           <ion-icon name="person-add-outline" slot="start"></ion-icon>
           Criar Conta
         </ion-button>
