@@ -27,8 +27,8 @@ export class DefinicoesPage implements OnInit {
   }
 
   private aplicarTema(escuro: boolean) {
-    document.body.classList.toggle('dark-mode', escuro);
-  }
+  document.documentElement.classList.toggle('ion-palette-dark', escuro);
+}
 
   voltar() {
     this.router.navigate(['/home']);

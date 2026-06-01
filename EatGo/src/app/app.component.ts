@@ -23,7 +23,7 @@ export class AppComponent {
   ) {
   // modo escuro se estava ativo
   const escuro = localStorage.getItem('eat_go_modo_escuro') === 'true';
-  document.body.classList.toggle('dark-mode', escuro);
+document.documentElement.classList.toggle('ion-palette-dark', escuro);
 
   }
 
