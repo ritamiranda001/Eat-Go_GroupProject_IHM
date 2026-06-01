@@ -1,50 +1,49 @@
 /**
- * restaurante.ts (RestauranteService)
+ * restaurante.service.ts
  * Serviço responsável por gerir os dados dos restaurantes.
- * Requisito 7: Estruturar e organizar devidamente os vários módulos, services e assets
+ * Requisito 9: Guardar informação com recurso ao Ionic Storage
  * Requisito 10: Utilizar informação proveniente de ficheiros JSON
  * Requisito 15: Otimizar código com recurso a Services
  */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { Restaurante } from '../models/restaurante.model';
+import { Storage } from '@ionic/storage-angular';
+
+const CHAVE_RESTAURANTES = 'eat_go_restaurantes_adicionados';
 
 @Injectable({
-  providedIn: 'root' // Disponível em toda a aplicação sem necessidade de declarar no módulo
+  providedIn: 'root'
 })
 export class RestauranteService {
 
-  /** Caminho para o ficheiro JSON com os dados dos restaurantes */
   private readonly DATA_PATH = 'assets/data/restaurantes.json';
 
-  /**
-   * Injeta o HttpClient para fazer pedidos HTTP (leitura do JSON)
-   * @param http - Cliente HTTP do Angular
-   */
-  constructor(private http: HttpClient) {}
-
-  /**
-   * Obtém a lista completa de restaurantes a partir do ficheiro JSON.
-   * Futuramente pode ser substituído por uma chamada à API MongoDB.
-   * @returns Observable com array de Restaurante
-   */
-  getAll(): Observable<Restaurante[]> {
-    return this.http.get<Restaurante[]>(this.DATA_PATH);
+  constructor(private http: HttpClient, private storage: Storage) {
+    this.storage.create();
   }
 
-  /**
-   * Obtém um restaurante específico pelo seu ID.
-   * @param id - ID do restaurante a procurar
-   * @returns Observable com o Restaurante encontrado ou undefined
-   */
+  /** Obtém todos os restaurantes (JSON + adicionados pelo utilizador) */
+  getAll(): Observable<Restaurante[]> {
+    return new Observable(observer => {
+      this.http.get<Restaurante[]>(this.DATA_PATH).subscribe({
+        next: async (restaurantesJSON) => {
+          const adicionados = await this.storage.get(CHAVE_RESTAURANTES) || [];
+          observer.next([...restaurantesJSON, ...adicionados]);
+          observer.complete();
+        },
+        error: (err) => observer.error(err)
+      });
+    });
+  }
+
+  /** Obtém um restaurante pelo ID */
   getById(id: number): Observable<Restaurante | undefined> {
     return new Observable(observer => {
       this.getAll().subscribe({
         next: (restaurantes) => {
-          // Procura o restaurante com o ID correspondente
-          const encontrado = restaurantes.find(r => r.id === id);
-          observer.next(encontrado);
+          observer.next(restaurantes.find(r => r.id === id));
           observer.complete();
         },
         error: (err) => observer.error(err)
@@ -52,21 +51,12 @@ export class RestauranteService {
     });
   }
 
-  /**
-   * Filtra restaurantes por categoria.
-   * @param categoria - Categoria a filtrar (ex: "Fast Food", "Gourmet")
-   * @returns Observable com array de Restaurante filtrado
-   */
-  getByCategoria(categoria: string): Observable<Restaurante[]> {
-    return new Observable(observer => {
-      this.getAll().subscribe({
-        next: (restaurantes) => {
-          const filtrados = restaurantes.filter(r => r.categoria === categoria);
-          observer.next(filtrados);
-          observer.complete();
-        },
-        error: (err) => observer.error(err)
-      });
-    });
+  /** Adiciona um novo restaurante ao Storage */
+  async adicionar(restaurante: Restaurante): Promise<void> {
+    const adicionados: Restaurante[] = await this.storage.get(CHAVE_RESTAURANTES) || [];
+    const novoId = Date.now();
+    restaurante.id = novoId;
+    adicionados.push(restaurante);
+    await this.storage.set(CHAVE_RESTAURANTES, adicionados);
   }
 }

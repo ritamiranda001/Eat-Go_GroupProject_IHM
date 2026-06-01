@@ -7,42 +7,37 @@
  */
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { authGuard } from './guards/auth-guard';
 
 const routes: Routes = [
   {
-    // Redireciona a raiz para a página home das colegas
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
   {
-    // Página home (Rita)
     path: 'home',
     loadChildren: () =>
       import('./home/home.module').then(m => m.HomePageModule)
-  }
-  ,
+  },
   {
-    // Detalhe de um restaurante — parâmetro :id na rota
-    // Requisito 5: passar parâmetros entre páginas
     path: 'restaurante-detalhe/:id',
     loadChildren: () =>
       import('./restaurante-detalhe/restaurante-detalhe.module')
         .then(m => m.RestauranteDetalhePageModule)
   },
   {
-    // Tarefa: Avaliar restaurante — recebe :id do restaurante
-    // Requisito 5: passar parâmetros entre páginas
     path: 'avaliar/:id',
     loadChildren: () =>
-      import('./avaliar/avaliar.module').then(m => m.AvaliarPageModule)
+      import('./avaliar/avaliar.module').then(m => m.AvaliarPageModule),
+    canActivate: [authGuard]
   },
   {
-    // Tarefa: Adicionar novo restaurante
     path: 'adicionar-restaurante',
     loadChildren: () =>
       import('./adicionar-restaurante/adicionar-restaurante.module')
-        .then(m => m.AdicionarRestaurantePageModule)
+        .then(m => m.AdicionarRestaurantePageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'login',
@@ -55,9 +50,34 @@ const routes: Routes = [
       import('./perfil/perfil.module').then(m => m.PerfilPageModule)
   },
   {
+    path: 'minhas-avaliacoes',
+    loadChildren: () =>
+      import('./minhas-avaliacoes/minhas-avaliacoes.module')
+        .then(m => m.MinhasAvaliacoesPageModule),
+    canActivate: [authGuard]
+  },
+  {
+  path: 'perfil',
+  loadChildren: () =>
+    import('./perfil/perfil.module').then(m => m.PerfilPageModule),
+  canActivate: [authGuard]
+},
+  {
+    path: 'definicoes',
+    loadChildren: () =>
+      import('./definicoes/definicoes.module').then(m => m.DefinicoesPageModule)
+  },
+  {
+    // Deve ser sempre o último!
     path: '**',
     redirectTo: 'home'
+  },
+  
+/*  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   }
+    */
 
 ];
 

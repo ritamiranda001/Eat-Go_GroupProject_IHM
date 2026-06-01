@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
 
 import { AvaliarPageRoutingModule } from './avaliar-routing.module';
-
 import { AvaliarPage } from './avaliar.page';
 
 @NgModule({
@@ -13,9 +11,8 @@ import { AvaliarPage } from './avaliar.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AvaliarPageRoutingModule,
-    AvaliarPage
+    AvaliarPageRoutingModule
   ],
-
+  declarations: [AvaliarPage]
 })
 export class AvaliarPageModule {}

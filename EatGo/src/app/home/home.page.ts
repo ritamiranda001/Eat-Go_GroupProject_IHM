@@ -1,21 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-
-export interface Restaurante {
-  id: number;
-  nome: string;
-  categoria: string;
-  descricao: string;
-  morada: string;
-  distancia: number;
-  rating: number;
-  preco: string;
-  avaliacoes: number;
-  imagem: string;
-}
+import { Storage } from '@ionic/storage-angular';
+import { RestauranteService } from '../services/restaurante.service';
+import { Restaurante } from '../models/restaurante.model';
+import { Avaliacao } from '../models/avaliacao.model';
 
 @Component({
   selector: 'app-home',
@@ -30,57 +18,161 @@ export class HomePage implements OnInit {
   termoPesquisa = '';
   filtroAvaliacao = 'todos';
   filtroCategoria = 'todos';
-  ordenacaoAtual: 'alfabetica' | 'distancia' = 'distancia';
+  ordenacaoAtual: 'az' | 'za' = 'az';
+  limite = 5;
 
   categorias = [
-  { valor: 'todos',       icone: 'restaurant-outline' },
-  { valor: 'Tradicional', icone: 'fish-outline' },
-  { valor: 'Gourmet',     icone: 'wine-outline' },
-  { valor: 'Café',        icone: 'cafe-outline' },
-  { valor: 'Petiscos',    icone: 'beer-outline' },
-];
+    { valor: 'todos',       icone: 'restaurant-outline' },
+    { valor: 'Tradicional', icone: 'fish-outline' },
+    { valor: 'Gourmet',     icone: 'wine-outline' },
+    { valor: 'Café',        icone: 'cafe-outline' },
+    { valor: 'Petiscos',    icone: 'beer-outline' },
+  ];
 
- resultados: Restaurante[] = [
-  { id: 1, nome: 'O Pescador', categoria: 'Tradicional', descricao: 'Especializado em arroz de tamboril, feijoada de marisco e peixe grelhado fresquíssimo no centro histórico.', morada: 'Largo São Domingos, Viana do Castelo', distancia: 0.3, rating: 4.5, preco: '$$', avaliacoes: 287, imagem: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600' },
-  { id: 2, nome: 'O Tabernão', categoria: 'Petiscos', descricao: 'Tasca aconchegante com petiscos tradicionais como polvo à galega e mexilhão frio com salsa.', morada: 'Largo Infante Dom Henriques 42, Viana do Castelo', distancia: 0.5, rating: 4.6, preco: '$', avaliacoes: 193, imagem: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600' },
-  { id: 3, nome: 'Porta 93', categoria: 'Gourmet', descricao: 'Restaurante de autor da Chef Mariana, com pratos criativos feitos com ingredientes locais.', morada: 'Av. Conde Carreira 28, Viana do Castelo', distancia: 0.8, rating: 4.8, preco: '$$$', avaliacoes: 142, imagem: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600' },
-  { id: 4, nome: 'Adega do Padrinho', categoria: 'Tradicional', descricao: 'Numa rua típica do centro histórico, cozinha minhota autêntica com bacalhau e pratos regionais.', morada: 'Centro Histórico, Viana do Castelo', distancia: 0.4, rating: 4.3, preco: '$', avaliacoes: 98, imagem: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600' },
-  { id: 5, nome: "D'Amore Café", categoria: 'Café', descricao: 'Café charmoso com esplanada encantadora, perfeito para pequenos-almoços e brunchs.', morada: 'R. Mateus Barbosa 23, Viana do Castelo', distancia: 0.6, rating: 4.4, preco: '$', avaliacoes: 215, imagem: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600' },
-  { id: 6, nome: 'A Petisqueira', categoria: 'Petiscos', descricao: 'Espaço descontraído especializado em petiscos portugueses para partilhar, com serviço caloroso.', morada: 'Centro, Viana do Castelo', distancia: 1.0, rating: 4.5, preco: '$$', avaliacoes: 176, imagem: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=600' },
-];
+  resultados: Restaurante[] = [];
+  avaliacoesMap: Map<number, Avaliacao[]> = new Map();
+
+  private filtrarPorAvaliacao(r: Restaurante): boolean {
+    if (this.filtroAvaliacao === 'todos') return true;
+    const av = this.getAvaliacao(r);
+    const filtro = parseInt(this.filtroAvaliacao);
+    if (filtro === 5) return av >= 5.0;
+    if (filtro === 1) return av >= 0.0 && av < 2.0;
+    return av >= filtro && av < filtro + 1;
+  }
 
   get resultadosFiltrados(): Restaurante[] {
     let lista = this.resultados.filter(r => {
-      const porAvaliacao = this.filtroAvaliacao === 'todos' || Math.floor(r.rating) >= parseInt(this.filtroAvaliacao);
+      const porAvaliacao = this.filtrarPorAvaliacao(r);
       const porCategoria = this.filtroCategoria === 'todos' || r.categoria === this.filtroCategoria;
       const porPesquisa = this.termoPesquisa === '' ||
         r.nome.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
         r.categoria.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
-        r.morada.toLowerCase().includes(this.termoPesquisa.toLowerCase());
+        r.localizacao.toLowerCase().includes(this.termoPesquisa.toLowerCase());
       return porAvaliacao && porCategoria && porPesquisa;
     });
 
-    if (this.ordenacaoAtual === 'alfabetica') {
+    if (this.ordenacaoAtual === 'az') {
       lista = [...lista].sort((a, b) => a.nome.localeCompare(b.nome));
     } else {
-      lista = [...lista].sort((a, b) => a.distancia - b.distancia);
+      lista = [...lista].sort((a, b) => b.nome.localeCompare(a.nome));
     }
 
-    return lista;
+    return lista.slice(0, this.limite);
   }
 
-  constructor(private router: Router) {}
+  get totalFiltrados(): number {
+    return this.resultados.filter(r => {
+      const porAvaliacao = this.filtrarPorAvaliacao(r);
+      const porCategoria = this.filtroCategoria === 'todos' || r.categoria === this.filtroCategoria;
+      const porPesquisa = this.termoPesquisa === '' ||
+        r.nome.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
+        r.categoria.toLowerCase().includes(this.termoPesquisa.toLowerCase()) ||
+        r.localizacao.toLowerCase().includes(this.termoPesquisa.toLowerCase());
+      return porAvaliacao && porCategoria && porPesquisa;
+    }).length;
+  }
+
+  constructor(
+    private router: Router,
+    private restauranteService: RestauranteService,
+    private storage: Storage
+  ) {}
+
   ngOnInit() {}
+
+  async ionViewWillEnter() {
+    await this.storage.create();
+    this.restauranteService.getAll().subscribe({
+      next: async (data) => {
+        this.resultados = data;
+        await this.carregarAvaliacoes();
+      },
+      error: (err) => console.error('Erro ao carregar restaurantes:', err)
+    });
+  }
+
+  async carregarAvaliacoes() {
+    this.avaliacoesMap = new Map();
+    await this.storage.forEach((valor, chave) => {
+      if (chave.startsWith('avaliacao_')) {
+        const av: Avaliacao = valor;
+        const lista = this.avaliacoesMap.get(av.restauranteId) || [];
+        lista.push(av);
+        this.avaliacoesMap.set(av.restauranteId, lista);
+      }
+    });
+  }
+
+  getAvaliacao(restaurante: Restaurante): number {
+    const avaliacoesStorage = this.avaliacoesMap.get(restaurante.id) || [];
+    const avaliacoesJSON = (restaurante as any).avaliacoesList || [];
+    const todas = [...avaliacoesJSON, ...avaliacoesStorage];
+
+    if (todas.length === 0) return restaurante.avaliacao || 0;
+
+    const soma = todas.reduce((acc: number, av: Avaliacao) => acc + av.estrelas, 0);
+    return Math.round((soma / todas.length) * 10) / 10;
+  }
+
+  getTotalAvaliacoes(restaurante: Restaurante): number {
+    const avaliacoesStorage = this.avaliacoesMap.get(restaurante.id) || [];
+    const avaliacoesJSON = (restaurante as any).avaliacoesList || [];
+    return avaliacoesJSON.length + avaliacoesStorage.length;
+  }
 
   toggleFiltros() { this.mostrarFiltros = !this.mostrarFiltros; }
   togglePesquisa() { this.mostrarPesquisa = !this.mostrarPesquisa; if (!this.mostrarPesquisa) this.termoPesquisa = ''; }
-  selecionarAvaliacao(v: string) { this.filtroAvaliacao = v; }
+  selecionarAvaliacao(v: string) { this.filtroAvaliacao = this.filtroAvaliacao === v ? 'todos' : v; }
   selecionarCategoria(v: string) { this.filtroCategoria = v; }
-  toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'distancia' ? 'alfabetica' : 'distancia'; }
+  toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'az' ? 'za' : 'az'; }
+  verMaisResultados() { this.limite += 5; }
 
-  verDetalhe(restaurante: Restaurante) { this.router.navigate(['/restaurante-detalhe', restaurante.id]); }
   avaliar(event: Event, restaurante: Restaurante) { event.stopPropagation(); this.router.navigate(['/avaliar', restaurante.id]); }
-  verMapa(event: Event, restaurante: Restaurante) { event.stopPropagation(); console.log('Ver mapa:', restaurante.nome); }
-  partilhar(event: Event, restaurante: Restaurante) { event.stopPropagation(); console.log('Partilhar:', restaurante.nome); }
-  verMaisResultados() { console.log('Ver mais resultados'); }
+
+  verDetalhe(restaurante: Restaurante) {
+    this.router.navigate(['/restaurante-detalhe', restaurante.id]);
+  }
+
+  verMapa(event: Event, restaurante: Restaurante) {
+    event.stopPropagation();
+    this.router.navigate(['/restaurante-detalhe', restaurante.id]);
+  }
+
+  async partilhar(event: Event, restaurante: Restaurante) {
+    event.stopPropagation();
+
+    const texto = `🍽️ ${restaurante.nome} — ${restaurante.categoria} • ${restaurante.nivelPreco}\n📍 ${restaurante.localizacao}\n⭐ ${this.getAvaliacao(restaurante)} estrelas\n\nDescoberto na app Eat&Go!`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: restaurante.nome,
+          text: texto
+        });
+      } catch {
+        // Utilizador cancelou
+      }
+      return;
+    }
+
+    if (navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(texto);
+        await this.mostrarToast('Informação copiada! Cola onde quiseres partilhar. 📋');
+      } catch {
+        await this.mostrarToast('A partilha não está disponível neste dispositivo.');
+      }
+    }
+  }
+
+  private async mostrarToast(mensagem: string) {
+    const toast = document.createElement('ion-toast');
+    toast.message = mensagem;
+    toast.duration = 3000;
+    toast.position = 'bottom';
+    toast.color = 'dark';
+    document.body.appendChild(toast);
+    await toast.present();
+  }
 }

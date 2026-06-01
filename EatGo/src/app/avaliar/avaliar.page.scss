@@ -130,3 +130,18 @@
   --placeholder-color: #999999;
   --background: #ffffff;
 }
+
+.anonimo-item {
+  --background: transparent;
+  --color: #1a1a1a;
+  
+  ion-label {
+    color: #1a1a1a !important;
+  }
+}
+.anonimo-descricao {
+  font-size: 13px;
+  color: #1a1a1a !important;
+  padding: 4px 16px;
+  margin: 0;
+}

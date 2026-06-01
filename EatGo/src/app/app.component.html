@@ -45,6 +45,32 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item
+              routerDirection="root"
+              routerLink="/perfil"
+              routerLinkActive="selected"
+              detail="false"
+              *ngIf="authService.isLoggedIn()"
+              (click)="fecharMenu()">
+              <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+              <ion-label>O meu perfil</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          @for (p of menuPages; track p) {
+            <ion-menu-toggle auto-hide="false">
+              <ion-item
+                routerDirection="root"
+                [routerLink]="[p.url]"
+                routerLinkActive="selected"
+                detail="false"
+                *ngIf="!p.requerLogin || authService.isLoggedIn()"
+              >
+                <ion-icon slot="start" [name]="p.icon"></ion-icon>
+                <ion-label>{{ p.title }}</ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          }
         </ion-list>
 
         <!-- Footer: Login ou Logout -->
@@ -56,6 +82,25 @@
           <ion-button *ngIf="authService.isLoggedIn()" expand="block" color="medium" class="login-btn" (click)="logout()">
             <ion-icon slot="start" name="log-out-outline"></ion-icon>
             Terminar Sessão
+          <ion-button
+            *ngIf="!authService.isLoggedIn()"
+            expand="block"
+            routerLink="/login"
+            class="login-btn"
+            (click)="fecharMenu()"
+          >
+            <ion-icon slot="start" name="log-in-outline"></ion-icon>
+            Login
+          </ion-button>
+
+          <ion-button
+            *ngIf="authService.isLoggedIn()"
+            expand="block"
+            class="login-btn logout-btn"
+            (click)="logout()"
+          >
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            Logout
           </ion-button>
         </div>
 

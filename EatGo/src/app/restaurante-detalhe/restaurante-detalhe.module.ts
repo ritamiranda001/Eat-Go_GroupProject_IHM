@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 
 import { RestauranteDetalhePageRoutingModule } from './restaurante-detalhe-routing.module';
-
 import { RestauranteDetalhePage } from './restaurante-detalhe.page';
 
 @NgModule({
@@ -13,9 +12,9 @@ import { RestauranteDetalhePage } from './restaurante-detalhe.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RestauranteDetalhePageRoutingModule,
-    RestauranteDetalhePage
+    HttpClientModule,
+    RestauranteDetalhePageRoutingModule
   ],
-  
+  declarations: [RestauranteDetalhePage]
 })
 export class RestauranteDetalhePageModule {}

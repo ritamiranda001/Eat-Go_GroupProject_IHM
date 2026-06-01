@@ -29,7 +29,7 @@
   <!-- Título -->
   <div class="page-header">
     <h1 class="page-title">Explorar Restaurantes</h1>
-    <p class="page-subtitle">{{ resultadosFiltrados.length }} resultados localizados</p>
+    <p class="page-subtitle">{{ totalFiltrados }} resultados localizados</p>
   </div>
 
   <!-- Barra de filtros -->
@@ -39,8 +39,8 @@
       Filtrar por:
     </ion-button>
     <ion-button fill="outline" class="filter-btn" (click)="toggleOrdenacao()">
-      <ion-icon slot="start" name="swap-vertical-outline"></ion-icon>
-      {{ ordenacaoAtual === 'distancia' ? 'Ordenar: Distância' : 'Ordenar: A-Z' }}
+      <ion-icon name="swap-vertical-outline" slot="start"></ion-icon>
+      {{ ordenacaoAtual === 'az' ? 'A-Z' : 'Z-A' }}
     </ion-button>
   </div>
 
@@ -49,13 +49,8 @@
 
     <!-- Filtrar por Avaliação -->
     <div class="filtro-secao">
-      <p class="filtro-titulo">Filtrar por Avaliação (Estrelas)</p>
+      <p class="filtro-titulo">Avaliação (Estrelas)</p>
       <div class="filtro-opcoes">
-        <ion-button
-          [fill]="filtroAvaliacao === 'todos' ? 'solid' : 'outline'"
-          class="filtro-chip"
-          (click)="selecionarAvaliacao('todos')"
-        >Avaliação</ion-button>
         <ion-button
           [fill]="filtroAvaliacao === '5' ? 'solid' : 'outline'"
           class="filtro-chip estrelas"
@@ -77,12 +72,36 @@
           <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>
         </ion-button>
+        <ion-button
+          [fill]="filtroAvaliacao === '3' ? 'solid' : 'outline'"
+          class="filtro-chip estrelas"
+          (click)="selecionarAvaliacao('3')"
+        >
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </ion-button>
+        <ion-button
+          [fill]="filtroAvaliacao === '2' ? 'solid' : 'outline'"
+          class="filtro-chip estrelas"
+          (click)="selecionarAvaliacao('2')"
+        >
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </ion-button>
+        <ion-button
+          [fill]="filtroAvaliacao === '1' ? 'solid' : 'outline'"
+          class="filtro-chip estrelas"
+          (click)="selecionarAvaliacao('1')"
+        >
+          <ion-icon name="star"></ion-icon>
+        </ion-button>
       </div>
     </div>
 
-    <!-- Filtrar por Ementa -->
+    <!-- Filtrar por Categoria -->
     <div class="filtro-secao">
-      <p class="filtro-titulo">Filtrar por Ementa</p>
+      <p class="filtro-titulo">Categoria</p>
       <div class="filtro-opcoes">
         <ion-button
           *ngFor="let cat of categorias"
@@ -108,29 +127,21 @@
         <img class="card-imagem" [src]="restaurante.imagem" [alt]="restaurante.nome"/>
         <div class="rating-badge">
           <ion-icon name="star"></ion-icon>
-          <span>{{ restaurante.rating }}</span>
+          <span>{{ getAvaliacao(restaurante) }}</span>
         </div>
       </div>
 
       <div class="card-body">
         <div class="card-nome-preco">
           <h2 class="card-nome">{{ restaurante.nome }}</h2>
-          <span class="preco-badge">{{ restaurante.preco }}</span>
+          <span class="preco-badge">{{ restaurante.nivelPreco }}</span>
         </div>
         <p class="card-categoria">{{ restaurante.categoria }}</p>
         <p class="card-descricao">{{ restaurante.descricao }}</p>
-        <div class="card-localizacao">
-          <ion-icon name="location-outline"></ion-icon>
-          <span>{{ restaurante.morada }}</span>
-          <span class="separador">•</span>
-          <span>A {{ restaurante.distancia }} km</span>
-        </div>
+
         <div class="card-acoes">
-          <span class="avaliacoes-count">{{ restaurante.avaliacoes }} avaliações</span>
+          <span class="avaliacoes-count">{{ getTotalAvaliacoes(restaurante) > 0 ? getTotalAvaliacoes(restaurante) + ' avaliações' : 'Sem avaliações' }}</span>
           <div class="acoes-icons">
-            <ion-button fill="clear" class="icon-action" (click)="verMapa($event, restaurante)">
-              <ion-icon slot="icon-only" name="map-outline"></ion-icon>
-            </ion-button>
             <ion-button fill="clear" class="icon-action" (click)="partilhar($event, restaurante)">
               <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
             </ion-button>
@@ -145,17 +156,10 @@
   </div>
 
   <!-- Ver mais resultados -->
-  <div class="ver-mais-wrapper">
+  <div class="ver-mais-wrapper" *ngIf="limite <= totalFiltrados">
     <ion-button fill="outline" class="ver-mais-btn" expand="block" (click)="verMaisResultados()">
       Ver mais resultados
     </ion-button>
-  </div>
-
-  <!-- Secção Mapa da zona -->
-  <div class="mapa-secao">
-    <h2 class="mapa-titulo">Mapa da zona</h2>
-    <p class="mapa-descricao">Explore e clique nos pins para selecionar os restaurantes.</p>
-    <div class="mapa-placeholder"></div>
   </div>
 
 </ion-content>
