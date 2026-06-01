@@ -205,4 +205,29 @@
       text-decoration: underline;
     }
   }
+}.pp-requisitos {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    margin: 0;
+
+    ion-icon {
+      font-size: 1rem;
+    }
+
+    &.valido {
+      color: #2e7d32;
+    }
+
+    &.invalido {
+      color: #c62828;
+    }
+  }
 }
