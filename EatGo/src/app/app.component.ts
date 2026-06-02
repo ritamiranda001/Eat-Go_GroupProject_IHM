@@ -22,6 +22,10 @@ import { ScreenOrientation } from '@capacitor/screen-orientation';
 })
 export class AppComponent {
 
+  mostrarSplash = true;
+  ocultarSplash = false;
+  splashFundo: string;
+
   /** Páginas disponíveis no menu lateral */
   public menuPages = [
     { title: 'Minhas Avaliações', url: '/minhas-avaliacoes', icon: 'star-outline', requerLogin: true },
@@ -38,10 +42,15 @@ export class AppComponent {
   // Restaura modo escuro se estava ativo
   const escuro = localStorage.getItem('eat_go_modo_escuro') === 'true';
   document.documentElement.classList.toggle('ion-palette-dark', escuro);
+  this.splashFundo = escuro ? '#1c1c2e' : '#ffffff';
 
   // Bloqueia a orientação da app em portrait (vertical)
   // Requisito 12: Capacitor para controlo do dispositivo
   this.bloquearOrientacao();
+
+  // Splash screen: inicia fade out após 1.8s, remove do DOM após a animação
+  setTimeout(() => { this.ocultarSplash = true; }, 1800);
+  setTimeout(() => { this.mostrarSplash = false; }, 2400);
 }
     
 
