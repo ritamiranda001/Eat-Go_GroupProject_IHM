@@ -118,9 +118,11 @@ html.ion-palette-dark {
     .info-titulo { color: #888 !important; }
     .info-label { color: #aaa !important; }
     .info-valor { color: #f0f0f0 !important; }
+    .estado-ativo { color: #2ecc71 !important; }
     ion-icon { color: #f97316 !important; }
   }
   .info-row { border-color: #333350 !important; }
+
 
   // Definições
   .definicoes-content { --background: #1c1c2e !important; }
@@ -140,4 +142,8 @@ html.ion-palette-dark {
     .divider { background: #333350 !important; }
     .disclaimer { color: #888 !important; }
   }
+  ion-toast {
+  --font-family: var(--ion-font-family);
+  font-weight: 700;
+}
 }

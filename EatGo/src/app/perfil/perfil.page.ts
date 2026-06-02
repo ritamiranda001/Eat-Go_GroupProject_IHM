@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AuthService } from '../services/auth.service';
 import { Avaliacao } from '../models/avaliacao.model';
@@ -20,7 +21,8 @@ export class PerfilPage implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private storage: Storage
+    private storage: Storage,
+    private toastCtrl: ToastController
   ) {}
 
   async ngOnInit() {
@@ -62,5 +64,13 @@ export class PerfilPage implements OnInit {
   async logout() {
     await this.authService.logout();
     this.router.navigate(['/home']);
+    const toast = await this.toastCtrl.create({
+      message: 'Sessão terminada com sucesso.',
+      duration: 2500,
+      position: 'bottom',
+      icon: 'log-out-outline',
+      color: 'dark'
+    });
+    await toast.present();
   }
 }

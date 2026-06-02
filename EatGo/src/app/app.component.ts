@@ -3,8 +3,13 @@
  * Componente raiz da aplicação Eat&Go.
  * Requisito 12: Utilizar o Capacitor para controlo do dispositivo
  */
+/**
+ * app.component.ts
+ * Componente raiz da aplicação Eat&Go.
+ * Requisito 12: Utilizar o Capacitor para controlo do dispositivo
+ */
 import { Component } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
@@ -27,7 +32,8 @@ export class AppComponent {
   constructor(
   private menuCtrl: MenuController,
   public authService: AuthService,
-  private router: Router
+  private router: Router,
+  private toastCtrl: ToastController
 ) {
   // Restaura modo escuro se estava ativo
   const escuro = localStorage.getItem('eat_go_modo_escuro') === 'true';
@@ -62,5 +68,13 @@ export class AppComponent {
     await this.authService.logout();
     this.menuCtrl.close();
     this.router.navigate(['/home']);
+    const toast = await this.toastCtrl.create({
+      message: 'Sessão terminada com sucesso.',
+      duration: 2500,
+      position: 'bottom',
+      icon: 'log-out-outline',
+      color: 'dark'
+    });
+    await toast.present();
   }
 }
