@@ -26,6 +26,12 @@ export class MinhasAvaliacoesPage implements OnInit {
     await this.carregarAvaliacoes();
   }
 
+  /** Recarrega as avaliações sempre que a página é aberta */
+  async ionViewWillEnter() {
+    await this.storage.create();
+    await this.carregarAvaliacoes();
+  }
+
   /** Carrega todas as avaliações guardadas no Storage */
   async carregarAvaliacoes() {
     this.avaliacoes = [];
