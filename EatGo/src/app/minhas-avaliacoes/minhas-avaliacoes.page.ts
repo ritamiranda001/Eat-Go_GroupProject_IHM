@@ -23,6 +23,10 @@ export class MinhasAvaliacoesPage implements OnInit {
 
   async ngOnInit() {
     await this.storage.create();
+  }
+
+  /** Chamado pelo Ionic sempre que a página fica visível */
+  async ionViewWillEnter() {
     await this.carregarAvaliacoes();
   }
 

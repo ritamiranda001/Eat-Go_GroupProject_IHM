@@ -7,6 +7,12 @@
         <ion-icon name="restaurant"></ion-icon>
       </div>
       <h1 class="splash-titulo">Eat&Go</h1>
+  <div class="splash-screen" *ngIf="mostrarSplash" [class.splash-ocultar]="ocultarSplash" [style.background]="splashFundo">
+    <div class="splash-conteudo">
+      <div class="splash-icone">
+        <ion-icon name="restaurant"></ion-icon>
+      </div>
+      <h1 class="splash-titulo">Eat<span>&amp;Go</span></h1>
     </div>
   </div>
 
