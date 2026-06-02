@@ -1,4 +1,15 @@
 <ion-app>
+
+  <!-- Splash Screen -->
+  <div class="splash-screen" *ngIf="mostrarSplash" [class.splash-ocultar]="ocultarSplash" [style.background]="splashFundo">
+    <div class="splash-conteudo">
+      <div class="splash-icone">
+        <ion-icon name="restaurant"></ion-icon>
+      </div>
+      <h1 class="splash-titulo">Eat<span>&amp;Go</span></h1>
+    </div>
+  </div>
+
   <ion-split-pane contentId="main-content" [when]="false">
     <ion-menu contentId="main-content" type="overlay" [swipeGesture]="false" side="end">
       <ion-content>
