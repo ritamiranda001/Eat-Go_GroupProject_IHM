@@ -1,5 +1,6 @@
 // ── Splash Screen ─────────────────────────────────────────────────────────
 
+// Ecrã de splash: ocupa todo o ecrã por cima de tudo e centra o conteúdo
 .splash-screen {
   position: fixed;
   inset: 0;
@@ -9,13 +10,15 @@
   align-items: center;
   justify-content: center;
   opacity: 1;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.6s ease; // Transição suave ao esconder
 
+  // Classe aplicada via JavaScript para esconder o splash com fade out
   &.splash-ocultar {
     opacity: 0;
   }
 }
 
+// Agrupa o ícone e o título com animação de entrada
 .splash-conteudo {
   display: flex;
   flex-direction: column;
@@ -24,6 +27,7 @@
   animation: splashEntrada 0.5s ease forwards;
 }
 
+// Círculo laranja claro que envolve o ícone principal
 .splash-icone {
   width: 100px;
   height: 100px;
@@ -35,10 +39,11 @@
 
   ion-icon {
     font-size: 52px;
-    color: #f97316;
+    color: #f97316; // Laranja principal da app
   }
 }
 
+// Título "Eat&Go" exibido no splash
 .splash-titulo {
   font-size: 36px;
   font-weight: 900;
@@ -47,11 +52,13 @@
   letter-spacing: -0.5px;
   font-family: var(--ion-font-family);
 
+  // Parte secundária do título ligeiramente transparente
   span {
     opacity: 0.85;
   }
 }
 
+// Animação de entrada: o conteúdo cresce e aparece em fade
 @keyframes splashEntrada {
   from {
     transform: scale(0.85);
@@ -63,6 +70,8 @@
   }
 }
 
+// ── Menu Lateral ───────────────────────────────────────────────────────────
+
 ion-menu {
   --background: #ffffff;
 
@@ -72,6 +81,7 @@ ion-menu {
     flex-direction: column;
   }
 
+  // Cabeçalho do menu: logo à esquerda e botão de fechar à direita
   .menu-header {
     display: flex;
     justify-content: space-between;
@@ -84,11 +94,13 @@ ion-menu {
     }
   }
 
+  // Lista de navegação do menu
   ion-list {
     flex: 1;
     padding: 8px 16px;
     background: #ffffff;
 
+    // Estilo base de cada item de navegação
     ion-item {
       --background: #ffffff;
       --color: #000000;
@@ -103,6 +115,7 @@ ion-menu {
       }
     }
 
+    // Item ativo: fundo laranja subtil e texto laranja
     ion-item.selected {
       --background: rgba(249, 115, 22, 0.1);
       --color: #f97316;
@@ -113,6 +126,7 @@ ion-menu {
     }
   }
 
+  // Rodapé do menu: botão de login/logout
   .menu-footer {
     padding: 16px;
 
@@ -124,6 +138,8 @@ ion-menu {
     }
   }
 }
+
+// Botão de logout: fundo branco com borda e texto laranja
 .logout-btn {
   --background: #ffffff;
   --color: #FF6B2B;

@@ -1,6 +1,14 @@
+<!-- ─────────────────────────────────────────────
+     perfil.page.html
+     Template da página de Perfil do utilizador.
+     Mostra avatar, estatísticas de avaliações
+     e informações da conta.
+     ───────────────────────────────────────────── -->
+
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
+      <!-- Botão de navegação para a página anterior -->
       <ion-button (click)="voltar()">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
@@ -11,16 +19,19 @@
 
 <ion-content class="perfil-content">
 
-  <!-- Avatar e nome -->
+  <!-- Avatar e nome ─────────────────────────────
+       Mostra as iniciais do utilizador, o nome e o email -->
   <div class="perfil-header">
     <div class="avatar">
+      <!-- Iniciais geradas dinamicamente pelo método getIniciais() -->
       <span class="avatar-iniciais">{{ getIniciais() }}</span>
     </div>
     <h1 class="perfil-nome">{{ utilizador?.nome }}</h1>
     <p class="perfil-email">{{ utilizador?.email }}</p>
   </div>
 
-  <!-- Estatísticas -->
+  <!-- Estatísticas ───────────────────────────────
+       Total de avaliações feitas e média de estrelas dada pelo utilizador -->
   <div class="stats-section">
     <div class="stat-card">
       <span class="stat-valor">{{ totalAvaliacoes }}</span>
@@ -29,6 +40,7 @@
     <div class="stat-divider"></div>
     <div class="stat-card">
       <span class="stat-valor">
+        <!-- Mostra '—' se o utilizador ainda não fez nenhuma avaliação -->
         {{ mediaEstrelas > 0 ? mediaEstrelas : '—' }}
         <ion-icon *ngIf="mediaEstrelas > 0" name="star" class="stat-star"></ion-icon>
       </span>
@@ -36,10 +48,12 @@
     </div>
   </div>
 
-  <!-- Informações da conta -->
+  <!-- Informações da conta ───────────────────────
+       Linhas com ícone, label e valor para cada campo do perfil -->
   <div class="info-section">
     <h2 class="info-titulo">Informações da conta</h2>
 
+    <!-- Nome de utilizador -->
     <div class="info-row">
       <ion-icon name="person-outline"></ion-icon>
       <div class="info-texto">
@@ -48,6 +62,7 @@
       </div>
     </div>
 
+    <!-- Email -->
     <div class="info-row">
       <ion-icon name="mail-outline"></ion-icon>
       <div class="info-texto">
@@ -56,6 +71,7 @@
       </div>
     </div>
 
+    <!-- Estado da conta (sempre "Ativa" para utilizadores autenticados) -->
     <div class="info-row">
       <ion-icon name="shield-checkmark-outline"></ion-icon>
       <div class="info-texto">
@@ -65,12 +81,13 @@
     </div>
   </div>
 
-  <!-- Botão logout -->
-<div class="logout-wrapper">
-  <ion-button expand="block" (click)="logout()">
-    <ion-icon slot="start" name="log-out-outline"></ion-icon>
-    Logout
-  </ion-button>
-</div>
+  <!-- Botão de logout ────────────────────────────
+       Termina a sessão e redireciona para a página inicial -->
+  <div class="logout-wrapper">
+    <ion-button expand="block" (click)="logout()">
+      <ion-icon slot="start" name="log-out-outline"></ion-icon>
+      Logout
+    </ion-button>
+  </div>
 
 </ion-content>

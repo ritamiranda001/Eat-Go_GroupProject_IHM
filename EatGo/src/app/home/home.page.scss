@@ -1,15 +1,16 @@
-// Variáveis
-$primary:       #FF6B2B;
-$primary-light: #FFF0E8;
-$text-dark:     #1A1A1A;
-$text-mid:      #555555;
-$text-light:    #888888;
-$border:        #E8E8E8;
-$white:         #FFFFFF;
-$bg:            #F7F7F7;
+// ── Variáveis de cor e estilo globais ────────────────────────
+$primary:       #FF6B2B; // Cor principal da app (laranja)
+$primary-light: #FFF0E8; // Versão clara da cor principal
+$text-dark:     #1A1A1A; // Texto principal escuro
+$text-mid:      #555555; // Texto secundário
+$text-light:    #888888; // Texto discreto (labels, subtítulos)
+$border:        #E8E8E8; // Cor das bordas e separadores
+$white:         #FFFFFF; // Branco puro
+$bg:            #F7F7F7; // Fundo geral da página
 
 // ── Header ──────────────────────────────────────────────────
 
+/* Barra de topo — fundo branco com sombra subtil */
 .home-header {
   ion-toolbar {
     --background: #{$white};
@@ -20,6 +21,7 @@ $bg:            #F7F7F7;
   }
 }
 
+/* Ícone/logo da app no canto esquerdo do header */
 .brand-icon {
   width: 38px;
   height: 38px;
@@ -35,6 +37,7 @@ $bg:            #F7F7F7;
   }
 }
 
+/* Botões do header (pesquisa e menu) */
 .header-btn {
   --color: #{$text-dark};
   --padding-start: 6px;
@@ -47,23 +50,26 @@ $bg:            #F7F7F7;
 
 // ── Search Input Inline ──────────────────────────────────────
 
+/* Campo de pesquisa inline — aparece no header ao ativar a pesquisa */
 .search-input-wrapper {
   display: flex;
   align-items: center;
   background: $bg;
   border-radius: 8px;
   padding: 6px 10px;
-  flex: 1;
+  flex: 1;         /* Ocupa o espaço disponível no header */
   margin: 0 6px;
   gap: 6px;
-  min-width: 0;
+  min-width: 0;    /* Evita overflow em ecrãs pequenos */
 
+  /* Ícone de lupa dentro do campo */
   .search-input-icon {
     color: $text-light;
     font-size: 16px;
     flex-shrink: 0;
   }
 
+  /* Input nativo sem estilos padrão do browser */
   .search-input-native {
     border: none;
     background: transparent;
@@ -81,17 +87,20 @@ $bg:            #F7F7F7;
 
 // ── Content ─────────────────────────────────────────────────
 
+/* Fundo cinzento claro para o conteúdo da página */
 .home-content {
   --background: #{$bg};
 }
 
 // ── Page Header ─────────────────────────────────────────────
 
+/* Bloco do título e subtítulo da página */
 .page-header {
   padding: 24px 16px 8px;
   background: $white;
 }
 
+/* Título principal da página */
 .page-title {
   font-family: 'Nunito', sans-serif;
   font-size: 24px;
@@ -101,6 +110,7 @@ $bg:            #F7F7F7;
   letter-spacing: -0.3px;
 }
 
+/* Subtítulo com o número de resultados encontrados */
 .page-subtitle {
   font-size: 13px;
   color: $text-light;
@@ -109,6 +119,7 @@ $bg:            #F7F7F7;
 
 // ── Filter Bar ───────────────────────────────────────────────
 
+/* Barra com os botões de filtrar e ordenar */
 .filter-bar {
   display: flex;
   gap: 10px;
@@ -116,6 +127,7 @@ $bg:            #F7F7F7;
   background: $white;
   border-bottom: 1px solid $border;
 
+  /* Cada botão da barra de filtros */
   .filter-btn {
     --border-color: #{$border};
     --color: #{$text-dark};
@@ -125,7 +137,7 @@ $bg:            #F7F7F7;
     font-size: 13px;
     font-weight: 600;
     height: 38px;
-    flex: 1;
+    flex: 1; /* Divide o espaço igualmente entre os botões */
 
     ion-icon {
       font-size: 16px;
@@ -136,13 +148,15 @@ $bg:            #F7F7F7;
 
 // ── Lista de Restaurantes ────────────────────────────────────
 
+/* Contentor da lista de cartões de restaurantes */
 .restaurantes-lista {
   padding: 16px 16px 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 16px; /* Espaço entre cartões */
 }
 
+/* Cartão individual de restaurante */
 .restaurante-card {
   background: $white;
   border-radius: 16px;
@@ -151,18 +165,21 @@ $bg:            #F7F7F7;
   cursor: pointer;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 
+  /* Efeito de pressão ao clicar */
   &:active {
     transform: scale(0.98);
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.10);
   }
 }
 
+/* Contentor da imagem do cartão */
 .card-imagem-wrapper {
   position: relative;
   width: 100%;
   height: 180px;
 }
 
+/* Imagem do restaurante — preenche o contentor sem distorcer */
 .card-imagem {
   width: 100%;
   height: 100%;
@@ -170,6 +187,7 @@ $bg:            #F7F7F7;
   display: block;
 }
 
+/* Badge com a avaliação média — posicionado sobre a imagem */
 .rating-badge {
   position: absolute;
   top: 12px;
@@ -190,10 +208,12 @@ $bg:            #F7F7F7;
   }
 }
 
+/* Corpo do cartão com os detalhes do restaurante */
 .card-body {
   padding: 14px 16px 12px;
 }
 
+/* Linha com o nome e o nível de preço */
 .card-nome-preco {
   display: flex;
   align-items: center;
@@ -201,6 +221,7 @@ $bg:            #F7F7F7;
   margin-bottom: 4px;
 }
 
+/* Nome do restaurante em destaque */
 .card-nome {
   font-family: 'Nunito', sans-serif;
   font-size: 17px;
@@ -209,6 +230,7 @@ $bg:            #F7F7F7;
   margin: 0;
 }
 
+/* Badge do nível de preço ($, $$, $$$) */
 .preco-badge {
   font-size: 12px;
   font-weight: 700;
@@ -219,6 +241,7 @@ $bg:            #F7F7F7;
   letter-spacing: 0.5px;
 }
 
+/* Categoria do restaurante em cor primária */
 .card-categoria {
   font-size: 13px;
   font-weight: 700;
@@ -226,17 +249,19 @@ $bg:            #F7F7F7;
   margin: 0 0 6px 0;
 }
 
+/* Descrição truncada a 2 linhas */
 .card-descricao {
   font-size: 13px;
   color: $text-mid;
   margin: 0 0 8px 0;
   line-height: 1.45;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 2;        /* Limita a 2 linhas */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
+/* Linha com localização do restaurante */
 .card-localizacao {
   display: flex;
   align-items: center;
@@ -252,25 +277,29 @@ $bg:            #F7F7F7;
   }
 }
 
+/* Rodapé do cartão com contagem de avaliações e botões de ação */
 .card-acoes {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid $border;
+  border-top: 1px solid $border; /* Separador do corpo do cartão */
   padding-top: 10px;
 }
 
+/* Texto com o número total de avaliações */
 .avaliacoes-count {
   font-size: 12px;
   color: $text-light;
 }
 
+/* Contentor dos botões de ação (partilhar e avaliar) */
 .acoes-icons {
   display: flex;
   align-items: center;
   gap: 2px;
 }
 
+/* Botão de ação com ícone (ex: partilhar) */
 .icon-action {
   --color: #{$text-mid};
   --padding-start: 6px;
@@ -283,9 +312,10 @@ $bg:            #F7F7F7;
   }
 }
 
+/* Botão de avaliar — destaque em cor primária */
 .avaliar-btn {
   --background: #{$primary};
-  --background-activated: #e85e20;
+  --background-activated: #e85e20; /* Tom mais escuro ao clicar */
   --color: #{$white};
   --border-radius: 8px;
   --padding-start: 14px;
@@ -302,6 +332,7 @@ $bg:            #F7F7F7;
 
 // ── Ver Mais ─────────────────────────────────────────────────
 
+/* Botão para carregar mais resultados */
 .ver-mais-wrapper {
   padding: 20px 16px 8px;
 
@@ -317,21 +348,24 @@ $bg:            #F7F7F7;
 
 // ── Dropdown Filtros ─────────────────────────────────────────
 
+/* Painel de filtros — aparece abaixo da barra de ações */
 .filtros-dropdown {
   background: $white;
   border-bottom: 1px solid $border;
   padding: 12px 16px 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 16px; /* Espaço entre as secções de filtro */
 }
 
+/* Cada secção de filtro (avaliação, categoria) */
 .filtro-secao {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
+/* Título de cada grupo de filtros */
 .filtro-titulo {
   font-size: 12px;
   font-weight: 700;
@@ -341,12 +375,14 @@ $bg:            #F7F7F7;
   letter-spacing: 0.5px;
 }
 
+/* Linha de botões de filtro */
 .filtro-opcoes {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; /* Passa para a linha seguinte se não couber */
   gap: 8px;
 }
 
+/* Botão individual de filtro (chip) */
 .filtro-chip {
   --border-radius: 20px;
   --border-color: #{$border};
@@ -358,12 +394,14 @@ $bg:            #F7F7F7;
   font-size: 13px;
   font-weight: 600;
 
+  /* Chip ativo — fundo laranja quando selecionado */
   &[fill="solid"] {
     --background: #{$primary};
     --color: #{$white};
     --border-color: #{$primary};
   }
 
+  /* Variante para chips de estrelas — ícones mais pequenos */
   &.estrelas {
     --padding-start: 10px;
     --padding-end: 10px;

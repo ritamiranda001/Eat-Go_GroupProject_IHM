@@ -1,8 +1,10 @@
+/* Cor da toolbar — laranja com texto branco */
 ion-toolbar {
   --background: #FF6B2B;
   --color: #ffffff;
 }
 
+/* Estado vazio — exibido quando não há avaliações */
 .vazio {
   display: flex;
   flex-direction: column;
@@ -11,12 +13,14 @@ ion-toolbar {
   padding: 60px 24px;
   text-align: center;
 
+  /* Ícone de estrela grande em laranja */
   .vazio-icon {
     font-size: 64px;
     color: #FF6B2B;
     margin-bottom: 16px;
   }
 
+  /* Mensagem informativa */
   .vazio-texto {
     font-size: 15px;
     color: #888888;
@@ -24,24 +28,28 @@ ion-toolbar {
   }
 }
 
+/* Lista de cartões de avaliações empilhados verticalmente */
 .avaliacoes-lista {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 16px; /* Espaço entre cartões */
 }
 
+/* Cartão individual de avaliação */
 .avaliacao-card {
   background: #ffffff;
   border-radius: 14px;
   padding: 16px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
 
+  /* Cabeçalho do cartão: nome + data à esquerda, botão apagar à direita */
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 10px;
 
+    /* Nome do restaurante avaliado */
     .restaurante-nome {
       font-size: 16px;
       font-weight: 800;
@@ -49,6 +57,7 @@ ion-toolbar {
       margin: 0 0 4px 0;
     }
 
+    /* Data em que a avaliação foi feita */
     .avaliacao-data {
       font-size: 12px;
       color: #888888;
@@ -56,21 +65,25 @@ ion-toolbar {
     }
   }
 
+  /* Linha de estrelas com valor numérico */
   .estrelas-wrapper {
     display: flex;
     align-items: center;
     gap: 4px;
     margin-bottom: 10px;
 
+    /* Estrela individual — cinzenta por defeito */
     .estrela {
       font-size: 20px;
       color: #E0E0E0;
 
+      /* Estrela ativa (selecionada) — cor laranja */
       &.ativa {
         color: #FF6B2B;
       }
     }
 
+    /* Valor numérico da avaliação (ex: 4/5) */
     .estrelas-count {
       font-size: 13px;
       color: #888888;
@@ -78,6 +91,7 @@ ion-toolbar {
     }
   }
 
+  /* Comentário escrito pelo utilizador */
   .comentario {
     font-size: 14px;
     color: #555555;

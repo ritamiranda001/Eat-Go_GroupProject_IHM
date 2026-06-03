@@ -1,14 +1,15 @@
+<!-- Cabeçalho da página principal -->
 <ion-header class="home-header" [translucent]="false">
   <ion-toolbar>
 
-    <!-- Logo sempre visível -->
+    <!-- Logo da app — sempre visível no canto esquerdo -->
     <ion-buttons slot="start">
       <div class="brand-icon">
         <ion-icon name="restaurant"></ion-icon>
       </div>
     </ion-buttons>
 
-    <!-- Input inline (só durante pesquisa) -->
+    <!-- Campo de pesquisa inline — só aparece quando a pesquisa está ativa -->
     <div class="search-input-wrapper" *ngIf="mostrarPesquisa">
       <ion-icon name="search-outline" class="search-input-icon"></ion-icon>
       <input
@@ -20,11 +21,13 @@
       />
     </div>
 
-    <!-- Botões direita -->
+    <!-- Botões do lado direito: pesquisa e menu lateral -->
     <ion-buttons slot="end">
+      <!-- Alterna entre abrir/fechar a barra de pesquisa -->
       <ion-button fill="clear" class="header-btn" (click)="togglePesquisa()">
         <ion-icon slot="icon-only" [name]="mostrarPesquisa ? 'close-outline' : 'search-outline'"></ion-icon>
       </ion-button>
+      <!-- Abre o menu lateral de navegação -->
       <ion-menu-button class="header-btn" autoHide="false"></ion-menu-button>
     </ion-buttons>
 
@@ -33,31 +36,34 @@
 
 <ion-content [fullscreen]="false" class="home-content">
 
-  <!-- Título -->
+  <!-- Título da página e contador de resultados -->
   <div class="page-header">
     <h1 class="page-title">Explorar Restaurantes</h1>
     <p class="page-subtitle">{{ totalFiltrados }} resultados localizados</p>
   </div>
 
-  <!-- Barra de filtros -->
+  <!-- Barra de ações: filtrar e ordenar -->
   <div class="filter-bar">
+    <!-- Botão para mostrar/esconder o painel de filtros -->
     <ion-button fill="outline" class="filter-btn" (click)="toggleFiltros()">
       <ion-icon slot="start" name="options-outline"></ion-icon>
       Filtrar por:
     </ion-button>
+    <!-- Botão para alternar ordenação A-Z / Z-A -->
     <ion-button fill="outline" class="filter-btn" (click)="toggleOrdenacao()">
       <ion-icon name="swap-vertical-outline" slot="start"></ion-icon>
       {{ ordenacaoAtual === 'az' ? 'A-Z' : 'Z-A' }}
     </ion-button>
   </div>
 
-  <!-- Dropdown Filtros -->
+  <!-- Painel de filtros — visível apenas quando toggled -->
   <div class="filtros-dropdown" *ngIf="mostrarFiltros">
 
-    <!-- Filtrar por Avaliação -->
+    <!-- Filtro por avaliação em estrelas (1 a 5) -->
     <div class="filtro-secao">
       <p class="filtro-titulo">Avaliação (Estrelas)</p>
       <div class="filtro-opcoes">
+        <!-- 5 estrelas: mostra apenas restaurantes com avaliação 5.0 -->
         <ion-button
           [fill]="filtroAvaliacao === '5' ? 'solid' : 'outline'"
           class="filtro-chip estrelas"
@@ -69,6 +75,7 @@
           <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>
         </ion-button>
+        <!-- 4 estrelas: mostra restaurantes entre 4.0 e 4.9 -->
         <ion-button
           [fill]="filtroAvaliacao === '4' ? 'solid' : 'outline'"
           class="filtro-chip estrelas"
@@ -79,6 +86,7 @@
           <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>
         </ion-button>
+        <!-- 3 estrelas: mostra restaurantes entre 3.0 e 3.9 -->
         <ion-button
           [fill]="filtroAvaliacao === '3' ? 'solid' : 'outline'"
           class="filtro-chip estrelas"
@@ -88,6 +96,7 @@
           <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>
         </ion-button>
+        <!-- 2 estrelas: mostra restaurantes entre 2.0 e 2.9 -->
         <ion-button
           [fill]="filtroAvaliacao === '2' ? 'solid' : 'outline'"
           class="filtro-chip estrelas"
@@ -96,6 +105,7 @@
           <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>
         </ion-button>
+        <!-- 1 estrela: mostra restaurantes entre 0.0 e 1.9 -->
         <ion-button
           [fill]="filtroAvaliacao === '1' ? 'solid' : 'outline'"
           class="filtro-chip estrelas"
@@ -106,10 +116,11 @@
       </div>
     </div>
 
-    <!-- Filtrar por Categoria -->
+    <!-- Filtro por categoria — botões gerados dinamicamente -->
     <div class="filtro-secao">
       <p class="filtro-titulo">Categoria</p>
       <div class="filtro-opcoes">
+        <!-- Botão ativo (solid) quando corresponde à categoria selecionada -->
         <ion-button
           *ngFor="let cat of categorias"
           [fill]="filtroCategoria === cat.valor ? 'solid' : 'outline'"
@@ -123,22 +134,26 @@
 
   </div>
 
-  <!-- Lista de restaurantes -->
+  <!-- Lista de cartões de restaurantes filtrados e ordenados -->
   <div class="restaurantes-lista">
     <div
       class="restaurante-card"
       *ngFor="let restaurante of resultadosFiltrados"
       (click)="verDetalhe(restaurante)"
     >
+      <!-- Imagem do restaurante com badge de avaliação -->
       <div class="card-imagem-wrapper">
         <img class="card-imagem" [src]="restaurante.imagem" [alt]="restaurante.nome"/>
+        <!-- Badge com a avaliação média do restaurante -->
         <div class="rating-badge">
           <ion-icon name="star"></ion-icon>
           <span>{{ getAvaliacao(restaurante) }}</span>
         </div>
       </div>
 
+      <!-- Corpo do cartão com informações do restaurante -->
       <div class="card-body">
+        <!-- Nome e nível de preço na mesma linha -->
         <div class="card-nome-preco">
           <h2 class="card-nome">{{ restaurante.nome }}</h2>
           <span class="preco-badge">{{ restaurante.nivelPreco }}</span>
@@ -146,12 +161,16 @@
         <p class="card-categoria">{{ restaurante.categoria }}</p>
         <p class="card-descricao">{{ restaurante.descricao }}</p>
 
+        <!-- Rodapé do cartão: total de avaliações e ações -->
         <div class="card-acoes">
+          <!-- Número total de avaliações ou mensagem "Sem avaliações" -->
           <span class="avaliacoes-count">{{ getTotalAvaliacoes(restaurante) > 0 ? getTotalAvaliacoes(restaurante) + ' avaliações' : 'Sem avaliações' }}</span>
           <div class="acoes-icons">
+            <!-- Botão para partilhar o restaurante -->
             <ion-button fill="clear" class="icon-action" (click)="partilhar($event, restaurante)">
               <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
             </ion-button>
+            <!-- Botão para navegar para a página de avaliação -->
             <ion-button class="avaliar-btn" (click)="avaliar($event, restaurante)">
               <ion-icon slot="start" name="create-outline"></ion-icon>
               Avaliar
@@ -162,7 +181,7 @@
     </div>
   </div>
 
-  <!-- Ver mais resultados -->
+  <!-- Botão para carregar mais resultados — só aparece se houver mais para mostrar -->
   <div class="ver-mais-wrapper" *ngIf="limite <= totalFiltrados">
     <ion-button fill="outline" class="ver-mais-btn" expand="block" (click)="verMaisResultados()">
       Ver mais resultados

@@ -1,6 +1,8 @@
+<!-- Cabeçalho da página -->
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
+      <!-- Botão para voltar à página anterior -->
       <ion-button (click)="voltar()">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
@@ -11,10 +13,11 @@
 
 <ion-content class="definicoes-content">
 
-  <!-- Aparência -->
+  <!-- Secção de Aparência — controlo do modo escuro -->
   <div class="secao">
     <h2 class="secao-titulo">Aparência</h2>
 
+    <!-- Linha de opção: Modo Escuro -->
     <div class="opcao-row">
       <div class="opcao-info">
         <ion-icon name="moon-outline"></ion-icon>
@@ -23,6 +26,7 @@
           <span class="opcao-desc">Reduz o brilho e poupa bateria</span>
         </div>
       </div>
+      <!-- Toggle que ativa/desativa o modo escuro -->
       <ion-toggle
         [checked]="modoEscuro"
         (ionChange)="toggleModoEscuro()"
@@ -32,43 +36,51 @@
 
   </div>
 
-  <!-- Sobre a app -->
+  <!-- Secção Sobre a App — informações da aplicação e autores -->
   <div class="secao">
     <h2 class="secao-titulo">Sobre a app</h2>
 
     <div class="sobre-card">
 
+      <!-- Identidade da app — ícone, nome e versão -->
       <div class="app-identidade">
         <ion-icon name="restaurant" class="app-icon"></ion-icon>
         <div>
-          <span class="app-nome">Eat&Go</span>
+          <span class="app-nome">Eat&amp;Go</span>
           <span class="app-versao">Versão 1.0 — Avaliação Oficial</span>
         </div>
       </div>
 
+      <!-- Separador visual -->
       <div class="divider"></div>
 
+      <!-- Lista de autores do projeto -->
       <div class="autores">
         <p class="autores-titulo">
           <ion-icon name="school-outline"></ion-icon>
           Alunos do IPVC — ESTG
         </p>
+        <!-- Autor 1 -->
         <div class="autor-row">
           <ion-icon name="person-outline"></ion-icon>
           <span>Igor Brito - 34577</span>
         </div>
+        <!-- Autor 2 -->
         <div class="autor-row">
           <ion-icon name="person-outline"></ion-icon>
           <span>Keila dos Santos - 34668</span>
         </div>
+        <!-- Autor 3 -->
         <div class="autor-row">
           <ion-icon name="person-outline"></ion-icon>
           <span>Rita Miranda - 34501</span>
         </div>
       </div>
 
+      <!-- Separador visual -->
       <div class="divider"></div>
 
+      <!-- Descrição académica do projeto -->
       <p class="disclaimer">
         Projeto académico desenvolvido no âmbito da unidade curricular de Interação Homem-Máquina.
       </p>

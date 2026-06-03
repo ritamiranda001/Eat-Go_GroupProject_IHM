@@ -1,36 +1,41 @@
+/* Banner de sucesso — exibido após guardar a avaliação com sucesso */
 .sucesso-banner {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: #e8f5e9;  /* Verde claro */
+  color: #2e7d32;        /* Verde escuro */
   padding: 12px 16px;
   border-radius: 8px;
   margin-bottom: 16px;
   font-weight: 600;
-  ion-icon { font-size: 1.4rem; }
+  ion-icon { font-size: 1.4rem; } /* Tamanho do ícone de sucesso */
 }
 
+/* Bloco com informações resumidas do restaurante a ser avaliado */
 .restaurante-info {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 16px 0;
 
+  /* Miniatura da imagem do restaurante */
   .restaurante-thumb {
     width: 70px;
     height: 70px;
     border-radius: 10px;
-    object-fit: cover;
-    flex-shrink: 0;
+    object-fit: cover; /* Mantém proporção sem distorcer */
+    flex-shrink: 0;    /* Impede que a imagem encolha em ecrãs pequenos */
   }
 
+  /* Nome do restaurante */
   .restaurante-nome {
     font-size: 1.1rem;
     font-weight: 700;
     margin: 0 0 4px;
   }
 
+  /* Categoria do restaurante */
   .restaurante-categoria {
     color: var(--ion-color-primary);
     font-weight: 600;
@@ -38,6 +43,7 @@
     font-size: 0.9rem;
   }
 
+  /* Morada do restaurante com ícone de localização */
   .restaurante-morada {
     color: var(--ion-color-medium);
     font-size: 0.85rem;
@@ -48,9 +54,11 @@
   }
 }
 
+/* Secção genérica do formulário (estrelas, comentário, anónimo) */
 .secao {
   padding: 16px 0;
 
+  /* Título de cada secção */
   .secao-titulo {
     font-weight: 600;
     font-size: 0.95rem;
@@ -59,47 +67,56 @@
   }
 }
 
+/* Linha de ícones de estrelas para classificação */
 .estrelas-wrapper {
   display: flex;
   gap: 8px;
 
+  /* Cada ícone de estrela */
   .estrela {
     font-size: 2.2rem;
-    color: var(--ion-color-medium);
+    color: var(--ion-color-medium); /* Cor cinzenta por defeito */
     cursor: pointer;
-    transition: transform 0.1s;
+    transition: transform 0.1s; /* Animação suave ao hover */
 
+    /* Estrela ativa (selecionada) — cor primária */
     &.ativa {
       color: var(--ion-color-primary);
     }
 
+    /* Efeito de zoom ao passar o rato */
     &:hover {
       transform: scale(1.2);
     }
   }
 }
 
+/* Texto indicativo do número de estrelas selecionadas */
 .estrelas-label {
   color: var(--ion-color-medium);
   font-size: 0.9rem;
   margin-top: 6px;
 }
 
+/* Banner de erro — exibido quando há erro ao submeter */
 .erro-banner {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #ffebee;
-  color: #c62828;
+  background: #ffebee;  /* Vermelho claro */
+  color: #c62828;        /* Vermelho escuro */
   padding: 10px 14px;
   border-radius: 8px;
   margin-bottom: 12px;
   font-size: 0.9rem;
 }
 
+/* Botão de submeter avaliação */
 .btn-submeter {
   margin-top: 8px;
 }
+
+/* Override global do título de secção para garantir cor correta em modo escuro */
 .secao-titulo {
   font-weight: 600;
   font-size: 0.95rem;
@@ -107,43 +124,53 @@
   margin-bottom: 10px;
 }
 
+/* Override global das estrelas para garantir cor correta */
 .estrela {
   font-size: 2.2rem;
-  color: #cccccc;
+  color: #cccccc; /* Cinzento por defeito */
   cursor: pointer;
   transition: transform 0.1s;
 
+  /* Estrela ativa — cor primária */
   &.ativa {
     color: var(--ion-color-primary);
   }
 }
 
+/* Override do nome do restaurante para garantir legibilidade */
 .restaurante-nome {
   color: #333333 !important;
 }
 
+/* Override da morada para garantir legibilidade */
 .restaurante-morada {
   color: #666666 !important;
 }
+
+/* Campo de comentário — cores explícitas para compatibilidade com modo escuro */
 .comentario-input {
-  --color: #333333;
-  --placeholder-color: #999999;
-  --background: #ffffff;
+  --color: #333333;              /* Cor do texto inserido */
+  --placeholder-color: #999999;  /* Cor do placeholder */
+  --background: #ffffff;         /* Fundo branco */
 }
 
+/* Item do checkbox anónimo — fundo transparente e cor de texto adaptável */
 .anonimo-item {
   --background: transparent;
   --color: var(--ion-text-color, #1a1a1a);
-  
+
   ion-label {
     color: var(--ion-text-color, #1a1a1a) !important;
   }
 }
 
+/* Checkbox de anónimo — cores da borda adaptáveis ao tema */
 .anonimo-checkbox {
-  --border-color: var(--ion-text-color, #1a1a1a);
-  --border-color-checked: var(--ion-color-primary);
+  --border-color: var(--ion-text-color, #1a1a1a);         /* Borda quando desmarcado */
+  --border-color-checked: var(--ion-color-primary);        /* Borda quando marcado */
 }
+
+/* Descrição informativa da opção anónimo */
 .anonimo-descricao {
   font-size: 13px;
   color: var(--ion-text-color, #1a1a1a) !important;
