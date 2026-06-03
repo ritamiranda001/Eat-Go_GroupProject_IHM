@@ -79,7 +79,7 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
 
     if (sucesso) {
-      await this.mostrarToast('Login efetuado com sucesso!', 'success');
+      await this.mostrarToast('Login efetuado com sucesso!', 'success', 'log-in-outline');
       this.router.navigate(['/home'], { replaceUrl: true });
     } else {
       await this.mostrarToast('Email ou palavra-passe incorretos.', 'danger');
@@ -123,7 +123,7 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
 
     if (sucesso) {
-      await this.mostrarToast('Conta criada com sucesso!', 'success');
+      await this.mostrarToast('Conta criada com sucesso!', 'success', 'person-add-outline');
       this.router.navigate(['/home'], { replaceUrl: true });
     } else {
       await this.mostrarToast('Erro ao criar conta. Tenta novamente.', 'danger');
@@ -136,12 +136,13 @@ export class LoginPage implements OnInit {
   }
 
   /** Mostra uma mensagem toast ao utilizador. */
-  private async mostrarToast(mensagem: string, cor: string) {
+  private async mostrarToast(mensagem: string, cor: string, icone?: string) {
     const toast = await this.toastCtrl.create({
       message: mensagem,
       duration: 2500,
       color: cor,
-      position: 'bottom'
+      position: 'bottom',
+      icon: icone
     });
     await toast.present();
   }

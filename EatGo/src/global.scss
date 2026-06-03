@@ -180,6 +180,10 @@ html.ion-palette-dark {
   .login-card {
     background: #1e1e30 !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    .amarelo {
+      --background: #daab01 !important;
+      --color: #000000;
+}
   }
 
   .login-top-row {
