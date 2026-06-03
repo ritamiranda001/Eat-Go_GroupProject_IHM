@@ -77,7 +77,7 @@ export class AppComponent {
       duration: 2500,
       position: 'bottom',
       icon: 'log-out-outline',
-      color: 'warning'
+      color: 'amarelo'
     });
     await toast.present();
   }
