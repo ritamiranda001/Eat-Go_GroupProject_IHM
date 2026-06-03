@@ -1,3 +1,13 @@
+// ─────────────────────────────────────────────────────────────
+// global.styles.scss
+// Estilos globais da aplicação Eat&Go.
+// Inclui imports do Ionic, Leaflet, modo escuro manual
+// e overrides globais de componentes.
+// ─────────────────────────────────────────────────────────────
+
+// ── Imports Ionic ─────────────────────────────────────────────
+// Folhas de estilo base do Ionic (obrigatórias para funcionamento correto)
+
 @import "@ionic/angular/css/core.css";
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
@@ -8,182 +18,189 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+// Estilos do mapa Leaflet (necessário para renderização correta dos tiles e markers)
 @import 'leaflet/dist/leaflet.css';
 
+// Paletas de modo escuro automático do Ionic (desativadas — modo escuro é controlado manualmente)
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 /* @import "@ionic/angular/css/palettes/dark.system.css"; */
 
+
 // ── Modo Escuro Manual ─────────────────────────────────────────
+// Ativado ao adicionar a classe 'ion-palette-dark' ao <html>
+// via JavaScript (guardado no localStorage em eat_go_modo_escuro)
 
 html.ion-palette-dark {
 
+  // Variáveis globais de cor adaptadas ao tema escuro
   --ion-background-color: #1c1c2e;
-  --ion-text-color: #f0f0f0;
-  --ion-border-color: #333350;
-  --ion-item-background: #252538;
+  --ion-text-color:       #f0f0f0;
+  --ion-border-color:     #333350;
+  --ion-item-background:  #252538;
   --ion-toolbar-background: #1f1f35;
 
   ion-content { --background: #1c1c2e; }
 
+  // Toolbars sem cor explícita (as com color="primary" não são afetadas)
   ion-toolbar:not([color]) {
     --background: #1f1f35 !important;
-    --color: #f0f0f0 !important;
+    --color:      #f0f0f0 !important;
   }
 
   .header-btn { --color: #f0f0f0 !important; }
 
-  ion-item {
-    --background: #252538 !important;
-    --color: #f0f0f0 !important;
-  }
-  ion-list { background: #1c1c2e !important; }
+  // Items e listas
+  ion-item { --background: #252538 !important; --color: #f0f0f0 !important; }
+  ion-list  { background: #1c1c2e !important; }
   ion-label { color: #f0f0f0 !important; }
 
+  // Menu lateral
   ion-menu ion-content { --background: #1f1f35 !important; }
-  ion-menu ion-item {
-    --background: #1f1f35 !important;
-    --color: #f0f0f0 !important;
-  }
+  ion-menu ion-item    { --background: #1f1f35 !important; --color: #f0f0f0 !important; }
 
-  .home-content { --background: #1c1c2e !important; }
-  .page-header { background: #1f1f35 !important; }
-  .page-title { color: #f0f0f0 !important; }
+  // ── Página Home ───────────────────────────────────────────
+  .home-content  { --background: #1c1c2e !important; }
+  .page-header   { background: #1f1f35 !important; }
+  .page-title    { color: #f0f0f0 !important; }
   .page-subtitle { color: #aaaaaa !important; }
 
+  // Barra de filtros e dropdown
   .filter-bar {
     background: #1f1f35 !important;
     border-color: #333350 !important;
   }
   .filter-bar .filter-btn {
     --border-color: #444466 !important;
-    --color: #f0f0f0 !important;
+    --color:        #f0f0f0 !important;
   }
   .filtros-dropdown { background: #252538 !important; }
-  .filtro-titulo { color: #aaa !important; }
+  .filtro-titulo    { color: #aaa !important; }
   .filtro-chip {
-    --background: #333350 !important;
-    --color: #f0f0f0 !important;
+    --background:   #333350 !important;
+    --color:        #f0f0f0 !important;
     --border-color: #444466 !important;
   }
 
   .ver-mais-btn {
     --border-color: #444466 !important;
-    --color: #f0f0f0 !important;
+    --color:        #f0f0f0 !important;
   }
 
+  // Cards de restaurante na listagem
   .restaurante-card {
     background: #2a2a3e !important;
-    .card-nome { color: #f0f0f0 !important; }
-    .card-categoria { color: #f97316 !important; }
-    .card-descricao { color: #cccccc !important; }
+
+    .card-nome        { color: #f0f0f0 !important; }
+    .card-categoria   { color: #f97316 !important; }
+    .card-descricao   { color: #cccccc !important; }
     .card-localizacao { color: #aaaaaa !important; }
     .avaliacoes-count { color: #aaaaaa !important; }
-    .preco-badge {
-      background: #3a3a52 !important;
-      color: #cccccc !important;
-    }
-    .card-acoes { border-color: #3a3a52 !important; }
-    .icon-action { --color: #aaaaaa !important; }
+    .preco-badge      { background: #3a3a52 !important; color: #cccccc !important; }
+    .card-acoes       { border-color: #3a3a52 !important; }
+    .icon-action      { --color: #aaaaaa !important; }
   }
 
-  // Detalhe restaurante
+  // ── Página de Detalhe do Restaurante ─────────────────────
   .info-section { background: #1f1f35 !important; }
-  .nome { color: #f0f0f0 !important; }
-  .preco { color: #cccccc !important; }
-  .categoria { color: #f97316 !important; }
-  .descricao { color: #cccccc !important; }
-  .detalhe-row {
-    color: #aaaaaa !important;
-    ion-icon { color: #f97316 !important; }
-  }
+  .nome         { color: #f0f0f0 !important; }
+  .preco        { color: #cccccc !important; }
+  .categoria    { color: #f97316 !important; }
+  .descricao    { color: #cccccc !important; }
+  .detalhe-row  { color: #aaaaaa !important; ion-icon { color: #f97316 !important; } }
+
   .avaliacoes-titulo { color: #f0f0f0 !important; }
   .avaliacao-card {
     background: #252538 !important;
-    .autor-nome { color: #f0f0f0 !important; }
-    .avaliacao-data { color: #aaa !important; }
+    .autor-nome          { color: #f0f0f0 !important; }
+    .avaliacao-data      { color: #aaa !important; }
     .avaliacao-comentario { color: #ccc !important; }
   }
 
-  // Perfil
+  // ── Página de Perfil ──────────────────────────────────────
   .perfil-content { --background: #1c1c2e !important; }
   .stats-section {
     background: #252538 !important;
-    .stat-valor { color: #f97316 !important; }
-    .stat-label { color: #aaa !important; }
+    .stat-valor   { color: #f97316 !important; }
+    .stat-label   { color: #aaa !important; }
     .stat-divider { background: #333350 !important; }
   }
   .info-section {
     background: #252538 !important;
-    .info-titulo { color: #888 !important; }
-    .info-label { color: #aaa !important; }
-    .info-valor { color: #f0f0f0 !important; }
-    .info-valor.estado-ativo { color: #2ecc71 !important; }
-    ion-icon { color: #f97316 !important; }
+    .info-titulo               { color: #888 !important; }
+    .info-label                { color: #aaa !important; }
+    .info-valor                { color: #f0f0f0 !important; }
+    .info-valor.estado-ativo   { color: #2ecc71 !important; } // Verde mantido para indicar conta ativa
+    ion-icon                   { color: #f97316 !important; }
   }
   .info-row { border-color: #333350 !important; }
 
-  // Definições
+  // ── Página de Definições ──────────────────────────────────
   .definicoes-content { --background: #1c1c2e !important; }
-  .secao-titulo { color: #888 !important; }
+  .secao-titulo       { color: #888 !important; }
   .opcao-row {
     background: #252538 !important;
     .opcao-label { color: #f0f0f0 !important; }
-    .opcao-desc { color: #aaa !important; }
-    ion-icon { color: #f97316 !important; }
+    .opcao-desc  { color: #aaa !important; }
+    ion-icon     { color: #f97316 !important; }
   }
   .sobre-card {
     background: #252538 !important;
-    .app-nome { color: #f0f0f0 !important; }
-    .app-versao { color: #aaa !important; }
+    .app-nome      { color: #f0f0f0 !important; }
+    .app-versao    { color: #aaa !important; }
     .autores-titulo { color: #ccc !important; }
     .autor-row span { color: #ccc !important; }
-    .divider { background: #333350 !important; }
-    .disclaimer { color: #888 !important; }
+    .divider       { background: #333350 !important; }
+    .disclaimer    { color: #888 !important; }
   }
 
-  // Avaliar restaurante
+  // ── Página Avaliar Restaurante ────────────────────────────
   .restaurante-nome { color: #f0f0f0 !important; }
   .comentario-input {
-    --color: #f0f0f0 !important;
+    --color:             #f0f0f0 !important;
     --placeholder-color: #aaaaaa !important;
-    --background: #252538 !important;
-    --border-color: #444466 !important;
+    --background:        #252538 !important;
+    --border-color:      #444466 !important;
   }
   .anonimo-item {
     --background: transparent !important;
-    --color: #f0f0f0 !important;
+    --color:      #f0f0f0 !important;
     ion-label { color: #f0f0f0 !important; }
     ion-checkbox {
-      --checkbox-background: transparent !important;
-      --border-color: #f0f0f0 !important;
-      --border-color-checked: var(--ion-color-primary) !important;
+      --checkbox-background:        transparent !important;
+      --border-color:               #f0f0f0 !important;
+      --border-color-checked:       var(--ion-color-primary) !important;
     }
   }
   .anonimo-descricao { color: #cccccc !important; }
 }
-// ── Toast ─────────────────────────────────────────────────────────────────
+
+
+// ── Toast Global ──────────────────────────────────────────────
+// Aplica fonte e peso consistente a todos os toasts da app
 
 ion-toast {
   --font-family: var(--ion-font-family);
   font-weight: 700;
 }
 
-// ── Login / Registo — Modo Escuro ─────────────────────────────────────────
+
+// ── Login / Registo — Modo Escuro ─────────────────────────────
 
 html.ion-palette-dark {
 
-  .login-content {
-    --background: #12121e !important;
-  }
+  .login-content { --background: #12121e !important; }
 
   .login-card {
     background: #1e1e30 !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+
+    // Toast de confirmação dentro do card de login
     .amarelo {
       --background: #daab01 !important;
-      --color: #000000;
-}
+      --color:      #000000;
+    }
   }
 
   .login-top-row {
@@ -191,17 +208,18 @@ html.ion-palette-dark {
     .fechar-btn { --color: #f0f0f0 !important; }
   }
 
-  .login-title { color: #f0f0f0 !important; }
+  .login-title    { color: #f0f0f0 !important; }
   .login-subtitle { color: #aaaaaa !important; }
+  .form-label     { color: #f0f0f0 !important; }
 
-  .form-label { color: #f0f0f0 !important; }
-
+  // Campo de input com ícones e estado de foco
   .input-wrapper {
-    background: #2a2a40 !important;
+    background:   #2a2a40 !important;
     border-color: #3a3a55 !important;
 
+    // Borda laranja ao focar o input
     &:focus-within {
-      background: #2a2a40 !important;
+      background:   #2a2a40 !important;
       border-color: #f97316 !important;
     }
 
@@ -214,70 +232,59 @@ html.ion-palette-dark {
     }
   }
 
-  .input-placeholder-italic::placeholder {
-    color: #666688 !important;
-  }
-
-  .lembrar-wrapper { color: #f0f0f0 !important; }
-
+  .input-placeholder-italic::placeholder { color: #666688 !important; }
+  .lembrar-wrapper   { color: #f0f0f0 !important; }
   .criar-conta-texto { color: #aaaaaa !important; }
-
-  .pass-dica { color: #888888 !important; }
+  .pass-dica         { color: #888888 !important; }
 }
+
+
 // ── Minhas Avaliações — Modo Escuro ──────────────────────────
 
 html.ion-palette-dark {
 
   .avaliacao-card {
     background: #252538 !important;
-
     .restaurante-nome { color: #f0f0f0 !important; }
-    .avaliacao-data { color: #aaaaaa !important; }
-    .estrelas-count { color: #aaaaaa !important; }
-    .comentario { color: #cccccc !important; }
+    .avaliacao-data   { color: #aaaaaa !important; }
+    .estrelas-count   { color: #aaaaaa !important; }
+    .comentario       { color: #cccccc !important; }
   }
 
-  // ── Alert Apagar — Modo Escuro ──────────────────────────────
-
+  // Alert de confirmação de remoção de avaliação
   .alerta-confirmacao {
     --background: #252538;
-
-    .alert-title { color: #f0f0f0 !important; }
+    .alert-title   { color: #f0f0f0 !important; }
     .alert-message { color: #cccccc !important; }
-
-    .alert-button { color: #aaaaaa !important; }
+    .alert-button  { color: #aaaaaa !important; }
+    // Botão de apagar em vermelho para ação destrutiva
     .alert-button.alerta-apagar { color: var(--ion-color-danger) !important; font-weight: 700; }
   }
 
   // ── Adicionar Restaurante — Modo Escuro ─────────────────────
 
   .campo-label { color: #f0f0f0 !important; }
-
   .campo-input {
-    --color: #f0f0f0 !important;
+    --color:             #f0f0f0 !important;
     --placeholder-color: #666688 !important;
-    --background: #252538 !important;
+    --background:        #252538 !important;
   }
 
+  // Seletor de imagem com borda tracejada
   .imagem-selector {
     border-color: #444466 !important;
-
-    .imagem-placeholder {
-      color: #888899 !important;
-
-      span { color: #888899 !important; }
-    }
+    .imagem-placeholder { color: #888899 !important; span { color: #888899 !important; } }
   }
 
-  // Select nativo do dropdown de categoria
+  // Select nativo do dropdown de categoria (elemento HTML puro)
   select {
-    background: #252538 !important;
-    color: #f0f0f0 !important;
+    background:   #252538 !important;
+    color:        #f0f0f0 !important;
     border-color: #444466 !important;
   }
 
   ion-select {
-    --color: #f0f0f0 !important;
+    --color:             #f0f0f0 !important;
     --placeholder-color: #666688 !important;
   }
 }

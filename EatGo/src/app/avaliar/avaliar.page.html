@@ -1,6 +1,8 @@
+<!-- Cabeçalho da página -->
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
+      <!-- Botão para voltar à página anterior -->
       <ion-button (click)="voltar()">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
@@ -11,15 +13,16 @@
 
 <ion-content class="ion-padding">
 
-  <!-- Sucesso -->
+  <!-- Banner de sucesso — exibido após guardar a avaliação -->
   <div class="sucesso-banner" *ngIf="sucesso">
     <ion-icon name="checkmark-circle-outline"></ion-icon>
     <span>Avaliação guardada com sucesso! A redirecionar...</span>
   </div>
 
+  <!-- Conteúdo principal — oculto após submissão bem sucedida -->
   <div *ngIf="!sucesso">
 
-    <!-- Info do restaurante -->
+    <!-- Informações do restaurante a ser avaliado -->
     <div class="restaurante-info" *ngIf="restaurante">
       <img [src]="restaurante.imagem" [alt]="restaurante.nome" class="restaurante-thumb"/>
       <div>
@@ -32,12 +35,14 @@
       </div>
     </div>
 
+    <!-- Separador visual -->
     <div style="height: 1px; background: #eeeeee; margin: 8px 0;"></div>
 
-    <!-- Estrelas -->
+    <!-- Secção de classificação por estrelas (1 a 5) -->
     <div class="secao">
       <p class="secao-titulo">A tua classificação *</p>
       <div class="estrelas-wrapper">
+        <!-- Cada estrela fica ativa (preenchida) se o seu índice for <= às estrelas selecionadas -->
         <ion-icon
           *ngFor="let e of estrelas"
           [name]="e <= estrelasAtivas ? 'star' : 'star-outline'"
@@ -46,12 +51,13 @@
           (click)="selecionarEstrelas(e)"
         ></ion-icon>
       </div>
+      <!-- Texto indicativo do número de estrelas selecionadas -->
       <p class="estrelas-label" *ngIf="estrelasAtivas > 0">
         {{ estrelasAtivas }} {{ estrelasAtivas === 1 ? 'estrela' : 'estrelas' }}
       </p>
     </div>
 
-    <!-- Comentário -->
+    <!-- Secção do comentário da avaliação -->
     <div class="secao">
       <p class="secao-titulo">Comentário *</p>
       <ion-textarea
@@ -63,7 +69,7 @@
       ></ion-textarea>
     </div>
 
-    <!-- Avaliação Anónima -->
+    <!-- Opção de publicar avaliação como anónimo -->
     <div class="secao anonimo-wrapper">
       <ion-item lines="none" class="anonimo-item">
         <ion-checkbox
@@ -74,18 +80,19 @@
         ></ion-checkbox>
         <ion-label>Publicar como anónimo</ion-label>
       </ion-item>
+      <!-- Mensagem informativa — só aparece quando a opção anónimo está ativa -->
       <p class="anonimo-descricao" *ngIf="anonimo">
         A tua avaliação será publicada como "Utilizador Anónimo".
       </p>
     </div>
 
-    <!-- Erro -->
+    <!-- Banner de erro — exibido se houver erro ao submeter -->
     <div class="erro-banner" *ngIf="erro">
       <ion-icon name="alert-circle-outline"></ion-icon>
       <span>{{ erro }}</span>
     </div>
 
-    <!-- Botão submeter -->
+    <!-- Botão para submeter a avaliação -->
     <ion-button expand="block" color="primary" class="btn-submeter" (click)="submeter()">
       <ion-icon slot="start" name="star-outline"></ion-icon>
       Guardar Avaliação

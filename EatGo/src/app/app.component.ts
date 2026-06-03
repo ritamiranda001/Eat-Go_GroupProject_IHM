@@ -13,41 +13,40 @@ import { ScreenOrientation } from '@capacitor/screen-orientation';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  standalone: false,
+  standalone: false, // Obrigatório para apps baseadas em NgModules
 })
 export class AppComponent {
 
-  mostrarSplash = true;
-  ocultarSplash = false;
-  splashFundo: string;
+  mostrarSplash = true;   // Controla se o splash está no DOM
+  ocultarSplash = false;  // Controla o fade out do splash (classe CSS)
+  splashFundo: string;    // Cor de fundo do splash (adapta ao modo escuro)
 
   /** Páginas disponíveis no menu lateral */
   public menuPages = [
-    { title: 'Minhas Avaliações', url: '/minhas-avaliacoes', icon: 'star-outline', requerLogin: true },
-    { title: 'Adicionar Restaurante', url: '/adicionar-restaurante', icon: 'add-circle-outline', requerLogin: true },
-    { title: 'Definições', url: '/definicoes', icon: 'settings-outline', requerLogin: false },
+    { title: 'Minhas Avaliações',      url: '/minhas-avaliacoes',      icon: 'star-outline',        requerLogin: true  },
+    { title: 'Adicionar Restaurante',  url: '/adicionar-restaurante',  icon: 'add-circle-outline',  requerLogin: true  },
+    { title: 'Definições',             url: '/definicoes',             icon: 'settings-outline',    requerLogin: false },
   ];
 
   constructor(
-  private menuCtrl: MenuController,
-  public authService: AuthService,
-  private router: Router,
-  private toastCtrl: ToastController
-) {
-  // Restaura modo escuro se estava ativo
-  const escuro = localStorage.getItem('eat_go_modo_escuro') === 'true';
-  document.documentElement.classList.toggle('ion-palette-dark', escuro);
-  this.splashFundo = escuro ? '#1c1c2e' : '#ffffff';
+    private menuCtrl: MenuController,
+    public authService: AuthService,  // public: usado diretamente no template para verificar login
+    private router: Router,
+    private toastCtrl: ToastController
+  ) {
+    // Restaura modo escuro se estava ativo na sessão anterior
+    const escuro = localStorage.getItem('eat_go_modo_escuro') === 'true';
+    document.documentElement.classList.toggle('ion-palette-dark', escuro);
+    this.splashFundo = escuro ? '#1c1c2e' : '#ffffff';
 
-  // Bloqueia a orientação da app em portrait (vertical)
-  // Requisito 12: Capacitor para controlo do dispositivo
-  this.bloquearOrientacao();
+    // Bloqueia a orientação da app em portrait (vertical)
+    // Requisito 12: Capacitor para controlo do dispositivo
+    this.bloquearOrientacao();
 
-  // Splash screen: inicia fade out após 1.8s, remove do DOM após a animação
-  setTimeout(() => { this.ocultarSplash = true; }, 1800);
-  setTimeout(() => { this.mostrarSplash = false; }, 2400);
-}
-    
+    // Splash screen: inicia fade out após 1.8s, remove do DOM após a animação (2.4s)
+    setTimeout(() => { this.ocultarSplash = true;  }, 1800);
+    setTimeout(() => { this.mostrarSplash = false; }, 2400);
+  }
 
   /**
    * Bloqueia a orientação da app em portrait (vertical).
@@ -57,7 +56,7 @@ export class AppComponent {
     try {
       await ScreenOrientation.lock({ orientation: 'portrait' });
     } catch (e) {
-      // No browser o lock não funciona, apenas em dispositivo físico
+      // O lock de orientação só funciona em dispositivo físico, não no browser
       console.log('Orientação apenas bloqueada em dispositivo físico.');
     }
   }
@@ -67,7 +66,13 @@ export class AppComponent {
     this.menuCtrl.close();
   }
 
-  /** Termina a sessão do utilizador e redireciona para home */
+  /**
+   * Termina a sessão do utilizador:
+   * - Chama o serviço de autenticação para fazer logout
+   * - Fecha o menu lateral
+   * - Redireciona para a página inicial
+   * - Mostra um toast de confirmação
+   */
   async logout() {
     await this.authService.logout();
     this.menuCtrl.close();

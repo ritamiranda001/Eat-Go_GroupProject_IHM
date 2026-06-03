@@ -1,23 +1,18 @@
-/**
- * login.module.ts
- * Módulo Angular da página de Login/Registo.
- * Requisito 7: Estruturar e organizar devidamente os vários módulos
- */
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Necessário para [(ngModel)]
-import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common'; // Diretivas comuns do Angular (ngIf, ngFor, etc.)
+import { FormsModule } from '@angular/forms';   // Suporte a formulários e ngModel
+import { IonicModule } from '@ionic/angular';   // Componentes Ionic (ion-button, ion-input, etc.)
 
-import { LoginPage } from './login.page';
-import { LoginPageRoutingModule } from './login-routing.module';
+import { LoginPage } from './login.page';                     // Componente principal da página
+import { LoginPageRoutingModule } from './login-routing.module'; // Rotas do módulo
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,    // Permite uso de [(ngModel)] nos inputs
-    IonicModule,
-    LoginPageRoutingModule
+    CommonModule,          // Funcionalidades base do Angular
+    FormsModule,           // Necessário para [(ngModel)] nos inputs do formulário
+    IonicModule,           // Componentes e estilos Ionic
+    LoginPageRoutingModule // Rotas desta página
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage] // Declara o componente neste módulo
 })
 export class LoginPageModule {}

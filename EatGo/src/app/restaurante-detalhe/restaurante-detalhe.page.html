@@ -1,26 +1,39 @@
+<!-- ─────────────────────────────────────────────
+     restaurante-detalhe.page.html
+     Template da página de detalhe de um restaurante.
+     Mostra imagem, informações, mapa de localização,
+     botão de avaliação e lista de avaliações existentes.
+     ───────────────────────────────────────────── -->
+
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
+      <!-- Botão de navegação para a página anterior -->
       <ion-button (click)="voltar()">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <!-- Título dinâmico com o nome do restaurante -->
     <ion-title>{{ restaurante?.nome }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<!-- Conteúdo principal: só renderiza se o restaurante estiver carregado -->
 <ion-content *ngIf="restaurante">
 
-  <!-- Imagem -->
+  <!-- Imagem ─────────────────────────────────────
+       Imagem de capa com overlay de rating no canto -->
   <div class="imagem-wrapper">
     <img [src]="restaurante.imagem" [alt]="restaurante.nome" class="restaurante-imagem"/>
+    <!-- Badge com a avaliação média do restaurante -->
     <div class="rating-overlay">
       <ion-icon name="star"></ion-icon>
       <span>{{ restaurante.avaliacao }}</span>
     </div>
   </div>
 
-  <!-- Info principal -->
+  <!-- Informação principal ────────────────────────
+       Nome, nível de preço, categoria, descrição e localização -->
   <div class="info-section">
     <div class="nome-preco">
       <h1 class="nome">{{ restaurante.nome }}</h1>
@@ -29,18 +42,21 @@
     <p class="categoria">{{ restaurante.categoria }}</p>
     <p class="descricao">{{ restaurante.descricao }}</p>
 
+    <!-- Linha de localização com ícone -->
     <div class="detalhe-row">
-  <ion-icon name="location-outline"></ion-icon>
-  <span>{{ restaurante.localizacao }}</span>
-</div>
+      <ion-icon name="location-outline"></ion-icon>
+      <span>{{ restaurante.localizacao }}</span>
+    </div>
   </div>
 
-  <!-- Mapa de localização -->
+  <!-- Mapa de localização (com coordenadas) ───────
+       Renderiza o mapa Leaflet se o restaurante tiver coordenadas -->
   <div class="mapa-section" *ngIf="restaurante.coordenadas">
     <h2 class="section-titulo">
       <ion-icon name="location-outline"></ion-icon>
       Localização
     </h2>
+    <!-- Contentor onde o mapa Leaflet é inicializado pelo componente -->
     <div id="mapa-restaurante" class="mapa-container"></div>
     <p class="mapa-morada">
       <ion-icon name="navigate-outline"></ion-icon>
@@ -48,7 +64,8 @@
     </p>
   </div>
 
-  <!-- Sem coordenadas -->
+  <!-- Mapa indisponível (sem coordenadas) ─────────
+       Fallback exibido quando o restaurante não tem coordenadas no JSON -->
   <div class="mapa-section" *ngIf="!restaurante.coordenadas">
     <h2 class="section-titulo">
       <ion-icon name="location-outline"></ion-icon>
@@ -61,7 +78,8 @@
     </div>
   </div>
 
-  <!-- Botão Avaliar -->
+  <!-- Botão Avaliar ───────────────────────────────
+       Navega para o formulário de avaliação deste restaurante -->
   <div class="avaliar-wrapper">
     <ion-button expand="block" color="primary" (click)="avaliar()">
       <ion-icon slot="start" name="create-outline"></ion-icon>
@@ -69,26 +87,31 @@
     </ion-button>
   </div>
 
-  <!-- Secção de Avaliações -->
+  <!-- Secção de Avaliações ────────────────────────
+       Lista todas as avaliações guardadas para este restaurante -->
   <div class="avaliacoes-section">
     <h2 class="avaliacoes-titulo">Avaliações</h2>
 
-    <!-- Sem avaliações -->
+    <!-- Estado vazio: nenhuma avaliação ainda -->
     <div class="sem-avaliacoes" *ngIf="avaliacoes.length === 0">
       <ion-icon name="chatbubble-outline"></ion-icon>
       <p>Ainda não há avaliações. Sê o primeiro!</p>
     </div>
 
-    <!-- Lista de avaliações -->
+    <!-- Card de cada avaliação -->
     <div class="avaliacao-card" *ngFor="let av of avaliacoes">
+
+      <!-- Cabeçalho: autor e data -->
       <div class="avaliacao-header">
         <div class="avaliacao-autor">
           <ion-icon name="person-circle-outline" class="autor-icon"></ion-icon>
+          <!-- Fallback para 'Utilizador Anónimo' se o nome não estiver disponível -->
           <span class="autor-nome">{{ av.utilizador || 'Utilizador Anónimo' }}</span>
         </div>
         <span class="avaliacao-data">{{ av.data }}</span>
       </div>
 
+      <!-- Estrelas: preenchidas até ao valor da avaliação, vazias acima -->
       <div class="estrelas-wrapper">
         <ion-icon
           *ngFor="let e of [1,2,3,4,5]"
@@ -99,12 +122,15 @@
         <span class="estrelas-count">{{ av.estrelas }}/5</span>
       </div>
 
+      <!-- Comentário escrito pelo utilizador -->
       <p class="avaliacao-comentario">{{ av.comentario }}</p>
     </div>
   </div>
 
 </ion-content>
 
+<!-- Estado de carregamento ──────────────────────────
+     Mostrado enquanto os dados do restaurante ainda não chegaram -->
 <ion-content *ngIf="!restaurante">
   <div class="loading-wrapper">
     <ion-spinner name="crescent"></ion-spinner>

@@ -1,28 +1,24 @@
-<!-- 
-  login.page.html
-  Página de Login e Registo da app Eat&Go.
-  Requisito 6: Utilizar ícones da framework (Ionicons)
-  Requisito 11: Estruturar/Disponibilizar conteúdos através dos Ionic Components
--->
-
+<!-- Página de Login e Registo da app Eat&Go -->
 <ion-content class="login-content">
   <div class="login-container">
 
-    <!-- Card principal do login -->
+    <!-- Card principal que contém o formulário de login ou registo -->
     <div class="login-card">
 
-      <!-- Botão voltar + fechar -->
+      <!-- Linha superior com botão voltar e botão fechar -->
       <div class="login-top-row">
+        <!-- Botão para voltar à página anterior -->
         <ion-button fill="clear" class="voltar-btn" (click)="voltar()">
           <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
           Voltar
         </ion-button>
+        <!-- Botão fechar (ícone X) -->
         <ion-button fill="clear" class="fechar-btn" (click)="voltar()">
           <ion-icon name="close-outline" slot="icon-only"></ion-icon>
         </ion-button>
       </div>
 
-      <!-- Título -->
+      <!-- Título e subtítulo dinâmicos consoante o modo (login ou registo) -->
       <div class="login-header">
         <h1 class="login-title">
           {{ modo === 'login' ? 'Entrar na sua conta' : 'Criar conta' }}
@@ -32,10 +28,10 @@
         </p>
       </div>
 
-      <!-- Formulário de Login -->
+      <!-- Formulário de Login — visível apenas quando modo === 'login' -->
       <div class="login-form" *ngIf="modo === 'login'">
 
-        <!-- Campo Email -->
+        <!-- Campo de email -->
         <div class="form-group">
           <label class="form-label">Email</label>
           <div class="input-wrapper">
@@ -49,7 +45,7 @@
           </div>
         </div>
 
-        <!-- Campo Palavra-passe -->
+        <!-- Campo de palavra-passe com toggle para mostrar/ocultar -->
         <div class="form-group">
           <label class="form-label">Palavra-passe</label>
           <div class="input-wrapper">
@@ -60,6 +56,7 @@
               placeholder="••••••••"
               class="form-input"
             />
+            <!-- Ícone para alternar visibilidade da palavra-passe -->
             <ion-icon
               [name]="mostrarPalavraPasse ? 'eye-off-outline' : 'eye-outline'"
               class="input-icon-right"
@@ -68,16 +65,18 @@
           </div>
         </div>
 
-        <!-- Lembrar-me + Esqueceu a palavra-passe -->
+        <!-- Opções adicionais: lembrar sessão e recuperar palavra-passe -->
         <div class="form-options">
+          <!-- Checkbox para manter sessão iniciada -->
           <div class="lembrar-wrapper">
             <input type="checkbox" [(ngModel)]="lembrarMe" id="lembrarMe"/>
             <label for="lembrarMe">Lembrar-me</label>
           </div>
+          <!-- Link para recuperação de palavra-passe -->
           <span class="esqueceu-link">Esqueceu a palavra-passe?</span>
         </div>
 
-        <!-- Botão Entrar -->
+        <!-- Botão para submeter o login -->
         <ion-button
           expand="block"
           class="entrar-btn"
@@ -86,7 +85,7 @@
           Entrar
         </ion-button>
 
-        <!-- Link para criar conta -->
+        <!-- Link para alternar para o modo de registo -->
         <p class="criar-conta-texto">
           Ainda não tem conta?
           <span class="criar-conta-link" (click)="toggleModo()">Criar conta</span>
@@ -94,10 +93,10 @@
 
       </div>
 
-      <!-- Formulário de Registo -->
+      <!-- Formulário de Registo — visível apenas quando modo === 'registo' -->
       <div class="login-form" *ngIf="modo === 'registo'">
 
-        <!-- Campo Nome -->
+        <!-- Campo do nome do utilizador -->
         <div class="form-group">
           <label class="form-label">Nome</label>
           <div class="input-wrapper">
@@ -111,7 +110,7 @@
           </div>
         </div>
 
-        <!-- Campo Email -->
+        <!-- Campo de email -->
         <div class="form-group">
           <label class="form-label">Email</label>
           <div class="input-wrapper">
@@ -125,7 +124,7 @@
           </div>
         </div>
 
-        <!-- Campo Palavra-passe -->
+        <!-- Campo de palavra-passe com toggle e dica de requisitos -->
         <div class="form-group">
           <label class="form-label">Palavra-passe</label>
           <div class="input-wrapper">
@@ -136,16 +135,18 @@
               placeholder="Exemplo1"
               class="form-input input-placeholder-italic"
             />
+            <!-- Ícone para alternar visibilidade da palavra-passe -->
             <ion-icon
               [name]="mostrarPalavraPasse ? 'eye-off-outline' : 'eye-outline'"
               class="input-icon-right"
               (click)="togglePalavraPasse()">
             </ion-icon>
           </div>
+          <!-- Dica com os requisitos da palavra-passe -->
           <p class="pass-dica">Caracteres: mín. 4 | máx. 8, uma maiúscula e um número.</p>
         </div>
 
-        <!-- Campo Confirmar Palavra-passe -->
+        <!-- Campo de confirmação da palavra-passe -->
         <div class="form-group">
           <label class="form-label">Confirmar Palavra-passe</label>
           <div class="input-wrapper">
@@ -159,7 +160,7 @@
           </div>
         </div>
 
-        <!-- Botão Criar Conta -->
+        <!-- Botão para submeter o registo -->
         <ion-button
           expand="block"
           class="entrar-btn"
@@ -168,7 +169,7 @@
           Criar Conta
         </ion-button>
 
-        <!-- Link para login -->
+        <!-- Link para alternar para o modo de login -->
         <p class="criar-conta-texto">
           Já tem conta?
           <span class="criar-conta-link" (click)="toggleModo()">Entrar</span>

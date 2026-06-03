@@ -1,15 +1,11 @@
-// login.page.scss
-// Estilos da página de Login/Registo da app Eat&Go
-// Requisito 13: Manipular as CSS Custom Properties dos components
-// Requisito 16: Utilizar cores disponíveis globalmente
-
 // ── Conteúdo ──────────────────────────────────────────────────────────────────
 
+/* Fundo cinzento claro para a página de login */
 .login-content {
   --background: #f0f0f0;
 }
 
-// Centraliza o card na página
+/* Centraliza o card verticalmente e horizontalmente na página */
 .login-container {
   display: flex;
   align-items: center;
@@ -20,23 +16,26 @@
 
 // ── Card principal ────────────────────────────────────────────────────────────
 
+/* Card branco com sombra que contém o formulário */
 .login-card {
   background: #ffffff;
   border-radius: 20px;
   padding: 24px 20px;
   width: 100%;
-  max-width: 420px;
+  max-width: 420px; /* Largura máxima para ecrãs grandes */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 // ── Topo: voltar + fechar ─────────────────────────────────────────────────────
 
+/* Linha superior com botão voltar à esquerda e fechar à direita */
 .login-top-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 
+  /* Botão voltar — sem fundo, texto + ícone */
   .voltar-btn {
     --color: var(--eat-go-escuro);
     --padding-start: 0;
@@ -44,6 +43,7 @@
     font-weight: 500;
   }
 
+  /* Botão fechar (X) — apenas ícone */
   .fechar-btn {
     --color: var(--eat-go-escuro);
     font-size: 22px;
@@ -52,10 +52,12 @@
 
 // ── Cabeçalho ─────────────────────────────────────────────────────────────────
 
+/* Título e subtítulo centrados no topo do formulário */
 .login-header {
   text-align: center;
   margin-bottom: 28px;
 
+  /* Título principal — muda consoante o modo (login/registo) */
   .login-title {
     font-size: 22px;
     font-weight: 800;
@@ -64,6 +66,7 @@
     letter-spacing: -0.4px;
   }
 
+  /* Subtítulo descritivo */
   .login-subtitle {
     font-size: 13px;
     color: var(--eat-go-texto-secundario);
@@ -73,18 +76,20 @@
 
 // ── Formulário ────────────────────────────────────────────────────────────────
 
+/* Contentor do formulário — empilha os campos verticalmente */
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 16px; /* Espaço entre campos */
 }
 
-// Grupo de campo: label + input
+/* Grupo de campo: label + input wrapper */
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
 
+  /* Label do campo */
   .form-label {
     font-size: 13px;
     font-weight: 600;
@@ -92,7 +97,7 @@
   }
 }
 
-// Wrapper do input com ícones
+/* Wrapper do input com ícone à esquerda e opcional à direita */
 .input-wrapper {
   display: flex;
   align-items: center;
@@ -102,12 +107,13 @@
   border: 1.5px solid transparent;
   transition: border-color 0.2s;
 
-  // Borda laranja quando em foco
+  /* Borda laranja e fundo branco quando o input está em foco */
   &:focus-within {
     border-color: var(--eat-go-laranja);
     background: #fff;
   }
 
+  /* Ícone à esquerda do input (ex: email, cadeado) */
   .input-icon {
     font-size: 18px;
     color: var(--eat-go-texto-secundario);
@@ -115,6 +121,7 @@
     margin-right: 10px;
   }
 
+  /* Ícone à direita do input (ex: mostrar/ocultar palavra-passe) */
   .input-icon-right {
     font-size: 18px;
     color: var(--eat-go-texto-secundario);
@@ -123,7 +130,7 @@
     cursor: pointer;
   }
 
-  // Input de texto
+  /* Input nativo sem estilos padrão do browser */
   .form-input {
     flex: 1;
     border: none;
@@ -142,12 +149,14 @@
 
 // ── Opções: lembrar-me + esqueceu ────────────────────────────────────────────
 
+/* Linha com checkbox "lembrar-me" e link "esqueceu a palavra-passe" */
 .form-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: -4px;
 
+  /* Checkbox com label "Lembrar-me" */
   .lembrar-wrapper {
     display: flex;
     align-items: center;
@@ -158,11 +167,12 @@
     input[type="checkbox"] {
       width: 16px;
       height: 16px;
-      accent-color: var(--eat-go-laranja);
+      accent-color: var(--eat-go-laranja); /* Cor do checkbox quando marcado */
       cursor: pointer;
     }
   }
 
+  /* Link para recuperação de palavra-passe */
   .esqueceu-link {
     font-size: 13px;
     color: var(--eat-go-laranja);
@@ -177,25 +187,28 @@
 
 // ── Botão Entrar/Criar Conta ──────────────────────────────────────────────────
 
+/* Botão principal de submissão — laranja com sombra colorida */
 .entrar-btn {
   --background: var(--eat-go-laranja);
   --color: #ffffff;
   --border-radius: 50px;
-  --box-shadow: 0 4px 16px rgba(249, 115, 22, 0.4);
+  --box-shadow: 0 4px 16px rgba(249, 115, 22, 0.4); /* Sombra laranja */
   font-weight: 700;
   font-size: 15px;
   height: 52px;
   margin-top: 8px;
 }
 
-// ── Link criar conta ──────────────────────────────────────────────────────────
+// ── Link criar conta / entrar ─────────────────────────────────────────────────
 
+/* Texto com link para alternar entre login e registo */
 .criar-conta-texto {
   text-align: center;
   font-size: 13px;
   color: var(--eat-go-texto-secundario);
   margin: 8px 0 0;
 
+  /* Link clicável para mudar de modo */
   .criar-conta-link {
     color: var(--eat-go-laranja);
     font-weight: 700;
@@ -209,6 +222,7 @@
 
 // ── Regras da palavra-passe ────────────────────────────────────────────────────
 
+/* Lista de regras de validação da palavra-passe */
 .pass-regras {
   margin-top: 8px;
   display: flex;
@@ -216,6 +230,7 @@
   gap: 4px;
 }
 
+/* Cada regra individual com ícone de estado */
 .pass-regra {
   display: flex;
   align-items: center;
@@ -226,11 +241,12 @@
 
   ion-icon {
     font-size: 14px;
-    color: #aaa;
+    color: #aaa;       /* Cinzento por defeito (regra não cumprida) */
     transition: color 0.2s ease;
     flex-shrink: 0;
   }
 
+  /* Regra cumprida — texto e ícone ficam verdes */
   &.valida {
     color: #2ecc71;
 
@@ -240,6 +256,7 @@
   }
 }
 
+/* Exemplo de palavra-passe válida — destaque em laranja */
 .pass-exemplo {
   display: flex;
   align-items: center;
@@ -248,9 +265,9 @@
   color: var(--eat-go-texto-secundario);
   margin-top: 4px;
   padding: 6px 10px;
-  background: rgba(249, 115, 22, 0.08);
+  background: rgba(249, 115, 22, 0.08); /* Fundo laranja muito suave */
   border-radius: 8px;
-  border-left: 3px solid var(--eat-go-laranja);
+  border-left: 3px solid var(--eat-go-laranja); /* Barra laranja à esquerda */
 
   ion-icon {
     color: var(--eat-go-laranja);
@@ -258,6 +275,7 @@
     flex-shrink: 0;
   }
 
+  /* Texto do exemplo em monospace para parecer código */
   strong {
     color: var(--eat-go-laranja);
     font-family: monospace;
@@ -265,14 +283,15 @@
   }
 }
 
-
 // ── Placeholder itálico e dica de password ─────────────────────────────────
 
+/* Placeholder em itálico para o campo de palavra-passe no registo */
 .input-placeholder-italic::placeholder {
   font-style: italic;
   color: #b0b0b0;
 }
 
+/* Dica com os requisitos da palavra-passe abaixo do campo */
 .pass-dica {
   font-size: 11px;
   color: var(--eat-go-texto-secundario);

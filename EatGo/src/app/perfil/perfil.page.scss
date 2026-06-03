@@ -1,21 +1,22 @@
-// ── Header ───────────────────────────────────────────────────
+// ── Fundo geral da página ─────────────────────────────────────
 
 .perfil-content {
-  --background: #f5f5f5;
+  --background: #f5f5f5; // Fundo cinzento claro para contrastar com os cards brancos
 }
 
-// ── avatar/icon e nome ────────────────────────────────────────────
+// ── Cabeçalho com avatar e nome ───────────────────────────────
+// Fundo laranja com corte elíptico na base para efeito visual
 
 .perfil-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 24px 28px;
+  padding: 40px 24px 48px;
   background: var(--ion-color-primary);
-  clip-path: ellipse(100% 85% at 50% 0%);
-  padding-bottom: 48px;
+  clip-path: ellipse(100% 85% at 50% 0%); // Corte curvo na parte inferior
 }
 
+// Círculo branco que envolve as iniciais do utilizador
 .avatar {
   width: 88px;
   height: 88px;
@@ -28,10 +29,11 @@
   box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
 
+// Iniciais do utilizador centradas no avatar
 .avatar-iniciais {
   font-size: 30px;
   font-weight: 800;
-  color: var(--ion-color-primary);
+  color: var(--ion-color-primary); // Laranja sobre fundo branco
   letter-spacing: 1px;
 }
 
@@ -45,11 +47,12 @@
 
 .perfil-email {
   font-size: 13px;
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.75); // Branco semi-transparente para hierarquia visual
   margin: 0;
 }
 
 // ── Estatísticas ─────────────────────────────────────────────
+// Card branco com total de avaliações e média de estrelas
 
 .stats-section {
   display: flex;
@@ -62,6 +65,7 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
 }
 
+// Cada coluna de estatística (valor + label)
 .stat-card {
   flex: 1;
   display: flex;
@@ -70,6 +74,7 @@
   gap: 4px;
 }
 
+// Valor numérico destacado em laranja
 .stat-valor {
   display: flex;
   align-items: center;
@@ -79,11 +84,13 @@
   color: var(--ion-color-primary);
 }
 
+// Ícone de estrela amarelo ao lado da média
 .stat-star {
   font-size: 18px;
   color: #f4b942;
 }
 
+// Label descritiva abaixo do valor
 .stat-label {
   font-size: 12px;
   color: #888;
@@ -91,6 +98,7 @@
   letter-spacing: 0.5px;
 }
 
+// Separador vertical entre as duas estatísticas
 .stat-divider {
   width: 1px;
   height: 40px;
@@ -98,7 +106,8 @@
   margin: 0 16px;
 }
 
-// ── Informações ──────────────────────────────────────────────
+// ── Informações da conta ──────────────────────────────────────
+// Card branco com linhas de informação (ícone + label + valor)
 
 .info-section {
   background: white;
@@ -108,6 +117,7 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
 }
 
+// Título de secção em maiúsculas e tom cinzento discreto
 .info-titulo {
   font-size: 14px;
   font-weight: 700;
@@ -117,6 +127,7 @@
   margin: 0 0 16px;
 }
 
+// Linha individual de informação com ícone à esquerda
 .info-row {
   display: flex;
   align-items: center;
@@ -125,23 +136,25 @@
   border-bottom: 1px solid #f0f0f0;
 
   &:last-child {
-    border-bottom: none;
+    border-bottom: none; // Remove separador na última linha
     padding-bottom: 0;
   }
 
   ion-icon {
     font-size: 20px;
     color: var(--ion-color-primary);
-    flex-shrink: 0;
+    flex-shrink: 0; // Impede que o ícone encolha em ecrãs pequenos
   }
 }
 
+// Coluna com label e valor de cada campo
 .info-texto {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
+// Label descritiva discreta acima do valor
 .info-label {
   font-size: 11px;
   color: #aaa;
@@ -149,6 +162,7 @@
   letter-spacing: 0.5px;
 }
 
+// Valor principal de cada campo
 .info-valor {
   font-size: 15px;
   font-weight: 600;
@@ -156,11 +170,13 @@
   text-transform: capitalize;
 }
 
+// Estado da conta ativa em verde
 .estado-ativo {
   color: #2ecc71;
 }
 
-// ── Botão Logout ─────────────────────────────────────────────
+// ── Botão de Logout ───────────────────────────────────────────
+// Botão preto de largura total com cantos arredondados
 
 .logout-wrapper {
   padding: 24px 16px 40px;

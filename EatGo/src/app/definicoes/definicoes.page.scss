@@ -1,15 +1,18 @@
 // ── Geral ─────────────────────────────────────────────────────
 
+/* Fundo cinzento claro para a página de definições */
 .definicoes-content {
   --background: #f5f5f5;
 }
 
 // ── Secções ───────────────────────────────────────────────────
 
+/* Espaçamento exterior de cada secção */
 .secao {
   margin: 20px 16px 0;
 }
 
+/* Título de cada secção — estilo discreto em maiúsculas */
 .secao-titulo {
   font-size: 12px;
   font-weight: 700;
@@ -21,6 +24,7 @@
 
 // ── Opção Toggle ──────────────────────────────────────────────
 
+/* Linha de opção com toggle — ícone + texto à esquerda, toggle à direita */
 .opcao-row {
   display: flex;
   align-items: center;
@@ -31,6 +35,7 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
 }
 
+/* Lado esquerdo da opção — ícone + texto */
 .opcao-info {
   display: flex;
   align-items: center;
@@ -39,22 +44,25 @@
   ion-icon {
     font-size: 22px;
     color: var(--ion-color-primary);
-    flex-shrink: 0;
+    flex-shrink: 0; /* Impede que o ícone encolha */
   }
 }
 
+/* Contentor do label e descrição da opção */
 .opcao-texto {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
+/* Nome da opção */
 .opcao-label {
   font-size: 15px;
   font-weight: 600;
   color: #1a1a1a;
 }
 
+/* Descrição curta da opção */
 .opcao-desc {
   font-size: 12px;
   color: #aaa;
@@ -62,14 +70,16 @@
 
 // ── Sobre a App ───────────────────────────────────────────────
 
+/* Cartão com as informações da app e autores */
 .sobre-card {
   background: white;
   border-radius: 16px;
   padding: 20px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-  margin-bottom: 32px;
+  margin-bottom: 32px; /* Espaço no fundo para não ficar colado ao limite */
 }
 
+/* Linha com ícone da app, nome e versão */
 .app-identidade {
   display: flex;
   align-items: center;
@@ -77,11 +87,13 @@
   margin-bottom: 16px;
 }
 
+/* Ícone grande da aplicação */
 .app-icon {
   font-size: 36px;
   color: var(--ion-color-primary);
 }
 
+/* Nome da aplicação em destaque */
 .app-nome {
   display: block;
   font-size: 20px;
@@ -89,6 +101,7 @@
   color: #1a1a1a;
 }
 
+/* Versão da aplicação em texto discreto */
 .app-versao {
   display: block;
   font-size: 12px;
@@ -96,12 +109,14 @@
   margin-top: 2px;
 }
 
+/* Linha separadora entre blocos de conteúdo */
 .divider {
   height: 1px;
   background: #f0f0f0;
   margin: 16px 0;
 }
 
+/* Título da secção de autores com ícone */
 .autores-titulo {
   display: flex;
   align-items: center;
@@ -117,6 +132,7 @@
   }
 }
 
+/* Cada linha de autor — ícone + nome */
 .autor-row {
   display: flex;
   align-items: center;
@@ -125,7 +141,7 @@
 
   ion-icon {
     font-size: 16px;
-    color: #bbb;
+    color: #bbb; /* Ícone discreto */
   }
 
   span {
@@ -135,6 +151,7 @@
   }
 }
 
+/* Texto de disclaimer académico em itálico */
 .disclaimer {
   font-size: 12px;
   color: #bbb;
@@ -145,41 +162,50 @@
 
 // ── Modo Escuro ───────────────────────────────────────────────
 
+/* Overrides aplicados quando o body tem a classe dark-mode ativa */
 :host-context(body.dark-mode) {
 
+  /* Fundo escuro para a página */
   .definicoes-content {
     --background: #1a1a2e;
   }
 
+  /* Cartões com fundo escuro e sombra mais intensa */
   .opcao-row,
   .sobre-card {
     background: #252538;
     box-shadow: 0 2px 12px rgba(0,0,0,0.3);
   }
 
+  /* Textos principais mais claros */
   .opcao-label,
   .app-nome {
     color: #f0f0f0;
   }
 
+  /* Textos secundários em cinzento médio */
   .opcao-desc,
   .app-versao,
   .disclaimer {
     color: #888;
   }
 
+  /* Título de secção mais escuro */
   .secao-titulo {
     color: #666;
   }
 
+  /* Nome dos autores mais claro */
   .autor-row span {
     color: #ccc;
   }
 
+  /* Título dos autores em cinzento médio */
   .autores-titulo {
     color: #aaa;
   }
 
+  /* Separador mais escuro */
   .divider {
     background: #333350;
   }

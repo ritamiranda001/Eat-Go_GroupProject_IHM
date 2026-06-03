@@ -1,19 +1,28 @@
+<!-- Componente raiz da aplicação -->
 <ion-app>
 
-  <!-- Splash Screen -->
+  <!-- Splash Screen — exibida no arranque da app -->
+  <!-- Oculta progressivamente com animação via classe 'splash-ocultar' -->
   <div class="splash-screen" *ngIf="mostrarSplash" [class.splash-ocultar]="ocultarSplash" [style.background]="splashFundo">
     <div class="splash-conteudo">
+      <!-- Ícone da app -->
       <div class="splash-icone">
         <ion-icon name="restaurant"></ion-icon>
       </div>
+      <!-- Nome da app com destaque na segunda parte -->
       <h1 class="splash-titulo">Eat<span>&amp;Go</span></h1>
     </div>
   </div>
 
+  <!-- Split Pane — painel lateral (menu) + conteúdo principal -->
+  <!-- [when]="false" desativa o split pane em todos os tamanhos de ecrã -->
   <ion-split-pane contentId="main-content" [when]="false">
+
+    <!-- Menu lateral — desliza da direita como overlay -->
     <ion-menu contentId="main-content" type="overlay" [swipeGesture]="false" side="end">
       <ion-content>
 
+        <!-- Cabeçalho do menu: logo e botão de fechar -->
         <div class="menu-header">
           <ion-icon name="restaurant" class="menu-logo"></ion-icon>
           <ion-buttons>
@@ -23,7 +32,10 @@
           </ion-buttons>
         </div>
 
+        <!-- Lista de itens de navegação do menu -->
         <ion-list lines="none">
+
+          <!-- Item "O meu perfil" — só visível para utilizadores autenticados -->
           <ion-menu-toggle auto-hide="false">
             <ion-item
               routerDirection="root"
@@ -36,6 +48,9 @@
               <ion-label>O meu perfil</ion-label>
             </ion-item>
           </ion-menu-toggle>
+
+          <!-- Restantes itens do menu gerados dinamicamente a partir do array menuPages -->
+          <!-- Itens com requerLogin=true só aparecem se o utilizador estiver autenticado -->
           @for (p of menuPages; track p) {
             <ion-menu-toggle auto-hide="false">
               <ion-item
@@ -52,7 +67,10 @@
           }
         </ion-list>
 
+        <!-- Rodapé do menu com botão de login ou logout consoante o estado de autenticação -->
         <div class="menu-footer">
+
+          <!-- Botão Login — visível apenas quando o utilizador NÃO está autenticado -->
           <ion-button
             *ngIf="!authService.isLoggedIn()"
             expand="block"
@@ -64,6 +82,7 @@
             Login
           </ion-button>
 
+          <!-- Botão Logout — visível apenas quando o utilizador está autenticado -->
           <ion-button
             *ngIf="authService.isLoggedIn()"
             expand="block"
@@ -73,10 +92,14 @@
             <ion-icon slot="start" name="log-out-outline"></ion-icon>
             Logout
           </ion-button>
+
         </div>
 
       </ion-content>
     </ion-menu>
+
+    <!-- Área principal de conteúdo — onde as páginas são renderizadas -->
     <ion-router-outlet id="main-content"></ion-router-outlet>
+
   </ion-split-pane>
 </ion-app>
