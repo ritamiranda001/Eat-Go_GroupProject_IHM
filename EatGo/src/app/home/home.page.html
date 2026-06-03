@@ -1,26 +1,33 @@
 <ion-header class="home-header" [translucent]="false">
   <ion-toolbar>
+
+    <!-- Logo sempre visível -->
     <ion-buttons slot="start">
       <div class="brand-icon">
         <ion-icon name="restaurant"></ion-icon>
       </div>
     </ion-buttons>
+
+    <!-- Input inline (só durante pesquisa) -->
+    <div class="search-input-wrapper" *ngIf="mostrarPesquisa">
+      <ion-icon name="search-outline" class="search-input-icon"></ion-icon>
+      <input
+        #searchbar
+        class="search-input-native"
+        type="text"
+        [(ngModel)]="termoPesquisa"
+        placeholder="Pesquisar restaurante, categoria..."
+      />
+    </div>
+
+    <!-- Botões direita -->
     <ion-buttons slot="end">
       <ion-button fill="clear" class="header-btn" (click)="togglePesquisa()">
         <ion-icon slot="icon-only" [name]="mostrarPesquisa ? 'close-outline' : 'search-outline'"></ion-icon>
       </ion-button>
       <ion-menu-button class="header-btn" autoHide="false"></ion-menu-button>
     </ion-buttons>
-  </ion-toolbar>
 
-  <!-- Barra de pesquisa -->
-  <ion-toolbar *ngIf="mostrarPesquisa" class="search-toolbar">
-    <ion-searchbar
-      [(ngModel)]="termoPesquisa"
-      placeholder="Pesquisar restaurante, categoria..."
-      animated="true"
-      [debounce]="300"
-    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 

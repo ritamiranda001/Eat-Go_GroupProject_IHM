@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { AlertController } from '@ionic/angular';
 import { Avaliacao } from '../models/avaliacao.model';
 
 @Component({
@@ -11,48 +12,62 @@ import { Avaliacao } from '../models/avaliacao.model';
 })
 export class MinhasAvaliacoesPage implements OnInit {
 
-  /** Lista de avaliações carregadas do Storage */
-  avaliacoes: Avaliacao[] = [];
+  avaliacoes: any[] = [];
 
   constructor(
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private alertCtrl: AlertController
   ) {}
 
   async ngOnInit() {
     await this.storage.create();
   }
 
-  /** Chamado pelo Ionic sempre que a página fica visível */
   async ionViewWillEnter() {
     await this.carregarAvaliacoes();
   }
 
-  /** Carrega todas as avaliações guardadas no Storage */
   async carregarAvaliacoes() {
     this.avaliacoes = [];
     await this.storage.forEach((valor, chave) => {
       if (chave.startsWith('avaliacao_')) {
-        this.avaliacoes.push(valor);
+        // Guarda a chave exata dentro do objeto para apagar só este
+        this.avaliacoes.push({ ...valor, _chave: chave });
       }
+    });
+    // Ordena da mais recente para a mais antiga
+    this.avaliacoes.sort((a, b) => {
+      const chaveA = a._chave.split('_').pop() || '0';
+      const chaveB = b._chave.split('_').pop() || '0';
+      return Number(chaveB) - Number(chaveA);
     });
   }
 
-  /** Apaga uma avaliação do Storage */
-  async apagar(av: Avaliacao) {
-    const chaves: string[] = [];
-    await this.storage.forEach((valor, chave) => {
-      if (chave.startsWith('avaliacao_') && valor.restauranteId === av.restauranteId && valor.data === av.data) {
-        chaves.push(chave);
-      }
+  async apagar(av: any) {
+    const alert = await this.alertCtrl.create({
+      header: 'Apagar avaliação',
+      message: `Tens a certeza que queres apagar a avaliação de "${av.restauranteNome}"?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Apagar',
+          role: 'destructive',
+          cssClass: 'alerta-apagar',
+          handler: async () => {
+            await this.storage.remove(av._chave);
+            await this.carregarAvaliacoes();
+          }
+        }
+      ]
     });
-    for (const chave of chaves) {
-      await this.storage.remove(chave);
-    }
-    await this.carregarAvaliacoes();
+
+    await alert.present();
   }
 
-  /** Navega de volta para o home */
   voltar() {
     this.router.navigate(['/home']);
   }

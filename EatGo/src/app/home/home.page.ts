@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { RestauranteService } from '../services/restaurante.service';
@@ -12,6 +12,8 @@ import { Avaliacao } from '../models/avaliacao.model';
   standalone: false,
 })
 export class HomePage implements OnInit {
+
+  @ViewChild('searchbar') searchbarRef!: ElementRef<HTMLInputElement>;
 
   mostrarFiltros = false;
   mostrarPesquisa = false;
@@ -122,7 +124,16 @@ export class HomePage implements OnInit {
   }
 
   toggleFiltros() { this.mostrarFiltros = !this.mostrarFiltros; }
-  togglePesquisa() { this.mostrarPesquisa = !this.mostrarPesquisa; if (!this.mostrarPesquisa) this.termoPesquisa = ''; }
+
+  togglePesquisa() {
+    this.mostrarPesquisa = !this.mostrarPesquisa;
+    if (!this.mostrarPesquisa) {
+      this.termoPesquisa = '';
+    } else {
+      setTimeout(() => this.searchbarRef?.nativeElement?.focus(), 150);
+    }
+  }
+
   selecionarAvaliacao(v: string) { this.filtroAvaliacao = this.filtroAvaliacao === v ? 'todos' : v; }
   selecionarCategoria(v: string) { this.filtroCategoria = v; }
   toggleOrdenacao() { this.ordenacaoAtual = this.ordenacaoAtual === 'az' ? 'za' : 'az'; }
