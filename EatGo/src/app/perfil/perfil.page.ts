@@ -7,11 +7,9 @@
  */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
-import { Storage } from '@ionic/storage-angular';
 import { AuthService } from '../services/auth.service';
 import { Storage } from '@ionic/storage-angular';
 import { Avaliacao } from '../models/avaliacao.model';
@@ -43,7 +41,7 @@ export class PerfilPage implements OnInit {
   constructor(
     private authService: AuthService,
     private storage: Storage,
-    private router: Router
+    private router: Router,
     private toastCtrl: ToastController
   ) {}
 
@@ -54,9 +52,7 @@ export class PerfilPage implements OnInit {
     await this.carregarAvaliacoes();
   }
 
-  /**
-   * Carrega todas as avaliações guardadas no Storage.
-   */
+  /** Carrega todas as avaliações guardadas no Storage */
   async carregarAvaliacoes() {
     this.avaliacoes = [];
     await this.storage.forEach((valor, chave) => {
@@ -71,9 +67,7 @@ export class PerfilPage implements OnInit {
     }
   }
 
-  /**
-   * Devolve as iniciais do nome do utilizador.
-   */
+  /** Devolve as iniciais do nome do utilizador */
   getIniciais(): string {
     if (!this.utilizador?.nome) return '?';
     return this.utilizador.nome
@@ -82,10 +76,7 @@ export class PerfilPage implements OnInit {
       .join('');
   }
 
-  /**
-   * Devolve um array com o número de estrelas para renderizar.
-   * @param n - Número de estrelas
-   */
+  /** Devolve um array com o número de estrelas para renderizar */
   getEstrelas(n: number): number[] {
     return Array(n).fill(0);
   }
@@ -95,9 +86,7 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  /**
-   * Faz logout e redireciona para home.
-   */
+  /** Faz logout e redireciona para home */
   async logout() {
     await this.authService.logout();
     this.router.navigate(['/home']);

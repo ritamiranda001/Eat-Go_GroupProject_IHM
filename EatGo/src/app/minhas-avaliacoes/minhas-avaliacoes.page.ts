@@ -25,11 +25,6 @@ export class MinhasAvaliacoesPage implements OnInit {
     await this.storage.create();
   }
 
-  /** Chamado pelo Ionic sempre que a página fica visível */
-  async ionViewWillEnter() {
-    await this.carregarAvaliacoes();
-  }
-
   /** Recarrega as avaliações sempre que a página é aberta */
   async ionViewWillEnter() {
     await this.storage.create();
@@ -55,10 +50,7 @@ export class MinhasAvaliacoesPage implements OnInit {
       header: 'Apagar avaliação',
       message: `Tens a certeza que queres apagar a avaliação de "${av.restauranteNome}"?`,
       buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-        },
+        { text: 'Cancelar', role: 'cancel' },
         {
           text: 'Apagar',
           role: 'destructive',
