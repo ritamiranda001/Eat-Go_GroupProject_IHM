@@ -168,3 +168,55 @@ ion-toast {
   --font-family: var(--ion-font-family);
   font-weight: 700;
 }
+
+// ── Login / Registo — Modo Escuro ─────────────────────────────────────────
+
+html.ion-palette-dark {
+
+  .login-content {
+    --background: #12121e !important;
+  }
+
+  .login-card {
+    background: #1e1e30 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .login-top-row {
+    .voltar-btn { --color: #f0f0f0 !important; }
+    .fechar-btn { --color: #f0f0f0 !important; }
+  }
+
+  .login-title { color: #f0f0f0 !important; }
+  .login-subtitle { color: #aaaaaa !important; }
+
+  .form-label { color: #f0f0f0 !important; }
+
+  .input-wrapper {
+    background: #2a2a40 !important;
+    border-color: #3a3a55 !important;
+
+    &:focus-within {
+      background: #2a2a40 !important;
+      border-color: #f97316 !important;
+    }
+
+    .input-icon,
+    .input-icon-right { color: #aaaaaa !important; }
+
+    .form-input {
+      color: #f0f0f0 !important;
+      &::placeholder { color: #666688 !important; }
+    }
+  }
+
+  .input-placeholder-italic::placeholder {
+    color: #666688 !important;
+  }
+
+  .lembrar-wrapper { color: #f0f0f0 !important; }
+
+  .criar-conta-texto { color: #aaaaaa !important; }
+
+  .pass-dica { color: #888888 !important; }
+}
