@@ -69,7 +69,7 @@ export class PerfilPage implements OnInit {
       duration: 2500,
       position: 'bottom',
       icon: 'log-out-outline',
-      color: 'dark'
+      color: 'warning'
     });
     await toast.present();
   }

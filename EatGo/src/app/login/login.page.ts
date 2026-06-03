@@ -95,11 +95,6 @@ export class LoginPage implements OnInit {
     return null;
   }
 
-  get passTemMinimo(): boolean { return this.palavraPasse.length >= 4; }
-  get passTemMaximo(): boolean { return this.palavraPasse.length <= 8 && this.palavraPasse.length > 0; }
-  get passTemMaiuscula(): boolean { return /[A-Z]/.test(this.palavraPasse); }
-  get passTemNumero(): boolean { return /[0-9]/.test(this.palavraPasse); }
-
   /** Executa o registo de um novo utilizador. */
   async registar() {
     if (!this.nome || !this.email || !this.palavraPasse || !this.confirmarPalavraPasse) {

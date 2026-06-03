@@ -206,3 +206,76 @@
     }
   }
 }
+
+// ── Regras da palavra-passe ────────────────────────────────────────────────────
+
+.pass-regras {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pass-regra {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--eat-go-texto-secundario);
+  transition: color 0.2s ease;
+
+  ion-icon {
+    font-size: 14px;
+    color: #aaa;
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  &.valida {
+    color: #2ecc71;
+
+    ion-icon {
+      color: #2ecc71;
+    }
+  }
+}
+
+.pass-exemplo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--eat-go-texto-secundario);
+  margin-top: 4px;
+  padding: 6px 10px;
+  background: rgba(249, 115, 22, 0.08);
+  border-radius: 8px;
+  border-left: 3px solid var(--eat-go-laranja);
+
+  ion-icon {
+    color: var(--eat-go-laranja);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  strong {
+    color: var(--eat-go-laranja);
+    font-family: monospace;
+    font-size: 13px;
+  }
+}
+
+
+// ── Placeholder itálico e dica de password ─────────────────────────────────
+
+.input-placeholder-italic::placeholder {
+  font-style: italic;
+  color: #b0b0b0;
+}
+
+.pass-dica {
+  font-size: 11px;
+  color: var(--eat-go-texto-secundario);
+  margin: 4px 0 0 2px;
+  font-style: italic;
+}

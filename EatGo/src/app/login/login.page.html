@@ -133,8 +133,8 @@
             <input
               [type]="mostrarPalavraPasse ? 'text' : 'password'"
               [(ngModel)]="palavraPasse"
-              placeholder="••••••••"
-              class="form-input"
+              placeholder="Exemplo1"
+              class="form-input input-placeholder-italic"
             />
             <ion-icon
               [name]="mostrarPalavraPasse ? 'eye-off-outline' : 'eye-outline'"
@@ -142,29 +142,7 @@
               (click)="togglePalavraPasse()">
             </ion-icon>
           </div>
-          <!-- Regras da palavra-passe -->
-          <div class="pass-regras">
-            <div class="pass-regra" [class.valida]="passTemMinimo">
-              <ion-icon [name]="passTemMinimo ? 'checkmark-circle' : 'ellipse-outline'"></ion-icon>
-              Mínimo 4 caracteres
-            </div>
-            <div class="pass-regra" [class.valida]="passTemMaximo">
-              <ion-icon [name]="passTemMaximo ? 'checkmark-circle' : 'ellipse-outline'"></ion-icon>
-              Máximo 8 caracteres
-            </div>
-            <div class="pass-regra" [class.valida]="passTemMaiuscula">
-              <ion-icon [name]="passTemMaiuscula ? 'checkmark-circle' : 'ellipse-outline'"></ion-icon>
-              Pelo menos uma maiúscula
-            </div>
-            <div class="pass-regra" [class.valida]="passTemNumero">
-              <ion-icon [name]="passTemNumero ? 'checkmark-circle' : 'ellipse-outline'"></ion-icon>
-              Pelo menos um número
-            </div>
-            <div class="pass-exemplo">
-              <ion-icon name="bulb-outline"></ion-icon>
-              Exemplo: <strong>Exemplo1</strong>
-            </div>
-          </div>
+          <p class="pass-dica">Caracteres: mín. 4 | máx. 8, uma maiúscula e um número.</p>
         </div>
 
         <!-- Campo Confirmar Palavra-passe -->
