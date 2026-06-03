@@ -3,11 +3,6 @@
  * Componente raiz da aplicação Eat&Go.
  * Requisito 12: Utilizar o Capacitor para controlo do dispositivo
  */
-/**
- * app.component.ts
- * Componente raiz da aplicação Eat&Go.
- * Requisito 12: Utilizar o Capacitor para controlo do dispositivo
- */
 import { Component } from '@angular/core';
 import { MenuController, ToastController } from '@ionic/angular';
 import { AuthService } from './services/auth.service';
@@ -82,7 +77,7 @@ export class AppComponent {
       duration: 2500,
       position: 'bottom',
       icon: 'log-out-outline',
-      color: 'dark'
+      cssClass: 'amarelo'
     });
     await toast.present();
   }

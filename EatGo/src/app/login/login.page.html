@@ -133,8 +133,8 @@
             <input
               [type]="mostrarPalavraPasse ? 'text' : 'password'"
               [(ngModel)]="palavraPasse"
-              placeholder="••••••••"
-              class="form-input"
+              placeholder="Exemplo1"
+              class="form-input input-placeholder-italic"
             />
             <ion-icon
               [name]="mostrarPalavraPasse ? 'eye-off-outline' : 'eye-outline'"
@@ -142,6 +142,7 @@
               (click)="togglePalavraPasse()">
             </ion-icon>
           </div>
+          <p class="pass-dica">Caracteres: mín. 4 | máx. 8, uma maiúscula e um número.</p>
         </div>
 
         <!-- Campo Confirmar Palavra-passe -->
