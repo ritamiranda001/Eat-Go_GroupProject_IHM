@@ -86,10 +86,30 @@ export class LoginPage implements OnInit {
     }
   }
 
+  /** Valida as regras da palavra-passe. Devolve mensagem de erro ou null se válida. */
+  validarPalavraPasse(pass: string): string | null {
+    if (pass.length < 4) return 'A palavra-passe deve ter pelo menos 4 caracteres.';
+    if (pass.length > 8) return 'A palavra-passe não pode ter mais de 8 caracteres.';
+    if (!/[A-Z]/.test(pass)) return 'A palavra-passe deve ter pelo menos uma letra maiúscula.';
+    if (!/[0-9]/.test(pass)) return 'A palavra-passe deve ter pelo menos um número.';
+    return null;
+  }
+
+  get passTemMinimo(): boolean { return this.palavraPasse.length >= 4; }
+  get passTemMaximo(): boolean { return this.palavraPasse.length <= 8 && this.palavraPasse.length > 0; }
+  get passTemMaiuscula(): boolean { return /[A-Z]/.test(this.palavraPasse); }
+  get passTemNumero(): boolean { return /[0-9]/.test(this.palavraPasse); }
+
   /** Executa o registo de um novo utilizador. */
   async registar() {
     if (!this.nome || !this.email || !this.palavraPasse || !this.confirmarPalavraPasse) {
       await this.mostrarToast('Por favor preenche todos os campos.', 'warning');
+      return;
+    }
+
+    const erroPass = this.validarPalavraPasse(this.palavraPasse);
+    if (erroPass) {
+      await this.mostrarToast(erroPass, 'warning');
       return;
     }
 
