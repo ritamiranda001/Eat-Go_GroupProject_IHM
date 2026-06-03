@@ -47,7 +47,7 @@ export class MinhasAvaliacoesPage implements OnInit {
   async apagar(av: any) {
     const alert = await this.alertCtrl.create({
       header: 'Apagar avaliação',
-      message: 'Tens a certeza que queres apagar a tua avaliação de<strong> ${av.restauranteNome}</strong>?',
+      message: `Tens a certeza que queres apagar a avaliação de "${av.restauranteNome}"?`,
       buttons: [
         {
           text: 'Cancelar',

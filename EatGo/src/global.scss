@@ -224,3 +224,60 @@ html.ion-palette-dark {
 
   .pass-dica { color: #888888 !important; }
 }
+// ── Minhas Avaliações — Modo Escuro ──────────────────────────
+
+html.ion-palette-dark {
+
+  .avaliacao-card {
+    background: #252538 !important;
+
+    .restaurante-nome { color: #f0f0f0 !important; }
+    .avaliacao-data { color: #aaaaaa !important; }
+    .estrelas-count { color: #aaaaaa !important; }
+    .comentario { color: #cccccc !important; }
+  }
+
+  // ── Alert Apagar — Modo Escuro ──────────────────────────────
+
+  .alerta-confirmacao {
+    --background: #252538;
+
+    .alert-title { color: #f0f0f0 !important; }
+    .alert-message { color: #cccccc !important; }
+
+    .alert-button { color: #aaaaaa !important; }
+    .alert-button.alerta-apagar { color: var(--ion-color-danger) !important; font-weight: 700; }
+  }
+
+  // ── Adicionar Restaurante — Modo Escuro ─────────────────────
+
+  .campo-label { color: #f0f0f0 !important; }
+
+  .campo-input {
+    --color: #f0f0f0 !important;
+    --placeholder-color: #666688 !important;
+    --background: #252538 !important;
+  }
+
+  .imagem-selector {
+    border-color: #444466 !important;
+
+    .imagem-placeholder {
+      color: #888899 !important;
+
+      span { color: #888899 !important; }
+    }
+  }
+
+  // Select nativo do dropdown de categoria
+  select {
+    background: #252538 !important;
+    color: #f0f0f0 !important;
+    border-color: #444466 !important;
+  }
+
+  ion-select {
+    --color: #f0f0f0 !important;
+    --placeholder-color: #666688 !important;
+  }
+}
