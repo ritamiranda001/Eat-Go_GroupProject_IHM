@@ -4,10 +4,10 @@
 // Inclui imports do Ionic, Leaflet, modo escuro manual
 // e overrides globais de componentes.
 // ─────────────────────────────────────────────────────────────
- 
+
 // ── Imports Ionic ─────────────────────────────────────────────
 // Folhas de estilo base do Ionic (obrigatórias para funcionamento correto)
- 
+
 @import "@ionic/angular/css/core.css";
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
@@ -18,37 +18,37 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
- 
+
 // Estilos do mapa Leaflet (necessário para renderização correta dos tiles e markers)
 @import 'leaflet/dist/leaflet.css';
- 
+
 // Paletas de modo escuro automático do Ionic (desativadas — modo escuro é controlado manualmente)
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 /* @import "@ionic/angular/css/palettes/dark.system.css"; */
- 
- 
+
+
 // ── Toast Global ──────────────────────────────────────────────
 // Aplica fonte e peso consistente a todos os toasts da app
- 
+
 ion-toast {
   --font-family: var(--ion-font-family);
   font-weight: 700;
 }
- 
+
 // Classe aplicada aos toasts de sucesso (ex: avaliação submetida)
 .amarelo {
   --background: #daab01 !important;
   --color:      #000000;
 }
- 
- 
+
+
 // ── Modo Escuro Manual ────────────────────────────────────────
 // Ativado ao adicionar a classe 'ion-palette-dark' ao <html>
 // via JavaScript (guardado no localStorage em eat_go_modo_escuro)
- 
+
 html.ion-palette-dark {
- 
+
   // ── Variáveis globais ───────────────────────────────────────
   // Cores base adaptadas ao tema escuro
   --ion-background-color:    #1c1c2e;
@@ -56,48 +56,88 @@ html.ion-palette-dark {
   --ion-border-color:        #333350;
   --ion-item-background:     #252538;
   --ion-toolbar-background:  #1f1f35;
- 
+
   ion-content { --background: #1c1c2e; }
- 
+
   // Toolbars sem cor explícita (as com color="primary" não são afetadas)
   ion-toolbar:not([color]) {
     --background: #1f1f35 !important;
     --color:      #f0f0f0 !important;
   }
- 
+
   .header-btn { --color: #f0f0f0 !important; }
- 
+
   // Items e listas
   ion-item  { --background: #252538 !important; --color: #f0f0f0 !important; }
   ion-list  { background: #1c1c2e !important; }
   ion-label { color: #f0f0f0 !important; }
- 
+
   // Menu lateral
   ion-menu ion-content { --background: #1f1f35 !important; }
   ion-menu ion-item    { --background: #1f1f35 !important; --color: #f0f0f0 !important; }
- 
- 
+
+
+  // ── Barra de Pesquisa ───────────────────────────────────────
+// Compatível com ion-searchbar E com input HTML nativo
+
+ion-searchbar {
+  --background:        #2a2a40 !important;
+  --color:             #f0f0f0 !important;
+  --placeholder-color: #888899 !important;
+  --icon-color:        #aaaaaa !important;
+}
+
+ion-searchbar::part(input) {
+  color: #f0f0f0 !important;
+}
+
+ion-searchbar::part(container) {
+  background: #2a2a40 !important;
+}
+
+// Input nativo usado na Home
+
+.search-input-wrapper {
+  background: #2a2a40 !important;
+  border: 1px solid #3a3a55 !important;
+  border-radius: 10px;
+}
+
+.search-input-native {
+  background: transparent !important;
+  color: #f0f0f0 !important;
+  caret-color: #f97316 !important;
+}
+
+.search-input-native::placeholder {
+  color: #888899 !important;
+}
+
+.search-input-icon {
+  color: #aaaaaa !important;
+}
+
   // ── Inputs e formulários ────────────────────────────────────
   // Garante texto legível em todos os campos no modo escuro
- 
+
   // Inputs e textareas HTML nativos
   input, textarea {
     color: #f0f0f0 !important;
     &::placeholder { color: #666688 !important; }
   }
- 
+
   // Componentes Ionic de input
   ion-input, ion-textarea {
     --color:             #f0f0f0 !important;
     --placeholder-color: #666688 !important;
   }
- 
+
   // Override via ::part para garantir cor nos inputs nativos do Ionic
   ion-input::part(native),
   ion-textarea::part(native) {
     color: #f0f0f0 !important;
   }
- 
+
   // ion-select: texto do valor selecionado
   ion-select {
     --color:             #f0f0f0 !important;
@@ -106,45 +146,45 @@ html.ion-palette-dark {
   ion-select::part(text) {
     color: #f0f0f0 !important;
   }
- 
+
   // Select HTML nativo (dropdown de categoria em adicionar-restaurante)
   select {
     background:   #252538 !important;
     color:        #f0f0f0 !important;
     border-color: #444466 !important;
   }
- 
+
   // Labels e checkboxes
   ion-label, .campo-label, .form-label { color: #f0f0f0 !important; }
   ion-checkbox + ion-label             { color: #f0f0f0 !important; }
- 
+
   // ── Popover do ion-select (dropdown de categoria) ───────────
   // O popover é renderizado fora do componente, por isso precisa
   // de override global para ficar legível no modo escuro
   ion-alert {
     --background: #252538 !important;
- 
+
     // Texto das opções e título
     .alert-title,
     .alert-radio-label { color: #f0f0f0 !important; }
- 
+
     // Botões Cancel e OK em laranja
     .alert-button { color: #f97316 !important; }
- 
+
     // Opção selecionada em laranja
     [aria-checked="true"] .alert-radio-label { color: #f97316 !important; }
- 
+
     // Círculo do radio button selecionado
     .alert-radio-inner { border-color: #f97316 !important; }
   }
- 
- 
+
+
   // ── Página Home ─────────────────────────────────────────────
   .home-content  { --background: #1c1c2e !important; }
   .page-header   { background: #1f1f35 !important; }
   .page-title    { color: #f0f0f0 !important; }
   .page-subtitle { color: #aaaaaa !important; }
- 
+
   // Barra de filtros e dropdown
   .filter-bar {
     background:   #1f1f35 !important;
@@ -165,7 +205,7 @@ html.ion-palette-dark {
     --border-color: #444466 !important;
     --color:        #f0f0f0 !important;
   }
- 
+
   // Cards de restaurante na listagem
   .restaurante-card {
     background: #2a2a3e !important;
@@ -178,8 +218,8 @@ html.ion-palette-dark {
     .card-acoes       { border-color: #3a3a52 !important; }
     .icon-action      { --color: #aaaaaa !important; }
   }
- 
- 
+
+
   // ── Página de Detalhe do Restaurante ────────────────────────
   .info-section { background: #1f1f35 !important; }
   .nome         { color: #f0f0f0 !important; }
@@ -187,7 +227,7 @@ html.ion-palette-dark {
   .categoria    { color: #f97316 !important; }
   .descricao    { color: #cccccc !important; }
   .detalhe-row  { color: #aaaaaa !important; ion-icon { color: #f97316 !important; } }
- 
+
   .avaliacoes-titulo { color: #f0f0f0 !important; }
   .avaliacao-card {
     background: #252538 !important;
@@ -195,8 +235,8 @@ html.ion-palette-dark {
     .avaliacao-data       { color: #aaa !important; }
     .avaliacao-comentario { color: #ccc !important; }
   }
- 
- 
+
+
   // ── Página de Perfil ─────────────────────────────────────────
   .perfil-content { --background: #1c1c2e !important; }
   .stats-section {
@@ -214,8 +254,8 @@ html.ion-palette-dark {
     ion-icon                 { color: #f97316 !important; }
   }
   .info-row { border-color: #333350 !important; }
- 
- 
+
+
   // ── Página de Definições ─────────────────────────────────────
   .definicoes-content { --background: #1c1c2e !important; }
   .secao-titulo       { color: #888 !important; }
@@ -234,8 +274,8 @@ html.ion-palette-dark {
     .divider        { background: #333350 !important; }
     .disclaimer     { color: #888 !important; }
   }
- 
- 
+
+
   // ── Página Avaliar Restaurante ───────────────────────────────
   .restaurante-nome { color: #f0f0f0 !important; }
   .comentario-input {
@@ -255,8 +295,8 @@ html.ion-palette-dark {
     }
   }
   .anonimo-descricao { color: #cccccc !important; }
- 
- 
+
+
   // ── Login / Registo ──────────────────────────────────────────
   .login-content { --background: #12121e !important; }
   .login-card {
@@ -274,21 +314,21 @@ html.ion-palette-dark {
   .login-title    { color: #f0f0f0 !important; }
   .login-subtitle { color: #aaaaaa !important; }
   .form-label     { color: #f0f0f0 !important; }
- 
+
   // Campo de input com ícones e estado de foco
   .input-wrapper {
     background:   #2a2a40 !important;
     border-color: #3a3a55 !important;
- 
+
     // Borda laranja ao focar o input
     &:focus-within {
       background:   #2a2a40 !important;
       border-color: #f97316 !important;
     }
- 
+
     .input-icon,
     .input-icon-right { color: #aaaaaa !important; }
- 
+
     .form-input {
       color: #f0f0f0 !important;
       &::placeholder { color: #666688 !important; }
@@ -298,8 +338,8 @@ html.ion-palette-dark {
   .lembrar-wrapper   { color: #f0f0f0 !important; }
   .criar-conta-texto { color: #aaaaaa !important; }
   .pass-dica         { color: #888888 !important; }
- 
- 
+
+
   // ── Minhas Avaliações ────────────────────────────────────────
   .avaliacao-card {
     background: #252538 !important;
@@ -308,7 +348,7 @@ html.ion-palette-dark {
     .estrelas-count   { color: #aaaaaa !important; }
     .comentario       { color: #cccccc !important; }
   }
- 
+
   // Alert de confirmação de remoção de avaliação
   .alerta-confirmacao {
     --background: #252538;
@@ -318,8 +358,8 @@ html.ion-palette-dark {
     // Botão de apagar em vermelho para ação destrutiva
     .alert-button.alerta-apagar { color: var(--ion-color-danger) !important; font-weight: 700; }
   }
- 
- 
+
+
   // ── Adicionar Restaurante ────────────────────────────────────
   .campo-label { color: #f0f0f0 !important; }
   .campo-input {
@@ -327,11 +367,11 @@ html.ion-palette-dark {
     --placeholder-color: #666688 !important;
     --background:        #252538 !important;
   }
- 
+
   // Seletor de imagem com borda tracejada
   .imagem-selector {
     border-color: #444466 !important;
     .imagem-placeholder { color: #888899 !important; span { color: #888899 !important; } }
   }
- 
+
 } // fim html.ion-palette-dark
